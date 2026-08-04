@@ -98,9 +98,15 @@
                         <option value="reservations">予約数</option>
                         <option value="bridal_fashion">ブライダル vs ファッション 予約数</option>
                         <option value="new_bridal_fashion" selected>ブライダル vs ファッション 新規予約数</option>
-                        <option value="sales">売上</option>
-                        <option value="customers">客数</option>
-                        <option value="unit_price">客単価</option>
+                        <option value="sales">総売上</option>
+                        <option value="customers">総客数</option>
+                        <option value="unit_price">総客単価</option>
+                        <option value="bridal_sales">ブライダル売上</option>
+                        <option value="bridal_customers">ブライダル客数</option>
+                        <option value="bridal_unit_price">ブライダル客単価</option>
+                        <option value="fashion_sales">ファッション売上</option>
+                        <option value="fashion_customers">ファッション客数</option>
+                        <option value="fashion_unit_price">ファッション客単価</option>
                         <option value="bridal_cpa">ブライダルCPA</option>
                     </select>
                     <span class="text-xs text-gray-400" id="trendNote">※受付日ベース・キャンセル除外</span>
@@ -121,18 +127,29 @@
                         <option value="reservations">予約数</option>
                         <option value="bridal_fashion">ブライダル vs ファッション 予約数</option>
                         <option value="new_bridal_fashion">ブライダル vs ファッション 新規予約数</option>
-                        <option value="sales">売上</option>
-                        <option value="customers">客数</option>
-                        <option value="unit_price">客単価</option>
+                        <option value="sales">総売上</option>
+                        <option value="customers">総客数</option>
+                        <option value="unit_price">総客単価</option>
+                        <option value="bridal_sales">ブライダル売上</option>
+                        <option value="bridal_customers">ブライダル客数</option>
+                        <option value="bridal_unit_price">ブライダル客単価</option>
+                        <option value="fashion_sales">ファッション売上</option>
+                        <option value="fashion_customers">ファッション客数</option>
+                        <option value="fashion_unit_price">ファッション客単価</option>
                         <option value="bridal_cpa" selected>ブライダルCPA</option>
                     </select>
-                    <span class="text-xs text-gray-400" id="cpaTrendNote">※KPI実績シート（AL列優先／空欄は費用÷ブライダル数）</span>
+                    <span class="text-xs text-gray-400" id="cpaTrendNote">※monthly_costs.jsonの月間費用 ÷ 受付日ベースのブライダル予約数</span>
                 </div>
             </div>
             <div class="relative h-96">
                 <canvas id="cpaTrendChart"></canvas>
             </div>
         </div>
+
+        <div class="mb-8 rounded-xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm text-amber-900">
+            <span class="font-semibold">データ注記:</span> 横浜の予約CSVは2026/07/21時点です。NO 34563の予約時刻が既存CSVと管理画面で不一致のため、追記専用ルールにより横浜のみ更新を停止しています。費用・売上は7月末確定値です。
+        </div>
+
 
         <!-- ============================================================ -->
         <!-- 上段: 単月データ -->
@@ -175,7 +192,7 @@
             <div class="glass-card p-6 border-t-4 border-amber-400">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">広告費用 (7月)</p>
+                        <p class="text-sm font-medium text-gray-500">月間費用 (7月)</p>
                         <p class="text-2xl font-bold text-gray-800 mt-1" id="costValue">-</p>
                         <p class="text-xs mt-1" id="costCompare"></p>
                     </div>
@@ -223,6 +240,16 @@
             </div>
         </div>
 
+        <div class="glass-card p-6 mb-8 border border-amber-200" id="costSourceSection" style="display: none;">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">月間費用の算出根拠</h3>
+                <span class="text-xs text-gray-500" id="costPeriod"></span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3" id="costSourceRows"></div>
+            <p class="text-xs text-gray-500 mt-4" id="costAllocationNote"></p>
+            <p class="text-sm font-medium text-rose-700 mt-2" id="costSpreadsheetDiff"></p>
+        </div>
+
         <!-- Capacity Status + Course Share (side by side) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="glass-card p-6 border-t-4 border-indigo-500 shadow-xl" id="capacitySection"
@@ -230,7 +257,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-bold text-gray-800">予約枠 稼働状況 <span
                             class="text-sm font-normal text-gray-500 ml-2" id="capPeriodLabel">(2026年7月)</span></h2>
-                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">CSV実予約数 ÷ KPI実績枠</div>
+                    <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">CSV実予約数 ÷ 予約管理の実稼働枠</div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -407,7 +434,7 @@
 
     <script>
         // Data injected by python script
-        const reportData = {"summary": {"current_year": {"total_reservations": 128, "total_cancels": 12, "total_bridal": 29}, "previous_year": {"total_reservations": 164, "total_cancels": 27, "total_bridal": 85}, "previous_month": {"total_reservations": 198, "total_cancels": 39, "total_bridal": 48}, "yoy_growth": {"reservations": -22.0, "cancels": -55.6, "bridal": -65.9}, "mom_growth": {"reservations": -35.4, "cancels": -69.2, "bridal": -39.6}, "prev_month_label": "2026年6月"}, "course_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース", "結婚・婚約指輪手作りコース（３本制作）"], "data": [81, 27, 14, 4, 1, 1], "prev_year_data": [50, 79, 15, 5, 3, 6], "prev_month_data": [111, 45, 25, 2, 5, 1]}, "new_reservation_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [43, 16, 15, 1, 1], "prev_year_data": [52, 69, 15, 4, 4], "prev_month_data": [69, 35, 17, 2, 2], "total": 76}, "course_share": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース", "その他"], "data": [81, 27, 14, 4, 1, 1]}, "course_cancel": [{"course": "手作りペアリングコース", "total": 81, "cancels": 8, "rate": 9.9}, {"course": "結婚指輪手作りコース", "total": 27, "cancels": 2, "rate": 7.4}, {"course": "結婚指輪・婚約指輪　ご見学", "total": 14, "cancels": 0, "rate": 0.0}, {"course": "アニバーサリーコース", "total": 4, "cancels": 2, "rate": 50.0}, {"course": "ダイヤモンドプロポーズコース", "total": 1, "cancels": 0, "rate": 0.0}, {"course": "結婚・婚約指輪手作りコース（３本制作）", "total": 1, "cancels": 0, "rate": 0.0}], "day_type_share": {"labels": ["休日", "平日"], "data": [85, 43]}, "ampm_share": {"labels": ["午前", "午後"], "data": [19, 14]}, "monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [263, 198, 128, 26, 0, 0, 0, 0, 0, 0, 0, 0], "previous_reservations": [200, 149, 164, 211, 213, 158, 171, 222, 238, 233, 210, 199], "current_cancels": [50, 39, 12, 2, 0, 0, 0, 0, 0, 0, 0, 0], "previous_cancels": [34, 25, 27, 32, 46, 27, 25, 39, 47, 44, 38, 26], "current_bridal": [47, 48, 29, 8, 0, 0, 0, 0, 0, 0, 0, 0], "previous_bridal": [94, 75, 85, 100, 88, 83, 95, 94, 100, 93, 72, 59], "current_fashion": [152, 89, 73, 14, 0, 0, 0, 0, 0, 0, 0, 0], "previous_fashion": [47, 36, 37, 56, 53, 37, 36, 70, 72, 72, 84, 104]}, "new_monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [189, 131, 76, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_reservations": [116, 136, 157, 166, 148, 155, 188, 152, 200, 169, 181, 203], "current_bridal": [44, 45, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_bridal": [81, 84, 89, 94, 85, 89, 109, 86, 105, 68, 71, 54], "current_fashion": [128, 69, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_fashion": [24, 35, 52, 53, 39, 51, 67, 45, 74, 76, 97, 140]}, "capacity_status": {"period": "2026年7月", "bridal": {"total": {"rate": 0, "act": 29, "cap": 0}, "weekday": {"rate": 0, "act": 10, "cap": 0}, "weekend": {"rate": 0, "act": 19, "cap": 0}}, "fashion": {"total": {"rate": 0, "act": 73, "cap": 0}, "weekday": {"rate": 0, "act": 29, "cap": 0}, "weekend": {"rate": 0, "act": 44, "cap": 0}}}, "repeater_analysis": {"period": "2026年7月（過去全期間と照合）", "unique_customers": 115, "repeater_count": 4, "repeater_ratio": 3.5, "top_transitions": [{"pattern": "ご見学 → ご見学", "count": 1}, {"pattern": "アニバーサリー → アニバーサリー", "count": 1}, {"pattern": "ご見学 → 結婚指輪", "count": 1}, {"pattern": "婚約指輪 → 結婚指輪", "count": 1}]}, "sales_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "sales": [16061180, 14768060, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null], "customers": [77, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null], "unit_price": [158276, 151463, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null]}, "prev_sales_trend": {"sales": [16140605, 15141203, 16691289, 19872791, 17938075, 17904772, 19581601, 21533205, 25561842, 22845725, 18385218, 14921592], "customers": [171, 142, 157, 187, 164, 152, 170, 171, 175, 174, 130, 105], "unit_price": [88992, 100222, 100687, 100513, 101008, 112586, 108938, 116162, 136065, 121315, 125173, 118930]}, "bridal_cpa_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_cpa": [11398, 13932, 7722, null, null, null, null, null, null, null, null, null], "previous_cpa": [4715, 1729, 2091, 2144, 3403, 5464, 2292, 3087, 2842, 4049, 4938, 17294]}, "kengaku_conversion": {"total_kengaku": 1506, "converted": 427, "rate": 28.4, "courses": [{"course": "結婚指輪", "count": 298, "rate": 19.8}, {"course": "結婚・婚約3本", "count": 50, "rate": 3.3}, {"course": "婚約指輪", "count": 46, "rate": 3.1}, {"course": "ダイヤモンドプロポーズコース", "count": 11, "rate": 0.7}, {"course": "ペアリング", "count": 10, "rate": 0.7}, {"course": "アニバーサリー", "count": 9, "rate": 0.6}, {"course": "プレミアムリング（10金）コース", "count": 3, "rate": 0.2}]}, "cost_roas": {"cost": 139005, "sales": 0, "roas": null, "bridal_count": 18, "cpa": 7722, "prev_year": {"cost": null, "sales": 16691289, "roas": null, "bridal_count": 89, "cpa": null}, "prev_month": {"cost": 640889, "sales": 14768060, "roas": 23.04, "bridal_count": 45, "cpa": 14242}}, "meta": {"generated_at": "2026-07-21 16:06:25"}};
+        const reportData = {"summary": {"current_year": {"total_reservations": 128, "total_cancels": 12, "total_bridal": 29}, "previous_year": {"total_reservations": 164, "total_cancels": 27, "total_bridal": 85}, "previous_month": {"total_reservations": 198, "total_cancels": 39, "total_bridal": 48}, "yoy_growth": {"reservations": -22.0, "cancels": -55.6, "bridal": -65.9}, "mom_growth": {"reservations": -35.4, "cancels": -69.2, "bridal": -39.6}, "prev_month_label": "2026年6月"}, "course_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース", "結婚・婚約指輪手作りコース（３本制作）"], "data": [81, 27, 14, 4, 1, 1], "prev_year_data": [50, 79, 15, 5, 3, 6], "prev_month_data": [111, 45, 25, 2, 5, 1]}, "new_reservation_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [43, 16, 15, 1, 1], "prev_year_data": [52, 69, 15, 4, 4], "prev_month_data": [69, 35, 17, 2, 2], "total": 76}, "course_share": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "アニバーサリーコース", "ダイヤモンドプロポーズコース", "その他"], "data": [81, 27, 14, 4, 1, 1]}, "course_cancel": [{"course": "手作りペアリングコース", "total": 81, "cancels": 8, "rate": 9.9}, {"course": "結婚指輪手作りコース", "total": 27, "cancels": 2, "rate": 7.4}, {"course": "結婚指輪・婚約指輪　ご見学", "total": 14, "cancels": 0, "rate": 0.0}, {"course": "アニバーサリーコース", "total": 4, "cancels": 2, "rate": 50.0}, {"course": "ダイヤモンドプロポーズコース", "total": 1, "cancels": 0, "rate": 0.0}, {"course": "結婚・婚約指輪手作りコース（３本制作）", "total": 1, "cancels": 0, "rate": 0.0}], "day_type_share": {"labels": ["休日", "平日"], "data": [85, 43]}, "ampm_share": {"labels": ["午前", "午後"], "data": [19, 14]}, "monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [263, 198, 128, 26, 0, 0, 0, 0, 0, 0, 0, 0], "previous_reservations": [200, 149, 164, 211, 213, 158, 171, 222, 238, 233, 210, 199], "current_cancels": [50, 39, 12, 2, 0, 0, 0, 0, 0, 0, 0, 0], "previous_cancels": [34, 25, 27, 32, 46, 27, 25, 39, 47, 44, 38, 26], "current_bridal": [47, 48, 29, 8, 0, 0, 0, 0, 0, 0, 0, 0], "previous_bridal": [94, 75, 85, 100, 88, 83, 95, 94, 100, 93, 72, 59], "current_fashion": [152, 89, 73, 14, 0, 0, 0, 0, 0, 0, 0, 0], "previous_fashion": [47, 36, 37, 56, 53, 37, 36, 70, 72, 72, 84, 104]}, "new_monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [189, 131, 76, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_reservations": [116, 136, 157, 166, 148, 155, 188, 152, 200, 169, 181, 203], "current_bridal": [44, 45, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_bridal": [81, 84, 89, 94, 85, 89, 109, 86, 105, 68, 71, 54], "current_fashion": [128, 69, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0], "previous_fashion": [24, 35, 52, 53, 39, 51, 67, 45, 74, 76, 97, 140]}, "capacity_status": {"period": "2026年7月", "bridal": {"total": {"rate": 27.1, "act": 29, "cap": 107}, "weekday": {"rate": 20.8, "act": 10, "cap": 48}, "weekend": {"rate": 32.2, "act": 19, "cap": 59}}, "fashion": {"total": {"rate": 64.0, "act": 73, "cap": 114}, "weekday": {"rate": 60.4, "act": 29, "cap": 48}, "weekend": {"rate": 66.7, "act": 44, "cap": 66}}}, "repeater_analysis": {"period": "2026年7月（過去全期間と照合）", "unique_customers": 115, "repeater_count": 4, "repeater_ratio": 3.5, "top_transitions": [{"pattern": "ご見学 → ご見学", "count": 1}, {"pattern": "アニバーサリー → アニバーサリー", "count": 1}, {"pattern": "ご見学 → 結婚指輪", "count": 1}, {"pattern": "婚約指輪 → 結婚指輪", "count": 1}]}, "sales_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "sales": [16061180, 14768060, 10275292, 0, 0, 0, 0, 0, 0, 0, 0, 0], "customers": [380, 254, 203, 0, 0, 0, 0, 0, 0, 0, 0, 0], "unit_price": [42266, 58142, 50617, 0, 0, 0, 0, 0, 0, 0, 0, 0], "bridal_sales": [12187280, 12571460, 8606892, null, null, null, null, null, null, null, null, null], "bridal_customers": [77, 83, 62, null, null, null, null, null, null, null, null, null], "bridal_unit_price": [158276, 151463, 138821, null, null, null, null, null, null, null, null, null], "fashion_sales": [3873900, 2196600, 1668400, null, null, null, null, null, null, null, null, null], "fashion_customers": [303, 171, 141, null, null, null, null, null, null, null, null, null], "fashion_unit_price": [12785, 12846, 11833, null, null, null, null, null, null, null, null, null]}, "prev_sales_trend": {"sales": [16140605, 15141203, 16691289, 19872791, 17938075, 17904772, 19581601, 21533205, 25561842, 22845725, 18385218, 14921592], "customers": [171, 213, 220, 292, 278, 225, 247, 309, 313, 310, 298, 303], "unit_price": [88992, 71085, 75869, 68058, 64525, 79577, 79278, 69687, 81667, 73696, 61695, 49246], "bridal_sales": [null, 14231603, 15807989, 18795991, 16565375, 17113072, 18519001, 19863705, 23811442, 21108925, 16272618, 12487692], "bridal_customers": [null, 142, 157, 187, 164, 152, 170, 171, 175, 174, 130, 105], "bridal_unit_price": [null, 100223, 100688, 100513, 101008, 112586, 108935, 116162, 136065, 121316, 125174, 118930], "fashion_sales": [null, 909600, 883300, 1076800, 1372700, 791700, 1062600, 1669500, 1750400, 1736800, 2112600, 2433900], "fashion_customers": [null, 71, 63, 105, 114, 73, 77, 138, 138, 136, 168, 198], "fashion_unit_price": [null, 12811, 14021, 10255, 12041, 10845, 13800, 12098, 12684, 12771, 12575, 12292]}, "bridal_cpa_trend": null, "kengaku_conversion": {"total_kengaku": 1506, "converted": 427, "rate": 28.4, "courses": [{"course": "結婚指輪", "count": 298, "rate": 19.8}, {"course": "結婚・婚約3本", "count": 50, "rate": 3.3}, {"course": "婚約指輪", "count": 46, "rate": 3.1}, {"course": "ダイヤモンドプロポーズコース", "count": 11, "rate": 0.7}, {"course": "ペアリング", "count": 10, "rate": 0.7}, {"course": "アニバーサリー", "count": 9, "rate": 0.6}, {"course": "プレミアムリング（10金）コース", "count": 3, "rate": 0.2}]}, "cost_roas": null, "meta": {"generated_at": "2026-08-04 17:14:37", "cost_source": "monthly_costs.json", "data_quality_note": "横浜の予約CSVは2026/07/21時点です。NO 34563の予約時刻が既存CSVと管理画面で不一致のため、追記専用ルールにより横浜のみ更新を停止しています。費用・売上は7月末確定値です。"}};
 
         try {
             initDashboard(reportData);
@@ -451,6 +478,38 @@
             document.getElementById('compareMode').addEventListener('change', function() {
                 updateKpiComparison(data, this.value);
             });
+
+            if (data.cost_roas) {
+                const cost = data.cost_roas;
+                const yen = value => value == null ? '-' : `¥${Number(value).toLocaleString()}`;
+                document.getElementById('costRoasSection').style.display = 'grid';
+                document.getElementById('costValue').textContent = yen(cost.cost);
+                document.getElementById('costSalesValue').textContent = yen(cost.sales);
+                document.getElementById('roasValue').textContent = cost.roas == null ? '-' : `${cost.roas.toFixed(2)}倍`;
+                document.getElementById('cpaValue').textContent = yen(cost.cpa);
+                document.getElementById('cpaDetail').textContent = cost.cpa_note || (
+                    cost.bridal_count == null ? '' : `受付日ベースのブライダル予約 ${cost.bridal_count.toLocaleString()}件`
+                );
+
+                document.getElementById('costSourceSection').style.display = 'block';
+                document.getElementById('costPeriod').textContent = `${cost.period} / ${cost.month_status === 'closed' ? '月末確定' : '月途中'}`;
+                document.getElementById('costSourceRows').innerHTML = (cost.sources || []).map(source => `
+                    <div class="rounded-lg bg-amber-50 px-4 py-3">
+                        <p class="text-xs text-gray-500">${source.name}</p>
+                        <p class="text-lg font-semibold text-gray-800 mt-1">${yen(source.amount)}</p>
+                    </div>`).join('');
+                document.getElementById('costAllocationNote').textContent = cost.allocation_note || '';
+
+                const comparison = cost.spreadsheet_comparison;
+                if (comparison) {
+                    const diff = Number(comparison.difference_jpy || 0);
+                    const diffLabel = diff === 0
+                        ? '差額 ¥0（差異なし）'
+                        : `差額 ${diff > 0 ? '+' : '-'}${yen(Math.abs(diff))}`;
+                    document.getElementById('costSpreadsheetDiff').textContent =
+                        `従来スプレッドシート ${yen(comparison.spreadsheet_amount_jpy)} → 新方式 ${yen(comparison.new_method_amount_jpy)}（${diffLabel}）`;
+                }
+            }
 
             if (data.capacity_status) {
                 initCapacityStatus(data.capacity_status);
@@ -499,11 +558,17 @@
                     'new_reservations': '※受付日ベース・キャンセル除外',
                     'reservations': '※予約日ベース',
                     'bridal_fashion': '※予約日ベース',
-                    'sales': '※客数・客単価はペアリングコースを除く',
-                    'customers': '※ペアリングコースを除く',
-                    'unit_price': '※ペアリングコースを除く',
+                    'sales': '※総売上（ブライダル＋K10＋SV）',
+                    'customers': '※総客数（ブライダル＋K10＋SV）',
+                    'unit_price': '※総売上 ÷ 総客数',
+                    'bridal_sales': '※総売上からK10・SVを除く（オプション加工・石を含む）',
+                    'bridal_customers': '※総客数からK10・SV客数を除く',
+                    'bridal_unit_price': '※ブライダル売上 ÷ ブライダル客数',
+                    'fashion_sales': '※K10売上＋SV売上',
+                    'fashion_customers': '※K10客数＋SV客数',
+                    'fashion_unit_price': '※ファッション売上 ÷ ファッション客数',
                     'new_bridal_fashion': '※受付日ベース・キャンセル除外',
-                    'bridal_cpa': '※KPI実績シート（AL列優先／空欄は費用÷ブライダル数）'
+                    'bridal_cpa': '※monthly_costs.jsonの月間費用 ÷ 受付日ベースのブライダル予約数'
                 };
                 const noteEl = document.getElementById(noteId);
                 if (noteEl) noteEl.textContent = notes[mode] || '';
@@ -560,33 +625,31 @@
                             scales: { y: { beginAtZero: true, title: { display: true, text: '新規予約数 (受付日ベース)' } } } }
                     };
                 }
-                // Sales / Customers / Unit Price
+                // Total / bridal / fashion sales, customers, and unit price
                 const st = data.sales_trend;
                 const pst = data.prev_sales_trend;
                 const yenTick = { callback: function(v) { return '¥' + v.toLocaleString(); } };
                 const yenTooltip = { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ¥' + (ctx.parsed.y !== null && ctx.parsed.y !== undefined ? ctx.parsed.y.toLocaleString() : '-'); } } };
                 const countTooltip = { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + (ctx.parsed.y !== null && ctx.parsed.y !== undefined ? ctx.parsed.y.toLocaleString() : '-') + '人'; } } };
 
-                if (mode === 'sales' && st) {
-                    const ds = [{ label: '今期 売上', data: st.sales, borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', borderWidth: 2, tension: 0.3, fill: true }];
-                    if (pst) ds.push({ label: '前期 売上', data: pst.sales, borderColor: '#10b981', backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], tension: 0.3 });
+                const salesMetrics = {
+                    'sales': { key: 'sales', label: '総売上', unit: '円', color: '#10b981', fill: 'rgba(16,185,129,0.1)', currency: true },
+                    'customers': { key: 'customers', label: '総客数', unit: '人', color: '#3b82f6', fill: 'rgba(59,130,246,0.1)', currency: false },
+                    'unit_price': { key: 'unit_price', label: '総客単価', unit: '円', color: '#a855f7', fill: 'rgba(168,85,247,0.1)', currency: true },
+                    'bridal_sales': { key: 'bridal_sales', label: 'ブライダル売上', unit: '円', color: '#ec4899', fill: 'rgba(236,72,153,0.1)', currency: true },
+                    'bridal_customers': { key: 'bridal_customers', label: 'ブライダル客数', unit: '人', color: '#f43f5e', fill: 'rgba(244,63,94,0.1)', currency: false },
+                    'bridal_unit_price': { key: 'bridal_unit_price', label: 'ブライダル客単価', unit: '円', color: '#db2777', fill: 'rgba(219,39,119,0.1)', currency: true },
+                    'fashion_sales': { key: 'fashion_sales', label: 'ファッション売上', unit: '円', color: '#14b8a6', fill: 'rgba(20,184,166,0.1)', currency: true },
+                    'fashion_customers': { key: 'fashion_customers', label: 'ファッション客数', unit: '人', color: '#0d9488', fill: 'rgba(13,148,136,0.1)', currency: false },
+                    'fashion_unit_price': { key: 'fashion_unit_price', label: 'ファッション客単価', unit: '円', color: '#0891b2', fill: 'rgba(8,145,178,0.1)', currency: true }
+                };
+                const salesMetric = salesMetrics[mode];
+                if (salesMetric && st) {
+                    const ds = [{ label: '今期 ' + salesMetric.label, data: st[salesMetric.key], borderColor: salesMetric.color, backgroundColor: salesMetric.fill, borderWidth: 2, tension: 0.3, fill: true }];
+                    if (pst && Array.isArray(pst[salesMetric.key])) ds.push({ label: '前期 ' + salesMetric.label, data: pst[salesMetric.key], borderColor: salesMetric.color, backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], tension: 0.3 });
                     return { type: 'line', data: { labels, datasets: ds },
                         options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-                            scales: { y: { beginAtZero: true, title: { display: true, text: '売上 (円)' }, ticks: yenTick } }, plugins: { tooltip: yenTooltip } } };
-                }
-                if (mode === 'customers' && st) {
-                    const ds = [{ label: '今期 客数', data: st.customers, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, tension: 0.3, fill: true }];
-                    if (pst) ds.push({ label: '前期 客数', data: pst.customers, borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], tension: 0.3 });
-                    return { type: 'line', data: { labels, datasets: ds },
-                        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-                            scales: { y: { beginAtZero: true, title: { display: true, text: '客数 (人)' } } }, plugins: { tooltip: countTooltip } } };
-                }
-                if (mode === 'unit_price' && st) {
-                    const ds = [{ label: '今期 客単価', data: st.unit_price, borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.1)', borderWidth: 2, tension: 0.3, fill: true }];
-                    if (pst) ds.push({ label: '前期 客単価', data: pst.unit_price, borderColor: '#a855f7', backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], tension: 0.3 });
-                    return { type: 'line', data: { labels, datasets: ds },
-                        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-                            scales: { y: { beginAtZero: true, title: { display: true, text: '客単価 (円)' }, ticks: yenTick } }, plugins: { tooltip: yenTooltip } } };
+                            scales: { y: { beginAtZero: true, title: { display: true, text: salesMetric.label + ' (' + salesMetric.unit + ')' }, ticks: salesMetric.currency ? yenTick : {} } }, plugins: { tooltip: salesMetric.currency ? yenTooltip : countTooltip } } };
                 }
                 if (mode === 'bridal_cpa' && data.bridal_cpa_trend) {
                     const cpa = data.bridal_cpa_trend;
@@ -603,8 +666,10 @@
             function disableUnavailableTrendOptions(selectorId) {
                 const sel = document.getElementById(selectorId);
                 if (!sel) return;
+                const salesModes = ['sales','customers','unit_price','bridal_sales','bridal_customers','bridal_unit_price','fashion_sales','fashion_customers','fashion_unit_price'];
                 for (const opt of sel.options) {
-                    if (!data.sales_trend && ['sales','customers','unit_price'].includes(opt.value)) {
+                    const values = data.sales_trend ? data.sales_trend[opt.value] : null;
+                    if (salesModes.includes(opt.value) && (!Array.isArray(values) || !values.some(value => value !== null && value !== undefined))) {
                         opt.disabled = true;
                         if (!opt.textContent.includes('データなし')) opt.textContent += ' (データなし)';
                     }
@@ -829,14 +894,14 @@
         function initRepeaterAnalysis(repData) {
             document.getElementById('repeaterSection').style.display = 'block';
             document.getElementById('repeaterPeriodLabel').textContent = `(${repData.period})`;
-            
+
             document.getElementById('kpiUniqueCustomers').textContent = repData.unique_customers.toLocaleString();
             document.getElementById('kpiRepeaterCount').textContent = repData.repeater_count.toLocaleString();
             document.getElementById('kpiRepeaterRatio').textContent = `${repData.repeater_ratio.toFixed(1)}%`;
-            
+
             const tbody = document.getElementById('transitionPatternsBody');
             let html = '';
-            
+
             if (repData.top_transitions.length === 0) {
                 html = '<tr><td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500">リピーターデータがありません</td></tr>';
             } else {
@@ -850,7 +915,7 @@
                             formattedPattern += `<span class="text-gray-400 mx-2 text-xs">▶</span>`;
                         }
                     });
-                    
+
                     html += `
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">${index + 1}</td>
