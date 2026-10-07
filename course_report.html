@@ -395,11 +395,11 @@
             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-3 mb-5">
                 <div><h2 id="visitBridalConversionTitle" class="text-2xl font-bold text-gray-800">見学 → ブライダル 転換率（直近3か月）</h2>
                     <p class="text-sm text-gray-500 mt-2">大阪中崎町 ／ 見学対象期間：2026/07/01〜2026/09/30</p></div>
-                <span class="text-xs text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-3 py-2 self-start whitespace-nowrap">2026/09/30時点・同一店舗内</span>
+                <span class="text-xs text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-3 py-2 self-start whitespace-nowrap">2026/09/30時点・全4店舗の予約を照合</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 <div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h3 class="text-sm text-gray-500 mb-2">見学対象（母数）</h3><p class="text-3xl font-bold text-gray-800">20<span class="text-base font-normal ml-1">組</span></p></div>
-                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h3 class="text-sm text-gray-500 mb-2">ブライダル4コースへ転換</h3><p class="text-3xl font-bold text-gray-800">6<span class="text-base font-normal ml-1">組</span></p></div>
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h3 class="text-sm text-gray-500 mb-2">ブライダル4コースへ転換</h3><p class="text-3xl font-bold text-gray-800">6<span class="text-base font-normal ml-1">組</span></p><p class="text-xs text-gray-500 mt-2">うち他店舗で予約：0組</p></div>
                 <div class="bg-teal-50 rounded-xl p-5 border border-teal-100"><h3 class="text-sm text-teal-700 mb-2">見学からの転換率</h3><p class="text-4xl font-bold text-teal-700">30.0%</p></div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -421,11 +421,18 @@
                 </div>
             </div>
 
+            <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-3">予約した店舗の内訳</h3>
+            <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">転換先店舗</th><th class="px-4 py-3 text-right text-xs text-gray-500">転換数</th><th class="px-4 py-3 text-right text-xs text-gray-500 whitespace-nowrap">母数に対する率</th></tr></thead>
+                <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm text-gray-700">鎌倉本店</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr>
+<tr><td class="px-4 py-3 text-sm text-gray-700">横浜元町</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr>
+<tr><td class="px-4 py-3 text-sm text-gray-700">大阪中崎町</td><td class="px-4 py-3 text-right text-sm">6組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">30.0%</td></tr>
+<tr><td class="px-4 py-3 text-sm text-gray-700">東京蔵前</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr></tbody></table></div>
             <div class="mt-5 rounded-xl bg-teal-50 border border-teal-100 p-4 text-xs text-gray-600 leading-relaxed space-y-2">
                 <p><strong>転換率 ＝ ブライダル4コースへ転換した組数 ÷ 直近3か月の見学対象組数 × 100。</strong> 結婚指輪・3本制作・婚約指輪・ダイヤモンドプロポーズを対象とし、ペアリング・アニバーサリー等は含めません。</p>
-                <p>母数は期間内のキャンセルのない見学予約を、同じ組の重複予約を除いて数えたものです。代表者・お連れ様の情報を照合しますが、お連れ様の人数は母数に加算しません。見学日は予約の予定日で、実来店の確認とは異なります。</p>
+                <p>母数は期間内のキャンセルのない見学予約を、同じ組の重複予約を除いて数えたものです。複数店舗で見学した同じ組は、最初の見学店舗にまとめて計上します。見学店舗の転換数に、他店舗での予約も含めます。代表者・お連れ様の情報を照合しますが、お連れ様の人数は母数に加算しません。見学日は予約の予定日で、実来店の確認とは異なります。</p>
                 <p>ふりがなが異なっていても、電話番号またはメールアドレスが一致すれば対象とします。代表者とお連れ様の間でも、氏名の完全一致・ふりがな・電話番号を照合し、お相手様名義での予約も含めます。空欄同士は一致とせず、氏名の部分一致は使いません。</p>
-                <p>見学日以降（同日を含む）から2026/09/30までに受け付けた、同一店舗のキャンセルのない予約を転換とします。制作予定日が翌月以降でも含め、見学前に受け付けた予約・他店舗の予約は含めません。複数コースの予約は最初の1コースに計上します。</p>
+                <p>見学日以降（同日を含む）から2026/09/30までに受け付けた、全4店舗のキャンセルのない予約を転換とします。横浜で見学して蔵前で予約した場合は、横浜の転換として計上します。制作予定日が翌月以降でも含め、見学前に受け付けた予約は含めません。複数コースの予約は最初の1コースに計上します。</p>
                 <p><strong>直近の見学者はまだ検討期間が短く、転換率は今後増える可能性があります。</strong> 3か月を超えた見学はこの母数に含めません。予約受付時刻は不明のため同日予約も含みます。キャンセル状態は2026/10/07の確認時点です。登録情報による照合のため、すべての情報が変わった予約は判別できません。</p>
             </div>
         </section>
