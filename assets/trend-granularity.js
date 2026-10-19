@@ -73,6 +73,32 @@
         };
     }
 
+    function buildCostConfig(trend) {
+        const datasets = ['current', 'previous'].map(prefix => ({
+            label: (prefix === 'current' ? '今期 ' : '前期 ') + trend.label,
+            data: trend[prefix + '_cost'],
+            borderColor: prefix === 'current' ? '#f97316' : '#94a3b8',
+            backgroundColor: 'transparent', borderWidth: 2,
+            borderDash: prefix === 'previous' ? [5, 5] : [],
+            tension: 0, spanGaps: false, pointRadius: 4
+        }));
+        return {type: 'line', data: {labels: trend.labels, datasets}, options: {
+            responsive: true, maintainAspectRatio: false, animation: false,
+            interaction: {mode: 'index', intersect: false},
+            scales: {y: {beginAtZero: true, title: {display: true, text: '月間費用（円）'},
+                ticks: {callback: value => '¥' + value.toLocaleString()}}},
+            plugins: {tooltip: {callbacks: {
+                label: context => context.dataset.label + ': ¥' + context.parsed.y.toLocaleString(),
+                afterLabel(context) {
+                    const meta = trend[(context.datasetIndex === 0 ? 'current' : 'previous') + '_meta'][context.dataIndex];
+                    if (!meta) return '';
+                    return meta.month + (meta.partial ? '（月途中：広告費は' + meta.through + 'まで）' : '（全月）')
+                        + (meta.provisional ? '・暫定額' : '');
+                }
+            }}}
+        }};
+    }
+
     function init({data, selectorId, noteId, canvasId, initialMode, buildMonthly}) {
         const selector = document.getElementById(selectorId);
         const periodSelector = document.getElementById(selectorId + 'Period');
@@ -101,7 +127,15 @@
             const mode = selector.value;
             let config;
             if (isMonthly) {
-                config = buildMonthly(mode, noteId);
+                if (mode === 'monthly_cost') {
+                    config = buildCostConfig(data.monthly_cost_trend);
+                    note.textContent = data.monthly_cost_trend.label + ' ／ ' + data.monthly_cost_trend.note;
+                    data.monthly_cost_trend.current_meta.filter(meta => meta?.partial).forEach(meta => {
+                        note.textContent += meta.month + '：広告費は' + meta.through + 'まで' + (meta.provisional ? '・暫定額' : '') + '。';
+                    });
+                } else {
+                    config = buildMonthly(mode, noteId);
+                }
             } else {
                 config = buildIntervalConfig(data.daily_trend, period, mode);
                 const daily = data.daily_trend;
@@ -114,7 +148,7 @@
                 note.textContent = daily.month.replace('-', '年') + '月 ／ ' + basis
                     + (period === 'weekly' ? '週は月曜〜日曜、月初・月末は月内分のみ。' : '')
                     + '前年は同じ日付範囲で比較（曜日は異なります）。取得 ' + daily.as_of
-                    + '。売上・客数・客単価・CPAは月次のみ。';
+                    + '。売上・客数・客単価・月間費用・CPAは月次のみ。';
                 if (daily.monthly_totals_differ?.includes(mode)) note.textContent += '日次・週次は取得時点の予約履歴による再集計です。保存済みの月次集計とは合計が異なります。';
                 if (daily.previous_reservations.every(v => v === null)) note.textContent += '前年同月は開業前のため比較なし。';
             }
@@ -136,6 +170,6 @@
         selector.addEventListener('change', render);
         render();
     }
-    root.KamakuraTrends = {init, buckets, buildIntervalConfig};
+    root.KamakuraTrends = {init, buckets, buildIntervalConfig, buildCostConfig};
     if (typeof module !== 'undefined' && module.exports) module.exports = root.KamakuraTrends;
 })(typeof window !== 'undefined' ? window : globalThis);
