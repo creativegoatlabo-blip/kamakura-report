@@ -60,7 +60,7 @@ test('Kuramae pre-opening comparison stays missing rather than becoming zero', (
 
 test('all-store daily counts equal the store totals, including missing periods', () => {
     const stores=['kamakura_course_report','yokohama_course_report','course_report','kuramae_course_report'].map(x=>read(x).daily_trend);
-    for (const k of Object.keys(stores[0]).filter(k => k.startsWith('current_') || k.startsWith('previous_') && k !== 'previous_year')) {
+    for (const k of Object.keys(stores[0]).filter(k => (k.startsWith('current_') || k.startsWith('previous_')) && Array.isArray(stores[0][k]) && !k.endsWith('_dates'))) {
         for (let i=0;i<31;i++) {
             const values=stores.map(s=>s[k][i]);
             assert.equal(data.daily_trend[k][i],values.every(v=>v===null)?null:sum(values));
