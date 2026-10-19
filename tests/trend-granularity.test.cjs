@@ -67,3 +67,47 @@ test('all-store daily counts equal the store totals, including missing periods',
         }
     }
 });
+
+test('every report period has complete daily counts and weekly sums without boundary overlap', () => {
+    const files=fs.readdirSync('.').filter(name=>name.endsWith('.html')&&name!=='index.html');
+    assert.equal(files.length,49);
+    for (const filename of files) {
+        const html=fs.readFileSync(filename,'utf8');
+        const r=JSON.parse(html.match(/const reportData\s*=\s*(\{.*?\});/s)[1]);
+        const d=r.daily_trend;
+        assert.ok(d,filename);
+        const [year,month]=d.month.split('-').map(Number);
+        assert.equal(d.dates.length,new Date(Date.UTC(year,month,0)).getUTCDate(),filename);
+        assert.equal(new Set(d.dates).size,d.dates.length);
+        const groups=buckets(d,'weekly');
+        assert.deepEqual(groups.flat(),d.dates.map((_,i)=>i));
+        for (const mode of ['reservations','new_reservations','bridal_fashion','new_bridal_fashion']) {
+            const day=buildIntervalConfig(d,'daily',mode);
+            const week=buildIntervalConfig(d,'weekly',mode);
+            day.data.datasets.forEach((ds,i)=>assert.equal(sum(ds.data),sum(week.data.datasets[i].data),filename+':'+mode));
+        }
+        for (const [key,value] of Object.entries(d.reconciliation||{})) {
+            assert.equal(sum(d['current_'+key]),value.daily_total,filename);
+        }
+        assert.match(html,/id="trendSelectorPeriod"/);
+        assert.match(html,/id="cpaTrendSelectorPeriod"/);
+    }
+});
+
+test('historical all-store daily series equal the sum of applicable stores', () => {
+    for (let month=1;month<=9;month++) {
+        const suffix=`_2026_${String(month).padStart(2,'0')}.html`;
+        const readFile=stem=>JSON.parse(fs.readFileSync(stem+suffix,'utf8').match(/const reportData\s*=\s*(\{.*?\});/s)[1]).daily_trend;
+        const all=readFile('all_course_report');
+        const stems=['kamakura_course_report','yokohama_course_report','course_report'];
+        if (month>=7) stems.push('kuramae_course_report');
+        const stores=stems.map(readFile);
+        // Before the Kuramae archive starts, future Kuramae bookings may already be accepted.
+        for (const key of ['current_reservations','current_bridal','current_fashion','previous_reservations','previous_bridal','previous_fashion']) {
+            all[key].forEach((v,i)=>assert.equal(v,sum(stores.map(s=>s[key][i])),month+':'+key));
+        }
+        if(month>=7) for(const key of ['current_new_reservations','current_new_bridal','current_new_fashion']) {
+            all[key].forEach((v,i)=>assert.equal(v,sum(stores.map(s=>s[key][i])),month+':'+key));
+        }
+    }
+});

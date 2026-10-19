@@ -115,6 +115,7 @@
                     + (period === 'weekly' ? '週は月曜〜日曜、月初・月末は月内分のみ。' : '')
                     + '前年は同じ日付範囲で比較（曜日は異なります）。取得 ' + daily.as_of
                     + '。売上・客数・客単価・CPAは月次のみ。';
+                if (daily.monthly_totals_differ?.includes(mode)) note.textContent += '日次・週次は取得時点の予約履歴による再集計です。保存済みの月次集計とは合計が異なります。';
                 if (daily.previous_reservations.every(v => v === null)) note.textContent += '前年同月は開業前のため比較なし。';
             }
             canvas.setAttribute('aria-label', title.textContent + '：' + selector.selectedOptions[0].textContent);
