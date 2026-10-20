@@ -12,10 +12,11 @@ test('every report offers monthly cost in both selectors with a twelve-month ser
   assert.ok([...t.current_cost,...t.previous_cost].every(v=>v===null||(Number.isInteger(v)&&v>=0)));
  }
 });
-test('October uses the latest snapshot, September stays missing, and forecast months are not zero',()=>{
+test('October uses the latest snapshot, September uses the approved published value, and forecast months are not zero',()=>{
  const t=read('all_course_report').monthly_cost_trend;
  assert.equal(t.current_cost[5],4798848);
- assert.equal(t.current_cost[4],null);
+ assert.equal(t.current_cost[4],6271551);
+ assert.equal(t.current_meta[4].adopted_from_published_report,true);
  assert.ok(t.current_cost.slice(6).every(v=>v===null));
  assert.equal(t.current_meta[5].through,'2026-10-19');
  assert.equal(t.current_meta[5].provisional,true);
