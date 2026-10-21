@@ -33,11 +33,12 @@ test('regional views do not allocate shared listing fees to a store',()=>{
  for(const stem of ['yokohama_course_report','kuramae_course_report'])assert.deepEqual(read(stem).monthly_cost_trend.current_cost,kanto.current_cost);
  assert.equal(kanto.current_meta[5].provisional,false);
 });
-test('historical fiscal years are aligned and months beyond the selected report are empty',()=>{
+test('historical fiscal years include acquired later months in the same fiscal year',()=>{
  const jan=read('all_course_report_2026_01').monthly_cost_trend;
  assert.equal(jan.current_meta[0].month,'2025-05');
  assert.equal(jan.current_meta[8].month,'2026-01');
  assert.equal(jan.current_cost[8],9187324);
- assert.ok(jan.current_cost.slice(9).every(v=>v===null));
+ assert.equal(jan.current_meta[11].month,'2026-04');
+ assert.equal(jan.current_cost[11],8888275);
  assert.ok(jan.previous_cost.every(v=>v===null));
 });

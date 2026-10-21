@@ -142,7 +142,13 @@
                     });
                 } else {
                     config = buildMonthly(mode, noteId);
+                    if (/^(?:(?:bridal|fashion)_)?(?:sales|customers|unit_price)$/.test(mode)) {
+                        note.textContent = '売上・客数・客単価は出納帳を優先します。全コースを確認できた月はペアリングを含む総計、出納帳が不足する月は従来の集計値です。未取得の内訳は空欄です。';
+                    } else if (mode === 'bridal_cpa') {
+                        note.textContent = data.bridal_cpa_trend.note;
+                    }
                 }
+                if (data.meta?.monthly_history_note) note.textContent += ' ' + data.meta.monthly_history_note;
             } else {
                 const comparison = comparisonSelector?.value === 'mom' ? 'mom' : 'yoy';
                 const comparisonLabel = comparison === 'mom' ? '前月' : '前年';
