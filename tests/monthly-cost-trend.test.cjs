@@ -14,21 +14,21 @@ test('every report offers monthly cost in both selectors with a twelve-month ser
 });
 test('October uses the latest snapshot, September uses the approved published value, and forecast months are not zero',()=>{
  const t=read('all_course_report').monthly_cost_trend;
- assert.equal(t.current_cost[5],4798848);
+ assert.equal(t.current_cost[5],6441376);
  assert.equal(t.current_cost[4],6271551);
  assert.equal(t.current_meta[4].adopted_from_published_report,true);
  assert.ok(t.current_cost.slice(6).every(v=>v===null));
- assert.equal(t.current_meta[5].through,'2026-10-19');
+ assert.equal(t.current_meta[5].through,'2026-10-26');
  assert.equal(t.current_meta[5].provisional,true);
  const config=buildCostConfig(t);
- assert.equal(config.options.plugins.tooltip.callbacks.afterLabel({datasetIndex:0,dataIndex:5}),'2026-10（月途中：広告費は2026-10-19まで）・暫定額');
+ assert.equal(config.options.plugins.tooltip.callbacks.afterLabel({datasetIndex:0,dataIndex:5}),'2026-10（月途中：広告費は2026-10-26まで）・暫定額');
  assert.equal(config.data.datasets[0].spanGaps,false);
 });
 test('regional views do not allocate shared listing fees to a store',()=>{
  const all=read('all_course_report').monthly_cost_trend;
  const kanto=read('kamakura_course_report').monthly_cost_trend;
  const osaka=read('course_report').monthly_cost_trend;
- assert.equal(kanto.current_cost[5],3762670);assert.equal(osaka.current_cost[5],716178);
+ assert.equal(kanto.current_cost[5],5034868);assert.equal(osaka.current_cost[5],1086508);
  assert.equal(all.current_cost[5]-kanto.current_cost[5]-osaka.current_cost[5],320000);
  for(const stem of ['yokohama_course_report','kuramae_course_report'])assert.deepEqual(read(stem).monthly_cost_trend.current_cost,kanto.current_cost);
  assert.equal(kanto.current_meta[5].provisional,false);
