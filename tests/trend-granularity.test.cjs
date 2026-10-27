@@ -15,23 +15,23 @@ test('weekly boundaries are Monday-Sunday, clipped to the report month', () => {
 test('accepted bookings exclude unobserved days and compare identical partial-week dates', () => {
     const d = data.daily_trend;
     const cfg = buildIntervalConfig(d,'weekly','new_reservations');
-    assert.equal(cfg.data.labels.length,4);
-    assert.match(cfg.data.labels[3], /途中/);
-    assert.equal(cfg.data.datasets[0].data[3],d.current_new_reservations[18]);
-    assert.equal(cfg.data.datasets[1].data[3],d.previous_new_reservations[18]);
-    assert.equal(sum(cfg.data.datasets[0].data),244);
-    assert.equal(buildIntervalConfig(d,'daily','new_reservations').data.labels.length,19);
-    assert.ok(d.current_new_reservations.slice(19).every(v => v === null));
+    assert.equal(cfg.data.labels.length,5);
+    assert.match(cfg.data.labels[4], /途中/);
+    assert.equal(cfg.data.datasets[0].data[4],d.current_new_reservations[25]);
+    assert.equal(cfg.data.datasets[1].data[4],d.previous_new_reservations[25]);
+    assert.equal(sum(cfg.data.datasets[0].data),338);
+    assert.equal(buildIntervalConfig(d,'daily','new_reservations').data.labels.length,26);
+    assert.ok(d.current_new_reservations.slice(26).every(v => v === null));
 });
 
 test('booked-date metrics include the entire month and retain their cancellation definitions', () => {
     const d = data.daily_trend;
     assert.equal(buildIntervalConfig(d,'daily','reservations').data.labels.length,31);
     const weekly = buildIntervalConfig(d,'weekly','reservations');
-    assert.equal(sum(weekly.data.datasets[0].data),362);
+    assert.equal(sum(weekly.data.datasets[0].data),413);
     const split = buildIntervalConfig(d,'weekly','bridal_fashion');
-    assert.equal(sum(split.data.datasets[0].data),131);
-    assert.equal(sum(split.data.datasets[2].data),121);
+    assert.equal(sum(split.data.datasets[0].data),144);
+    assert.equal(sum(split.data.datasets[2].data),142);
 });
 
 test('daily and weekly totals reconcile to the existing October monthly counts for all stores', () => {
