@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026年10月 大阪中崎町 予約実績ベースレポート</title>
+    <title>2026年11月 大阪中崎町 予約実績ベースレポート</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -21,7 +21,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-    </style>
+    .daily-acquisition-table th,.daily-acquisition-table td{padding:12px 10px;border-bottom:1px solid #e5e7eb}</style>
 <style id="september-responsive-layout">
     @media (max-width: 767px) {
         header > div:last-child { width: 100%; min-width: 0; }
@@ -82,14 +82,14 @@
     </style>
 </head>
 
-<body class="p-4 md:p-8"><nav aria-label="日次速報" style="padding:14px 24px;background:#204f60;color:white;text-align:center">11月4日更新： <a style="color:white;text-decoration:underline" href="daily/2026_11/course_report.html">11月 日次広告費・CPA・予約数</a>　｜　<a style="color:white;text-decoration:underline" href="daily/2026_10/course_report.html">10月 日次広告費・CPA・予約数</a></nav>
+<body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <header id="reportHeader" class="mb-8 flex flex-col md:flex-row md:items-start md:justify-between w-full">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">2026年10月 大阪中崎町 予約実績ベースレポート</h1>
-                <p class="text-gray-500 mt-2">コース別 データサマリー (2026年10月単月 / 月次推移は今期: 2026/5〜2027/4)</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">2026年11月 大阪中崎町 予約実績ベースレポート</h1>
+                <p class="text-gray-500 mt-2">コース別 データサマリー (2026年11月単月 / 月次推移は今期: 2026/5〜2027/4)</p>
             </div>
             <div class="mt-4 md:mt-0 flex flex-col items-start md:items-end">
                 <div class="text-sm text-gray-400 mb-3" id="generatedAt">
@@ -102,13 +102,7 @@
                         class="flex items-center space-x-2 text-sm bg-white border border-gray-200 rounded-md px-3 py-1 shadow-sm">
                         <span class="text-gray-500 font-medium">店舗:</span>
                         <select onchange="if(this.value) window.location.href=this.value"
-                            class="border-none bg-transparent text-gray-700 text-sm focus:ring-0 py-1 pl-1 pr-6 cursor-pointer">
-                            <option value="all_course_report.html">全店</option>
-                            <option value="kamakura_course_report.html">鎌倉本店</option>
-                            <option value="yokohama_course_report.html">横浜元町</option>
-                            <option value="course_report.html" selected>大阪中崎町</option>
-                            <option value="kuramae_course_report.html">東京蔵前</option>
-                        </select>
+                            class="border-none bg-transparent text-gray-700 text-sm focus:ring-0 py-1 pl-1 pr-6 cursor-pointer"><option value="all_course_report.html">全店</option><option value="kamakura_course_report.html">鎌倉本店</option><option value="yokohama_course_report.html">横浜元町</option><option value="course_report.html" selected>大阪中崎町</option><option value="kuramae_course_report.html">東京蔵前</option></select>
                     </div>
                     <!-- アーカイブリンク -->
                     <div
@@ -116,7 +110,8 @@
                         <span class="text-gray-500 font-medium">月別:</span>
                         <select onchange="if(this.value) window.location.href=this.value"
                             class="border-none bg-transparent text-gray-700 text-sm focus:ring-0 py-1 pl-1 pr-6 cursor-pointer">
-<option value="course_report.html" selected>2026年10月</option>
+<option value="course_report.html" selected>2026年11月</option>
+<option value="course_report_2026_10.html">2026年10月</option>
 <option value="course_report_2026_09.html">2026年9月</option>
 <option value="course_report_2026_08.html">2026年8月</option>
 <option value="course_report_2026_07.html">2026年7月</option>
@@ -172,7 +167,7 @@
                         <option value="fashion_sales">ファッション売上</option>
                         <option value="fashion_customers">ファッション客数</option>
                         <option value="fashion_unit_price">ファッション客単価</option>
-                        <option value="monthly_cost">月間費用</option>
+                        <option value="ad_spend">広告消化額（固定掲載費除外）</option><option value="ad_cpa">広告費ベースCPA</option><option value="monthly_cost">月間費用</option>
                         <option value="bridal_cpa">ブライダルCPA</option>
                     </select>
                     <span class="text-xs text-gray-400" id="trendNote">※受付日ベース・キャンセル除外</span>
@@ -206,7 +201,7 @@
                         <option value="fashion_sales">ファッション売上</option>
                         <option value="fashion_customers">ファッション客数</option>
                         <option value="fashion_unit_price">ファッション客単価</option>
-                        <option value="monthly_cost">月間費用</option>
+                        <option value="ad_spend">広告消化額（固定掲載費除外）</option><option value="ad_cpa">広告費ベースCPA</option><option value="monthly_cost">月間費用</option>
                         <option value="bridal_cpa" selected>ブライダルCPA</option>
                     </select>
                     <span class="text-xs text-gray-400" id="cpaTrendNote">※monthly_costs.jsonの月間費用 ÷ 受付日ベースのブライダル予約数</span>
@@ -222,32 +217,32 @@
         <!-- 上段: 単月データ -->
         <!-- ============================================================ -->
 
-<p id="octoberDataNote" class="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-gray-700">10月の新規予約・CPA・広告費は10月1〜31日。予約の取消状態は11月4日に再確認しました（10月受付分）。予約日基準の指標は9月以前受付分の取消変更を全件再照合していないため参考値です。売上・客数・客単価・ROAS・予約枠は未更新。マイナビ50,000円は従来の暫定額を継続し、全店総費用CPAも暫定です。見学転換率・リピーター分析は10月27日取得版を保持しています。</p>
+<p id="octoberDataNote" class="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-gray-700">11月の新規予約・広告費・広告費ベースCPAは11月1〜3日（11月4日取得）。予約日基準の指標は11月末までの予約予定を含みます。マイナビ費が未確定のため、全店の固定費込み総額・CPAは未確定。出納帳が必要な売上・客数・客単価・ROASは未反映です。9月以前受付の取消状態は全件再照合していません。見学転換率・リピーター分析・予約枠は今回未更新です。</p>
         <!-- KPI Summary Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="glass-card p-6 border-l-4 border-blue-500 hover:shadow-lg transition">
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">総予約数 (10月)</h2>
+                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">総予約数 (11月)</h2>
                 <div class="flex items-end justify-between">
                     <div class="text-4xl font-bold text-gray-800" id="kpiTotalRes">--</div>
                     <div class="text-sm font-medium" id="kpiResGrowth">--</div>
                 </div>
             </div>
             <div class="glass-card p-6 border-l-4 border-pink-500 hover:shadow-lg transition">
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">ブライダル予約数 (10月)</h2>
+                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">ブライダル予約数 (11月)</h2>
                 <div class="flex items-end justify-between">
                     <div class="text-4xl font-bold text-gray-800" id="kpiBridalRes">--</div>
                     <div class="text-sm font-medium" id="kpiBridalGrowth">--</div>
                 </div>
             </div>
             <div class="glass-card p-6 border-l-4 border-red-500 hover:shadow-lg transition">
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">キャンセル数 (10月)</h2>
+                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">キャンセル数 (11月)</h2>
                 <div class="flex items-end justify-between">
                     <div class="text-4xl font-bold text-gray-800" id="kpiTotalCancel">--</div>
                     <div class="text-sm font-medium" id="kpiCancelGrowth">--</div>
                 </div>
             </div>
             <div class="glass-card p-6 border-l-4 border-yellow-500 hover:shadow-lg transition">
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">キャンセル率 (10月)</h2>
+                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">キャンセル率 (11月)</h2>
                 <div class="flex items-end justify-between">
                     <div class="text-4xl font-bold text-gray-800" id="kpiCancelRate">--</div>
                     <div class="text-sm font-medium text-gray-400">vs 全予約</div>
@@ -255,12 +250,13 @@
             </div>
         </div>
 
+<section id="dailyAcquisitionSection" class="glass-card p-6 mb-8"><h2 class="text-xl font-bold text-gray-800 mb-3">日次の広告消化額・CPA・各予約数</h2><p class="text-sm text-gray-500 mb-4">11月1〜3日受付分・キャンセル除外。広告費・CPAは大阪。固定掲載費を除くGoogle＋Metaの消化額です。CPA分母は大阪のブライダル予約数。予約は全流入を含み、広告帰属を示しません。</p><div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4"><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-500">広告消化額</p><p class="text-2xl font-bold text-gray-800 mt-2">¥219,622</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-500">広告費ベースCPA</p><p class="text-2xl font-bold text-gray-800 mt-2">¥219,622</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-500">この店舗のブライダル予約</p><p class="text-2xl font-bold text-gray-800 mt-2">1件</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-500">全コース有効予約</p><p class="text-2xl font-bold text-gray-800 mt-2">6件</p></div></div><div class="overflow-x-auto"><table class="daily-acquisition-table w-full text-sm text-right whitespace-nowrap"><thead class="bg-gray-50"><tr><th>受付日</th><th>広告消化額</th><th>広告費CPA</th><th>CPA分母</th><th>ブライダル</th><th>ペアリング</th><th>見学</th><th>その他</th><th>有効計</th><th>取消</th></tr></thead><tbody><tr><th class="text-left">11/01</th><td>¥82,857</td><td>—</td><td>0</td><td>0</td><td>2</td><td>1</td><td>0</td><td>3</td><td>0</td></tr><tr><th class="text-left">11/02</th><td>¥76,525</td><td>¥76,525</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>2</td><td>0</td></tr><tr><th class="text-left">11/03</th><td>¥60,239</td><td>—</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody><tfoot class="bg-gray-50 font-bold"><tr><th class="text-left">合計</th><td>¥219,622</td><td>¥219,622</td><td>1</td><td>1</td><td>4</td><td>1</td><td>0</td><td>6</td><td>0</td></tr></tfoot></table></div><p class="text-xs text-gray-500 mt-3">取消は対象期間の受付分のうち取得時点で取消済みの件数。分母0件のCPAは「—」。売上・客数・客単価・ROASは未取得です。</p></section>
         <!-- Cost & ROAS KPI Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="costRoasSection" style="display: none;">
             <div class="glass-card p-6 border-t-4 border-amber-400">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">月間費用 (10月)</p>
+                        <p class="text-sm font-medium text-gray-500">月間費用 (11月)</p>
                         <p class="text-2xl font-bold text-gray-800 mt-1" id="costValue">-</p>
                         <p class="text-xs mt-1" id="costCompare"></p>
                     </div>
@@ -272,7 +268,7 @@
             <div class="glass-card p-6 border-t-4 border-emerald-400">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">売上 (10月)</p>
+                        <p class="text-sm font-medium text-gray-500">売上 (11月)</p>
                         <p class="text-2xl font-bold text-gray-800 mt-1" id="costSalesValue">-</p>
                         <p class="text-xs mt-1" id="salesCompare"></p>
                     </div>
@@ -284,7 +280,7 @@
             <div class="glass-card p-6 border-t-4 border-rose-400">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">ROAS (10月)</p>
+                        <p class="text-sm font-medium text-gray-500">ROAS (11月)</p>
                         <p class="text-2xl font-bold text-gray-800 mt-1" id="roasValue">-</p>
                         <p class="text-xs mt-1" id="roasCompare"></p>
                     </div>
@@ -296,7 +292,7 @@
             <div class="glass-card p-6 border-t-4 border-indigo-400">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500">ブライダル予約CPA (10月)</p>
+                        <p class="text-sm font-medium text-gray-500">ブライダル予約CPA (11月)</p>
                         <p class="text-2xl font-bold text-gray-800 mt-1" id="cpaValue">-</p>
                         <p class="text-xs text-gray-400 mt-1" id="cpaDetail"></p>
                         <p class="text-xs mt-1" id="cpaCompare"></p>
@@ -324,7 +320,7 @@
                 style="display: none;">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-bold text-gray-800">予約枠 稼働状況 <span
-                            class="text-sm font-normal text-gray-500 ml-2" id="capPeriodLabel">(2026年10月)</span></h2>
+                            class="text-sm font-normal text-gray-500 ml-2" id="capPeriodLabel">(2026年11月)</span></h2>
                     <div class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">CSV実予約数 ÷ 予約管理の実稼働枠</div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -343,7 +339,7 @@
                 </div>
             </div>
             <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 構成比 (10月)</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 構成比 (11月)</h3>
                 <div class="relative h-80 flex justify-center">
                     <canvas id="courseShareChart"></canvas>
                 </div>
@@ -353,14 +349,14 @@
         <!-- Course Ranking + New Reservation Ranking -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 予約数ランキング (10月)</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 予約数ランキング (11月)</h3>
                 <p class="text-xs text-gray-400 -mt-2 mb-3">※予約日ベース</p>
                 <div class="relative h-96">
                     <canvas id="courseRankingChart"></canvas>
                 </div>
             </div>
             <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 新規予約数ランキング (10月)</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 新規予約数ランキング (11月)</h3>
                 <p class="text-xs text-gray-400 -mt-2 mb-3">※受付日ベース・キャンセル除外</p>
                 <div class="relative h-96">
                     <canvas id="newReservationRankingChart"></canvas>
@@ -370,7 +366,7 @@
 
         <!-- Course Cancel Rate Table -->
         <div class="glass-card p-6 mb-8 border-t-4 border-red-400">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 キャンセル率 (10月)</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">コース別 キャンセル率 (11月)</h3>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -389,13 +385,13 @@
         <!-- Day Type + AM/PM -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">平日・休日の割合 (10月)</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">平日・休日の割合 (11月)</h3>
                 <div class="relative h-64 flex justify-center mt-8">
                     <canvas id="dayTypeShareChart"></canvas>
                 </div>
             </div>
             <div class="glass-card p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">午前・午後の割合 (ブライダル枠 10月)</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">午前・午後の割合 (ブライダル枠 11月)</h3>
                 <div class="relative h-64 flex justify-center mt-8">
                     <canvas id="ampmShareChart"></canvas>
                 </div>
@@ -447,83 +443,7 @@
             </div>
         </div>
 
-<!-- visit-bridal-conversion:start -->
-        <section id="visitBridalConversionSection" aria-labelledby="visitBridalConversionTitle" class="glass-card p-6 mb-8 border-t-4 border-teal-600 shadow-xl">
-            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-3 mb-5">
-                <div><h2 id="visitBridalConversionTitle" class="text-2xl font-bold text-gray-800">見学 → ブライダル 転換率（直近3か月）</h2>
-                    <p class="text-sm text-gray-500 mt-2">大阪中崎町 ／ 見学対象期間：2026/08/01〜2026/10/26</p></div>
-                <span class="text-xs text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-3 py-2 self-start whitespace-nowrap">2026/10/26時点・全4店舗の予約を照合</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h3 class="text-sm text-gray-500 mb-2">見学対象（母数）</h3><p class="text-3xl font-bold text-gray-800">23<span class="text-base font-normal ml-1">組</span></p></div>
-                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h3 class="text-sm text-gray-500 mb-2">ブライダル4コースへ転換</h3><p class="text-3xl font-bold text-gray-800">7<span class="text-base font-normal ml-1">組</span></p><p class="text-xs text-gray-500 mt-2">うち他店舗で予約：0組</p></div>
-                <div class="bg-teal-50 rounded-xl p-5 border border-teal-100"><h3 class="text-sm text-teal-700 mb-2">見学からの転換率</h3><p class="text-4xl font-bold text-teal-700">30.4%</p></div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div><h3 class="text-lg font-semibold text-gray-700 mb-3">転換先コース内訳</h3>
-                    <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">コース</th><th class="px-4 py-3 text-right text-xs text-gray-500 whitespace-nowrap">転換数</th><th class="px-4 py-3 text-right text-xs text-gray-500 whitespace-nowrap">母数に対する率</th></tr></thead>
-                        <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm text-gray-700">結婚指輪手作りコース</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">6組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">26.1%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">結婚・婚約指輪手作りコース（３本制作）</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">1組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">4.3%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">婚約指輪手作りコース</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">ダイヤモンドプロポーズコース</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr></tbody></table></div>
-                </div>
-                <div><h3 class="text-lg font-semibold text-gray-700 mb-3">見学月別の経過</h3>
-                    <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">見学月</th><th class="px-4 py-3 text-right text-xs text-gray-500">母数</th><th class="px-4 py-3 text-right text-xs text-gray-500">転換数</th><th class="px-4 py-3 text-right text-xs text-gray-500">転換率</th></tr></thead>
-                        <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm text-gray-700">8月</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">7組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">3組</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">42.9%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">9月</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">8組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">2組</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">25.0%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">10月</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">8組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">2組</td><td class="px-4 py-3 text-right text-sm font-semibold whitespace-nowrap">25.0%</td></tr></tbody></table></div>
-                    <p class="text-xs text-gray-500 mt-2">各見学月の対象者のうち、2026/10/26までに予約した組数です。</p>
-                </div>
-            </div>
-            <div id="visitTourOriginSection" aria-labelledby="visitTourOriginTitle">
-            <h3 id="visitTourOriginTitle" class="text-lg font-semibold text-gray-700 mt-6 mb-3">見学予約した店舗の内訳</h3>
-            <p class="text-sm text-gray-500 mb-3">全店の見学対象154組の内訳です。構成比は全店の見学対象組数に対する割合です。ブライダルへの転換には、自店舗と他店舗での予約の両方を含めます。</p>
-            <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">見学店舗</th><th class="px-4 py-3 text-right text-xs text-gray-500">見学対象</th><th class="px-4 py-3 text-right text-xs text-gray-500">構成比</th><th class="px-4 py-3 text-right text-xs text-gray-500">ブライダルへ転換</th><th class="px-4 py-3 text-right text-xs text-gray-500">うち自店舗で予約</th><th class="px-4 py-3 text-right text-xs text-gray-500">うち他店舗で予約</th><th class="px-4 py-3 text-right text-xs text-gray-500">全店への転換率</th></tr></thead>
-                <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm whitespace-nowrap">鎌倉本店</td><td class="px-4 py-3 text-right text-sm">45組</td><td class="px-4 py-3 text-right text-sm">29.2%</td><td class="px-4 py-3 text-right text-sm">14組</td><td class="px-4 py-3 text-right text-sm">11組</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700">3組</td><td class="px-4 py-3 text-right text-sm">31.1%</td></tr><tr><td class="px-4 py-3 text-sm whitespace-nowrap">横浜元町</td><td class="px-4 py-3 text-right text-sm">28組</td><td class="px-4 py-3 text-right text-sm">18.2%</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm">1組</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700">6組</td><td class="px-4 py-3 text-right text-sm">25.0%</td></tr><tr class="bg-teal-50"><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町</td><td class="px-4 py-3 text-right text-sm">23組</td><td class="px-4 py-3 text-right text-sm">14.9%</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700">0組</td><td class="px-4 py-3 text-right text-sm">30.4%</td></tr><tr><td class="px-4 py-3 text-sm whitespace-nowrap">東京蔵前</td><td class="px-4 py-3 text-right text-sm">58組</td><td class="px-4 py-3 text-right text-sm">37.7%</td><td class="px-4 py-3 text-right text-sm">25組</td><td class="px-4 py-3 text-right text-sm">24組</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700">1組</td><td class="px-4 py-3 text-right text-sm">43.1%</td></tr><tr class="bg-gray-50 font-semibold"><td class="px-4 py-3 text-sm">全店</td><td class="px-4 py-3 text-right text-sm">154組</td><td class="px-4 py-3 text-right text-sm">100.0%</td><td class="px-4 py-3 text-right text-sm">53組</td><td class="px-4 py-3 text-right text-sm">43組</td><td class="px-4 py-3 text-right text-sm text-teal-700">10組</td><td class="px-4 py-3 text-right text-sm">34.4%</td></tr></tbody></table></div>
-            <p class="text-xs text-gray-500 mt-2">未転換の見学者も見学対象に含め、同じ組は対象期間内の最初の見学店舗に1回だけ計上します。他店舗での予約も、見学を受け入れた店舗の転換実績です。</p>
-            </div>
-            <div id="visitBridalDestinationSection" aria-labelledby="visitBridalDestinationTitle">
-            <h3 id="visitBridalDestinationTitle" class="text-lg font-semibold text-gray-700 mt-6 mb-3">ブライダル予約した店舗の内訳</h3>
-            <p class="text-sm text-gray-500 mb-3">大阪中崎町で見学した組のうち、ブライダル予約に転換した7組の予約先です。率の母数は見学対象の23組です。</p>
-            <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">ブライダル予約店舗</th><th class="px-4 py-3 text-right text-xs text-gray-500">転換数</th><th class="px-4 py-3 text-right text-xs text-gray-500 whitespace-nowrap">見学対象に対する率</th></tr></thead>
-                <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm text-gray-700">鎌倉本店</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">横浜元町</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">大阪中崎町</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">30.4%</td></tr>
-<tr><td class="px-4 py-3 text-sm text-gray-700">東京蔵前</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm whitespace-nowrap">0.0%</td></tr></tbody></table></div>
-            </div>
-            <div id="visitBridalOriginSection" aria-labelledby="visitBridalOriginTitle">
-            <h3 id="visitBridalOriginTitle" class="text-lg font-semibold text-gray-700 mt-6 mb-3">この店舗でブライダル予約した組の見学店舗内訳</h3>
-            <p class="text-sm text-gray-500 mb-3">直近3か月に全店のいずれかで見学し、大阪中崎町でブライダル予約した7組の見学先です。構成比の母数はこの7組です。</p>
-            <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">見学店舗</th><th class="px-4 py-3 text-right text-xs text-gray-500">ブライダル予約</th><th class="px-4 py-3 text-right text-xs text-gray-500">構成比</th></tr></thead>
-                <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm">鎌倉本店</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm">0.0%</td></tr><tr><td class="px-4 py-3 text-sm">横浜元町</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm">0.0%</td></tr><tr><td class="px-4 py-3 text-sm">大阪中崎町</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm">100.0%</td></tr><tr><td class="px-4 py-3 text-sm">東京蔵前</td><td class="px-4 py-3 text-right text-sm">0組</td><td class="px-4 py-3 text-right text-sm">0.0%</td></tr><tr class="bg-gray-50 font-semibold"><td class="px-4 py-3 text-sm">合計</td><td class="px-4 py-3 text-right text-sm">7組</td><td class="px-4 py-3 text-right text-sm">100.0%</td></tr></tbody></table></div>
-            </div>
-            <div id="visitBridalTimingSection" aria-labelledby="visitBridalTimingTitle" class="mt-8 pt-6 border-t border-gray-200">
-                <h3 id="visitBridalTimingTitle" class="text-xl font-bold text-gray-800 mb-2">見学からブライダル予約受付までの日数（直近3か月）</h3>
-                <p class="text-sm text-teal-700 mb-3"><strong>直近3か月の日数分析</strong> ／ 見学対象期間：2026/08/01〜2026/10/26。この期間の見学者のうち、2026/10/26までにブライダル予約が発生した組を対象とします。</p>
-                <p class="text-sm text-gray-500 mb-4">見学予定日 → 最初のブライダル予約の受付日 ／ 転換済み7組。同日予約（0日）：3組。</p>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4"><div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h4 class="text-sm text-gray-500 mb-2">平均</h4><p class="text-3xl font-bold text-gray-800">7.4日</p></div><div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h4 class="text-sm text-gray-500 mb-2">中央値</h4><p class="text-3xl font-bold text-gray-800">4日</p></div><div class="bg-gray-50 rounded-xl p-5 border border-gray-100"><h4 class="text-sm text-gray-500 mb-2">最大</h4><p class="text-3xl font-bold text-gray-800">23日</p></div></div>
-
-                <h4 class="text-base font-semibold text-gray-700 mt-5 mb-3">予約受付までの日数が長い順 TOP5</h4>
-                <div class="overflow-x-auto border border-gray-200 rounded-xl"><table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50"><tr><th class="px-4 py-3 text-left text-xs text-gray-500">順番</th><th class="px-4 py-3 text-right text-xs text-gray-500">日数</th><th class="px-4 py-3 text-left text-xs text-gray-500 whitespace-nowrap">見学予定日</th><th class="px-4 py-3 text-left text-xs text-gray-500 whitespace-nowrap">ブライダル受付日</th><th class="px-4 py-3 text-left text-xs text-gray-500 whitespace-nowrap">見学店舗 → 予約店舗</th></tr></thead>
-                    <tbody class="divide-y divide-gray-200"><tr><td class="px-4 py-3 text-sm">1</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700 whitespace-nowrap">23日</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/01</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/24</td><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町 → 大阪中崎町</td></tr><tr><td class="px-4 py-3 text-sm">2</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700 whitespace-nowrap">18日</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/10/03</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/10/21</td><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町 → 大阪中崎町</td></tr><tr><td class="px-4 py-3 text-sm">3</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700 whitespace-nowrap">7日</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/09/05</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/09/12</td><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町 → 大阪中崎町</td></tr><tr><td class="px-4 py-3 text-sm">4</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700 whitespace-nowrap">4日</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/01</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/05</td><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町 → 大阪中崎町</td></tr><tr><td class="px-4 py-3 text-sm">5</td><td class="px-4 py-3 text-right text-sm font-semibold text-teal-700 whitespace-nowrap">0日</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/29</td><td class="px-4 py-3 text-sm whitespace-nowrap">2026/08/29</td><td class="px-4 py-3 text-sm whitespace-nowrap">大阪中崎町 → 大阪中崎町</td></tr></tbody></table></div>
-
-                <p class="text-xs text-gray-500 mt-3 leading-relaxed">日数 ＝ ブライダル予約の受付日 − 見学予定日。見学予定日9/1・予約受付日9/30なら29日です。制作予定日までの待ち日数は含めません。同じ組は全店舗の対象期間内の最初の見学を起点とし、最初の対象予約で1回だけ集計します。同日数は見学日等の順で表示します。氏名・連絡先は表示しません。予約済みの組だけを対象とし、未予約の組を0日にはしません。直近の見学者は観測期間が短いため、日数が短い予約に偏る可能性があります。日数分析も、上記の転換率と同じ直近3か月の見学者が対象です。</p>
-            </div>
-            <div class="mt-5 rounded-xl bg-teal-50 border border-teal-100 p-4 text-xs text-gray-600 leading-relaxed space-y-2">
-                <p><strong>転換率 ＝ ブライダル4コースへ転換した組数 ÷ 直近3か月の見学対象組数 × 100。</strong> 結婚指輪・3本制作・婚約指輪・ダイヤモンドプロポーズを対象とし、ペアリング・アニバーサリー等は含めません。</p>
-                <p>母数は期間内のキャンセルのない見学予約を、同じ組の重複予約を除いて数えたものです。複数店舗で見学した同じ組は、最初の見学店舗にまとめて計上します。見学店舗の転換数に、他店舗での予約も含めます。代表者・お連れ様の情報を照合しますが、お連れ様の人数は母数に加算しません。見学日は予約の予定日で、実来店の確認とは異なります。</p>
-                <p>ふりがなが異なっていても、電話番号またはメールアドレスが一致すれば対象とします。代表者とお連れ様の間でも、氏名の完全一致・ふりがな・電話番号を照合し、お相手様名義での予約も含めます。空欄同士は一致とせず、氏名の部分一致は使いません。</p>
-                <p>見学日以降（同日を含む）から2026/10/26までに受け付けた、全4店舗のキャンセルのない予約を転換とします。横浜で見学して蔵前で予約した場合は、横浜の転換として計上します。制作予定日が翌月以降でも含め、見学前に受け付けた予約は含めません。複数コースの予約は最初の1コースに計上します。</p>
-                <p><strong>直近の見学者はまだ検討期間が短く、転換率は今後増える可能性があります。</strong> 3か月を超えた見学はこの母数に含めません。予約受付時刻は不明のため同日予約も含みます。キャンセル状態は取得済み予約スナップショットによります。既存行の後日変更は全件再照合していません。登録情報による照合のため、すべての情報が変わった予約は判別できません。</p>
-            </div>
-        </section>
-<!-- visit-bridal-conversion:end -->
+<section class="glass-card p-6 mb-8"><h2 class="text-xl font-bold">見学転換率・リピーター分析</h2><p class="text-sm text-gray-500 mt-2">11月分は未更新です。過去の集計は10月レポートをご覧ください。</p></section>
 
         <!-- Repeater Analysis Section -->
         <div class="glass-card p-6 mb-8 border-t-4 border-amber-500 shadow-xl" id="repeaterSection" style="display: none;">
@@ -580,7 +500,7 @@
         <section id="courseUnitPriceSection" class="bg-white rounded-xl shadow-sm p-6 mt-6">
             <div class="mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">コース別 客単価</h2>
-                <p class="text-sm text-gray-500 mt-1">2026年10月 / 大阪中崎町</p>
+                <p class="text-sm text-gray-500 mt-1">2026年11月 / 大阪中崎町</p>
             </div>
             <div class="overflow-x-auto border border-gray-200 rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -623,10 +543,10 @@
 <!-- course-unit-price:end -->
     </div>
 
-    <script src="assets/trend-granularity.js?v=20261021-history"></script>
+    <script src="assets/trend-granularity.js?v=20261104-media"></script>
     <script>
         // Data injected by python script
-        const reportData = {"summary": {"current_year": {"total_reservations": 58, "total_cancels": 24, "total_bridal": 14}, "previous_year": {"total_reservations": 84, "total_cancels": 13, "total_bridal": 38}, "previous_month": {"total_reservations": 68, "total_cancels": 29, "total_bridal": 15}, "yoy_growth": {"reservations": -31.0, "cancels": 84.6, "bridal": -63.2}, "mom_growth": {"reservations": -14.7, "cancels": -17.2, "bridal": -6.7}, "cancel_rate": 41.4, "prev_month_label": "2026年9月", "basis": "予約日ベース。総予約数はキャンセル込み、ブライダル予約数はキャンセル除外。", "period_start": "2026-10-01", "period_end": "2026-10-31", "period_label": "10月1〜31日予約（過去受付の取消状態は一部未再照合）"}, "course_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "婚約指輪手作りコース", "結婚・婚約指輪手作りコース（３本制作）", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [21, 22, 12, 2, 0, 0, 0], "prev_year_data": [31, 38, 8, 4, 1, 1, 1], "prev_month_data": [27, 27, 9, 0, 2, 0, 0], "total": 57}, "new_reservation_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "婚約指輪手作りコース", "結婚・婚約指輪手作りコース（３本制作）", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [11, 13, 9, 2, 0, 0, 0], "prev_year_data": [38, 33, 10, 3, 0, 2, 0], "prev_month_data": [16, 8, 11, 1, 1, 0, 0], "total": 35}, "course_share": {"labels": ["結婚指輪手作りコース", "手作りペアリングコース", "結婚指輪・婚約指輪　ご見学", "婚約指輪手作りコース", "シルバーリング手作りコース"], "data": [22, 21, 12, 2, 1]}, "course_cancel": [{"course": "手作りペアリングコース", "total": 21, "cancels": 13, "rate": 61.9}, {"course": "結婚指輪手作りコース", "total": 22, "cancels": 10, "rate": 45.5}, {"course": "結婚指輪・婚約指輪　ご見学", "total": 12, "cancels": 1, "rate": 8.3}, {"course": "婚約指輪手作りコース", "total": 2, "cancels": 0, "rate": 0.0}], "day_type_share": {"labels": ["休日", "平日"], "data": [40, 18]}, "ampm_share": {"labels": ["午前", "午後"], "data": [16, 8]}, "monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [97, 59, 62, 62, 68, 58, null, null, null, null, null, null], "current_cancels": [29, 16, 20, 20, 29, 24, null, null, null, null, null, null], "current_bridal": [21, 18, 19, 18, 15, 14, null, null, null, null, null, null], "current_fashion": [36, 23, 18, 17, 16, 8, null, null, null, null, null, null], "previous_reservations": [60, 94, 97, 128, 98, 84, 114, 117, 74, 132, 132, 76], "previous_cancels": [8, 14, 18, 29, 32, 13, 22, 29, 16, 27, 35, 20], "previous_bridal": [32, 41, 46, 56, 36, 38, 43, 33, 25, 80, 50, 25], "previous_fashion": [11, 24, 24, 27, 23, 26, 32, 40, 23, 18, 36, 22]}, "new_monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [63, 39, 46, 40, 38, 36, null, null, null, null, null, null], "current_bridal": [21, 15, 21, 20, 10, 15, null, null, null, null, null, null], "current_fashion": [35, 21, 17, 17, 16, 11, null, null, null, null, null, null], "previous_reservations": [54, 88, 81, 90, 72, 86, 90, 74, 106, 63, 67, 69], "previous_bridal": [36, 39, 48, 54, 40, 38, 39, 37, 60, 47, 30, 28], "previous_fashion": [10, 33, 24, 24, 24, 38, 36, 22, 34, 13, 25, 29]}, "capacity_status": null, "repeater_analysis": {"period": "2026年10月（過去全期間と照合）", "unique_customers": 32, "repeater_count": 2, "repeater_ratio": 6.2, "email_covered_reservations": 33, "missing_email_reservations": 1, "email_coverage_rate": 97.1, "data_status": "partial", "top_transitions": [{"pattern": "ペアリング → ご見学", "count": 1}, {"pattern": "ご見学 → 結婚指輪", "count": 1}], "target_reservations": 33}, "sales_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "sales": [6548660, 4809380, 5317640, 5208580, 4790350, null, null, null, null, null, null, null], "customers": [107, 74, 70, 70, 58, null, null, null, null, null, null, null], "unit_price": [61202, 64992, 75966, 74408, 82592, null, null, null, null, null, null, null], "bridal_sales": [5834360, 4357380, 4826040, 4743280, 4491260, null, null, null, null, null, null, null], "bridal_customers": [38, 33, 34, 35, 30, null, null, null, null, null, null, null], "bridal_unit_price": [153536, 132042, 141942, 135522, 149709, null, null, null, null, null, null, null], "fashion_sales": [714300, 452000, 491600, 465300, 299090, null, null, null, null, null, null, null], "fashion_customers": [69, 41, 36, 35, 28, null, null, null, null, null, null, null], "fashion_unit_price": [10352, 11024, 13656, 13294, 10682, null, null, null, null, null, null, null]}, "prev_sales_trend": {"sales": [5190306, 7821704, 8669587, 11600337, 7723388, 8129191, 8726207, 7697857, 6590686, 16837230, 11549278, 6201960], "customers": [55, 76, 124, 160, 107, 124, 138, 138, 92, 190, 160, 89], "unit_price": [89469, 94784, 69916, 72502, 72181, 65558, 63233, 55782, 71638, 88617, 72183, 69685], "bridal_sales": [null, null, 8127487, 11028437, 7246588, 7354991, 8117907, 6739357, 6038586, 16408230, 10648478, 5603660], "bridal_customers": [null, null, 84, 108, 62, 69, 78, 62, 48, 156, 94, 44], "bridal_unit_price": [null, null, 96756, 102115, 116880, 106594, 104076, 108699, 125804, 105181, 113282, 127356], "fashion_sales": [null, null, 542100, 571900, 476800, 774200, 608300, 958500, 552100, 429000, 900800, 598300], "fashion_customers": [null, null, 40, 52, 45, 55, 60, 76, 44, 34, 66, 45], "fashion_unit_price": [null, null, 13553, 10998, 10596, 14076, 10138, 12612, 12548, 12618, 13648, 13296]}, "bridal_cpa_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "basis": "osaka", "current_label": "今期 大阪 広告媒体CPA", "previous_label": "前期 大阪 広告媒体CPA", "note": "大阪のGoogle・Facebook広告費 ÷ 同地域の受付日ベース・キャンセル除外のブライダル予約数。共通掲載費は未配賦", "current_cpa": [149118, 186556, 40657, 53114, 104981, 91264, null, null, null, null, null, null], "previous_cpa": [27391, 35031, 20498, 22345, 21574, 31787, 29522, 38936, 26320, 23733, 54518, 66705]}, "kengaku_conversion": {"total_kengaku": 220, "converted": 76, "rate": 34.5, "courses": [{"course": "結婚指輪", "count": 54, "rate": 24.5}, {"course": "婚約指輪", "count": 8, "rate": 3.6}, {"course": "結婚・婚約3本", "count": 7, "rate": 3.2}, {"course": "ペアリング", "count": 5, "rate": 2.3}, {"course": "アニバーサリー", "count": 1, "rate": 0.5}, {"course": "ダイヤモンドプロポーズコース", "count": 1, "rate": 0.5}]}, "cost_roas": {"cost": 1368963, "sales": null, "roas": null, "bridal_count": 15, "cpa": 91264, "observed_bridal_count": 15, "cpa_status": "complete", "cpa_note": "大阪 広告媒体CPA / 10月受付・取消除外 15件", "period": "広告消化 2026-10-01〜2026-10-31 / 取得 2026-11-04", "month_status": "closed", "ad_spend": 1368963, "listing_fees": 0, "sources": [{"name": "Google広告 API（大阪）", "amount": 452670}, {"name": "Facebook広告 Ads Manager（大阪）", "amount": 916293}], "spreadsheet_comparison": null, "allocation_note": "大阪のGoogle・Facebook広告媒体CPA。Ringraph・るるぶ等の共通掲載費は店舗へ配賦せず除外。", "basis": "osaka", "basis_label": "大阪 広告媒体CPA", "prev_year": {"cost": null, "sales": null, "roas": null, "bridal_count": null, "cpa": null}, "prev_month": {"cost": null, "sales": null, "roas": null, "bridal_count": null, "cpa": null}}, "meta": {"generated_at": "2026-11-04T10:50:15+09:00", "cost_source": "monthly_costs.json", "data_quality_note": "10月の新規予約・CPA・広告費は10月1〜31日。予約の取消状態は11月4日に再確認しました（10月受付分）。予約日基準の指標は9月以前受付分の取消変更を全件再照合していないため参考値です。売上・客数・客単価・ROAS・予約枠は未更新。マイナビ50,000円は従来の暫定額を継続し、全店総費用CPAも暫定です。見学転換率・リピーター分析は10月27日取得版を保持しています。", "summary_basis_revision": "2026-09-07_july_booked_date", "capacity_source": null, "presentation_revision": "2026-09-07_july_full_names_seven_courses", "ranking_excluded_courses": {"booked": {"シルバーリング手作りコース": 1}, "accepted": {"シルバーリング手作りコース": 1}}, "reservation_snapshot_checked_at": "2026-11-04", "build_mode": "anonymous_ui_october_refresh_20261104", "publication_base_commit": "3323555fd8a0f2f658630a5cf1b21c9045756553", "conversion_analysis_as_of": "2026-10-26", "monthly_history_updated_on": "2026-11-04", "monthly_history_note": "10月の新規予約と広告費を10月31日まで更新。取消状態は10月受付分のみ11月4日確認。売上等と他月の取得済み値は保持。", "reservation_received_through": "2026-10-31"}, "daily_trend": {"month": "2026-10", "as_of": "2026-11-04", "accepted_through": "2026-10-31", "previous_year": 2025, "dates": ["2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30", "2026-10-31"], "previous_month": "2026-09", "previous_month_dates": ["2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26", "2026-09-27", "2026-09-28", "2026-09-29", "2026-09-30", null], "monthly_totals_differ": [], "current_reservations": [0, 0, 5, 4, 1, 0, 0, 0, 1, 6, 3, 6, 0, 2, 0, 0, 5, 4, 3, 0, 2, 0, 0, 4, 4, 1, 0, 2, 0, 0, 5], "current_bridal": [0, 0, 0, 1, 1, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1], "current_fashion": [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], "current_new_reservations": [1, 0, 0, 0, 3, 1, 0, 0, 3, 2, 0, 0, 2, 1, 0, 2, 4, 2, 2, 0, 2, 1, 0, 0, 2, 1, 2, 0, 0, 1, 4], "current_new_bridal": [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 2, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 3], "current_new_fashion": [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 1], "previous_reservations": [0, 6, 0, 3, 8, 4, 5, 0, 1, 0, 5, 4, 5, 2, 0, 4, 0, 5, 6, 3, 2, 0, 1, 0, 4, 9, 3, 4, 0, 0, 0], "previous_bridal": [0, 0, 0, 0, 4, 1, 2, 0, 1, 0, 5, 3, 3, 1, 0, 0, 0, 4, 4, 0, 1, 0, 0, 0, 2, 5, 1, 1, 0, 0, 0], "previous_fashion": [0, 4, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0, 2, 1, 0, 2, 0, 0, 2, 2, 1, 0, 1, 0, 1, 2, 2, 1, 0, 0, 0], "previous_new_reservations": [1, 3, 1, 4, 2, 0, 4, 5, 3, 0, 3, 2, 5, 4, 2, 3, 1, 4, 2, 3, 2, 4, 2, 3, 0, 6, 3, 3, 3, 4, 4], "previous_new_bridal": [1, 0, 0, 3, 0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 1, 1, 0, 1, 1, 1, 2, 2, 0, 1, 0, 2, 0, 3, 1, 1, 2], "previous_new_fashion": [0, 3, 1, 1, 0, 0, 1, 2, 1, 0, 1, 0, 3, 1, 1, 2, 1, 2, 1, 1, 0, 2, 2, 1, 0, 3, 1, 0, 2, 3, 2], "previous_month_reservations": [0, 0, 0, 1, 5, 9, 1, 0, 1, 0, 1, 6, 4, 0, 0, 1, 0, 0, 4, 9, 4, 6, 4, 0, 1, 5, 5, 1, 0, 0, null], "previous_month_bridal": [0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2, 1, 2, 1, 0, 0, 0, 2, 0, 0, 0, null], "previous_month_fashion": [0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 2, 1, 1, 0, 0, null], "previous_month_new_reservations": [2, 2, 0, 1, 1, 0, 2, 0, 4, 1, 0, 3, 1, 1, 0, 4, 0, 1, 2, 3, 2, 1, 2, 0, 0, 1, 1, 1, 0, 2, null], "previous_month_new_bridal": [0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, null], "previous_month_new_fashion": [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 2, 2, 2, 0, 1, 0, 0, 0, 1, 0, 0, 1, null]}, "monthly_cost_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "basis": "osaka", "label": "大阪 広告費", "source": "monthly_costs.json", "note": "Google・Facebook広告費のみ。共通掲載費は未配賦。未取得月は空欄。月途中は集計済み広告費＋当月固定費、暫定額はツールチップに表示。", "current_cost": [3131475, 2798336, 853794, 1062275, 1049814, 1368963, null, null, null, null, null, null], "current_meta": [{"month": "2026-05", "through": "2026-05-31", "partial": false, "provisional": false}, {"month": "2026-06", "through": "2026-06-30", "partial": false, "provisional": false}, {"month": "2026-07", "through": "2026-07-31", "partial": false, "provisional": false}, {"month": "2026-08", "through": "2026-08-31", "partial": false, "provisional": false}, {"month": "2026-09", "through": "2026-09-30", "partial": false, "provisional": false, "adopted_from_published_report": true, "confirmed_on": "2026-10-20"}, {"month": "2026-10", "through": "2026-10-31", "partial": false, "provisional": false}, null, null, null, null, null, null], "previous_cost": [986079, 1366198, 983898, 1206651, 862960, 1207916, 1151354, 1440642, 1579200, 1115472, 1635536, 1867729], "previous_meta": [{"month": "2025-05", "through": "2025-05-31", "partial": false, "provisional": false}, {"month": "2025-06", "through": "2025-06-30", "partial": false, "provisional": false}, {"month": "2025-07", "through": "2025-07-31", "partial": false, "provisional": false}, {"month": "2025-08", "through": "2025-08-31", "partial": false, "provisional": false}, {"month": "2025-09", "through": "2025-09-30", "partial": false, "provisional": false}, {"month": "2025-10", "through": "2025-10-31", "partial": false, "provisional": false}, {"month": "2025-11", "through": "2025-11-30", "partial": false, "provisional": false}, {"month": "2025-12", "through": "2025-12-31", "partial": false, "provisional": false}, {"month": "2026-01", "through": "2026-01-31", "partial": false, "provisional": false}, {"month": "2026-02", "through": "2026-02-28", "partial": false, "provisional": false}, {"month": "2026-03", "through": "2026-03-31", "partial": false, "provisional": false}, {"month": "2026-04", "through": "2026-04-30", "partial": false, "provisional": false}]}};
+        const reportData = {"summary": {"current_year": {"total_reservations": 28, "total_cancels": 3, "total_bridal": 8}, "previous_year": {"total_reservations": 114, "total_cancels": 22, "total_bridal": 43}, "previous_month": {"total_reservations": 58, "total_cancels": 24, "total_bridal": 14}, "yoy_growth": {"reservations": -75.4, "cancels": -86.4, "bridal": -81.4}, "mom_growth": {"reservations": -51.7, "cancels": -87.5, "bridal": -42.9}, "cancel_rate": 10.7, "prev_month_label": "2026年10月", "basis": "予約日ベース。総予約数はキャンセル込み、ブライダル予約数はキャンセル除外。", "period_start": "2026-11-01", "period_end": "2026-11-30", "period_label": "11月末までの予約予定（11月3日受付分まで）"}, "course_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "婚約指輪手作りコース", "結婚・婚約指輪手作りコース（３本制作）", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [15, 8, 2, 2, 0, 0, 0], "prev_year_data": [46, 46, 17, 4, 1, 0, 0], "prev_month_data": [21, 22, 12, 2, 0, 0, 0], "total": 27}, "new_reservation_ranking": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "婚約指輪手作りコース", "結婚・婚約指輪手作りコース（３本制作）", "アニバーサリーコース", "ダイヤモンドプロポーズコース"], "data": [4, 0, 1, 1, 0, 0, 0], "prev_year_data": [4, 6, 2, 0, 0, 0, 0], "prev_month_data": [0, 0, 0, 1, 0, 0, 0], "total": 6}, "course_share": {"labels": ["手作りペアリングコース", "結婚指輪手作りコース", "婚約指輪手作りコース", "結婚指輪・婚約指輪　ご見学", "シルバーリング手作りコース"], "data": [15, 8, 2, 2, 1]}, "course_cancel": [{"course": "手作りペアリングコース", "total": 15, "cancels": 1, "rate": 6.7}, {"course": "結婚指輪手作りコース", "total": 8, "cancels": 2, "rate": 25.0}, {"course": "結婚指輪・婚約指輪　ご見学", "total": 2, "cancels": 0, "rate": 0.0}, {"course": "婚約指輪手作りコース", "total": 2, "cancels": 0, "rate": 0.0}], "day_type_share": {"labels": ["休日", "平日"], "data": [17, 11]}, "ampm_share": {"labels": ["午前", "午後"], "data": [6, 4]}, "monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [97, 59, 62, 62, 68, 58, 28, null, null, null, null, null], "current_cancels": [29, 16, 20, 20, 29, 24, 3, null, null, null, null, null], "current_bridal": [21, 18, 19, 18, 15, 14, 8, null, null, null, null, null], "current_fashion": [36, 23, 18, 17, 16, 8, 14, null, null, null, null, null], "previous_reservations": [60, 94, 97, 128, 98, 84, 114, 117, 74, 132, 132, 76], "previous_cancels": [8, 14, 18, 29, 32, 13, 22, 29, 16, 27, 35, 20], "previous_bridal": [32, 41, 46, 56, 36, 38, 43, 33, 25, 80, 50, 25], "previous_fashion": [11, 24, 24, 27, 23, 26, 32, 40, 23, 18, 36, 22]}, "new_monthly_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "current_reservations": [63, 39, 46, 40, 38, 36, 6, null, null, null, null, null], "current_bridal": [21, 15, 21, 20, 10, 15, 1, null, null, null, null, null], "current_fashion": [35, 21, 17, 17, 16, 11, 4, null, null, null, null, null], "previous_reservations": [54, 88, 81, 90, 72, 86, 90, 74, 106, 63, 67, 69], "previous_bridal": [36, 39, 48, 54, 40, 38, 39, 37, 60, 47, 30, 28], "previous_fashion": [10, 33, 24, 24, 24, 38, 36, 22, 34, 13, 25, 29]}, "capacity_status": null, "repeater_analysis": null, "sales_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "sales": [6548660, 4809380, 5317640, 5208580, 4790350, null, null, null, null, null, null, null], "customers": [107, 74, 70, 70, 58, null, null, null, null, null, null, null], "unit_price": [61202, 64992, 75966, 74408, 82592, null, null, null, null, null, null, null], "bridal_sales": [5834360, 4357380, 4826040, 4743280, 4491260, null, null, null, null, null, null, null], "bridal_customers": [38, 33, 34, 35, 30, null, null, null, null, null, null, null], "bridal_unit_price": [153536, 132042, 141942, 135522, 149709, null, null, null, null, null, null, null], "fashion_sales": [714300, 452000, 491600, 465300, 299090, null, null, null, null, null, null, null], "fashion_customers": [69, 41, 36, 35, 28, null, null, null, null, null, null, null], "fashion_unit_price": [10352, 11024, 13656, 13294, 10682, null, null, null, null, null, null, null]}, "prev_sales_trend": {"sales": [5190306, 7821704, 8669587, 11600337, 7723388, 8129191, 8726207, 7697857, 6590686, 16837230, 11549278, 6201960], "customers": [55, 76, 124, 160, 107, 124, 138, 138, 92, 190, 160, 89], "unit_price": [89469, 94784, 69916, 72502, 72181, 65558, 63233, 55782, 71638, 88617, 72183, 69685], "bridal_sales": [null, null, 8127487, 11028437, 7246588, 7354991, 8117907, 6739357, 6038586, 16408230, 10648478, 5603660], "bridal_customers": [null, null, 84, 108, 62, 69, 78, 62, 48, 156, 94, 44], "bridal_unit_price": [null, null, 96756, 102115, 116880, 106594, 104076, 108699, 125804, 105181, 113282, 127356], "fashion_sales": [null, null, 542100, 571900, 476800, 774200, 608300, 958500, 552100, 429000, 900800, 598300], "fashion_customers": [null, null, 40, 52, 45, 55, 60, 76, 44, 34, 66, 45], "fashion_unit_price": [null, null, 13553, 10998, 10596, 14076, 10138, 12612, 12548, 12618, 13648, 13296]}, "bridal_cpa_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "basis": "osaka", "current_label": "今期 大阪 広告媒体CPA", "previous_label": "前期 大阪 広告媒体CPA", "note": "大阪のGoogle・Facebook広告費 ÷ 同地域の受付日ベース・キャンセル除外のブライダル予約数。共通掲載費は未配賦", "current_cpa": [149118, 186556, 40657, 53114, 104981, 91264, 219622, null, null, null, null, null], "previous_cpa": [27391, 35031, 20498, 22345, 21574, 31787, 29522, 38936, 26320, 23733, 54518, 66705]}, "kengaku_conversion": null, "cost_roas": {"cost": 219622, "sales": null, "roas": null, "bridal_count": 1, "observed_bridal_count": 1, "cpa": 219622, "cpa_status": "partial", "cpa_note": "大阪 広告媒体CPA / 11月1〜3日受付・取消除外 1件", "period": "広告消化 2026-11-01〜2026-11-03 / 取得 2026-11-04", "month_status": "partial", "ad_spend": 219622, "listing_fees": 0, "sources": [{"name": "Google広告 API（大阪）", "amount": 105281}, {"name": "Facebook広告 Ads Manager（大阪）", "amount": 114341}], "spreadsheet_comparison": null, "allocation_note": "大阪の媒体費・CPA。共通固定掲載費は未配賦。", "basis": "osaka", "basis_label": "大阪 広告媒体CPA", "prev_year": {"cost": null, "sales": null, "roas": null, "bridal_count": null, "cpa": null}, "prev_month": {"cost": null, "sales": null, "roas": null, "bridal_count": null, "cpa": null}}, "meta": {"generated_at": "2026-11-04T11:10:15+09:00", "cost_source": "monthly_costs.json", "data_quality_note": "11月の新規予約・広告費・広告費ベースCPAは11月1〜3日（11月4日取得）。予約日基準の指標は11月末までの予約予定を含みます。マイナビ費が未確定のため、全店の固定費込み総額・CPAは未確定。出納帳が必要な売上・客数・客単価・ROASは未反映です。9月以前受付の取消状態は全件再照合していません。見学転換率・リピーター分析・予約枠は今回未更新です。", "summary_basis_revision": "2026-09-07_july_booked_date", "capacity_source": null, "presentation_revision": "2026-09-07_july_full_names_seven_courses", "ranking_excluded_courses": {"booked": {"シルバーリング手作りコース": 1}, "accepted": {}}, "reservation_snapshot_checked_at": "2026-11-04", "build_mode": "standard_november_refresh_20261104", "publication_base_commit": "e0c4f2b11b40748aaaa3f641240f4d207912a5d7", "conversion_analysis_as_of": null, "monthly_history_updated_on": "2026-11-04", "monthly_history_note": "11月は11月3日までの受付分と広告費、10月は月末まで反映。過去月の売上等は保持。全店の11月固定費込み総額・CPAは未確定。", "reservation_received_through": "2026-11-03", "daily_media_updated_at": "2026-11-04T11:10:15+09:00"}, "daily_trend": {"month": "2026-11", "as_of": "2026-11-04", "accepted_through": "2026-11-03", "previous_year": 2025, "dates": ["2026-11-01", "2026-11-02", "2026-11-03", "2026-11-04", "2026-11-05", "2026-11-06", "2026-11-07", "2026-11-08", "2026-11-09", "2026-11-10", "2026-11-11", "2026-11-12", "2026-11-13", "2026-11-14", "2026-11-15", "2026-11-16", "2026-11-17", "2026-11-18", "2026-11-19", "2026-11-20", "2026-11-21", "2026-11-22", "2026-11-23", "2026-11-24", "2026-11-25", "2026-11-26", "2026-11-27", "2026-11-28", "2026-11-29", "2026-11-30"], "previous_month": "2026-10", "previous_month_dates": ["2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30"], "monthly_totals_differ": [], "current_reservations": [8, 1, 3, 0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 2, 1, 2, 0, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 1, 0], "current_bridal": [2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], "current_fashion": [2, 1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 1, 0], "current_new_reservations": [3, 2, 1, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "current_new_bridal": [0, 1, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "current_new_fashion": [2, 1, 1, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_reservations": [8, 5, 6, 3, 0, 1, 0, 9, 8, 2, 1, 0, 5, 0, 8, 11, 2, 2, 0, 2, 0, 6, 12, 3, 2, 0, 4, 0, 6, 8], "previous_bridal": [2, 2, 1, 1, 0, 0, 0, 5, 2, 0, 0, 0, 2, 0, 5, 4, 1, 0, 0, 1, 0, 4, 4, 2, 0, 0, 2, 0, 2, 3], "previous_fashion": [3, 2, 2, 1, 0, 1, 0, 2, 1, 1, 1, 0, 1, 0, 2, 2, 1, 2, 0, 1, 0, 0, 2, 0, 1, 0, 2, 0, 2, 2], "previous_new_reservations": [5, 2, 5, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_new_bridal": [3, 0, 3, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_new_fashion": [2, 0, 2, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_month_reservations": [0, 0, 5, 4, 1, 0, 0, 0, 1, 6, 3, 6, 0, 2, 0, 0, 5, 4, 3, 0, 2, 0, 0, 4, 4, 1, 0, 2, 0, 0], "previous_month_bridal": [0, 0, 0, 1, 1, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0], "previous_month_fashion": [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], "previous_month_new_reservations": [1, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_month_new_bridal": [1, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_month_new_fashion": [0, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]}, "monthly_cost_trend": {"labels": ["5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月", "4月"], "basis": "osaka", "label": "大阪 広告費", "source": "monthly_costs.json", "note": "Google・Facebook広告費のみ。共通掲載費は未配賦。未取得月は空欄。月途中は集計済み広告費＋当月固定費、暫定額はツールチップに表示。", "current_cost": [3131475, 2798336, 853794, 1062275, 1049814, 1368963, 219622, null, null, null, null, null], "current_meta": [{"month": "2026-05", "through": "2026-05-31", "partial": false, "provisional": false}, {"month": "2026-06", "through": "2026-06-30", "partial": false, "provisional": false}, {"month": "2026-07", "through": "2026-07-31", "partial": false, "provisional": false}, {"month": "2026-08", "through": "2026-08-31", "partial": false, "provisional": false}, {"month": "2026-09", "through": "2026-09-30", "partial": false, "provisional": false, "adopted_from_published_report": true, "confirmed_on": "2026-10-20"}, {"month": "2026-10", "through": "2026-10-31", "partial": false, "provisional": false}, {"month": "2026-11", "through": "2026-11-03", "partial": true, "provisional": false, "missing_fixed_fee": false}, null, null, null, null, null], "previous_cost": [986079, 1366198, 983898, 1206651, 862960, 1207916, 1151354, 1440642, 1579200, 1115472, 1635536, 1867729], "previous_meta": [{"month": "2025-05", "through": "2025-05-31", "partial": false, "provisional": false}, {"month": "2025-06", "through": "2025-06-30", "partial": false, "provisional": false}, {"month": "2025-07", "through": "2025-07-31", "partial": false, "provisional": false}, {"month": "2025-08", "through": "2025-08-31", "partial": false, "provisional": false}, {"month": "2025-09", "through": "2025-09-30", "partial": false, "provisional": false}, {"month": "2025-10", "through": "2025-10-31", "partial": false, "provisional": false}, {"month": "2025-11", "through": "2025-11-30", "partial": false, "provisional": false}, {"month": "2025-12", "through": "2025-12-31", "partial": false, "provisional": false}, {"month": "2026-01", "through": "2026-01-31", "partial": false, "provisional": false}, {"month": "2026-02", "through": "2026-02-28", "partial": false, "provisional": false}, {"month": "2026-03", "through": "2026-03-31", "partial": false, "provisional": false}, {"month": "2026-04", "through": "2026-04-30", "partial": false, "provisional": false}]}, "daily_media": {"scope_label": "大阪", "current_spend": [82857.498241, 76525.458988, 60239.101678, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "current_bridal": [0, 1, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_spend": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_bridal": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_month_spend": [41956.877424, 40559.562896, 34959.764176, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "previous_month_bridal": [1, 0, 0, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]}, "advertising_trend": {"scope_label": "大阪", "current_spend": [null, null, null, null, null, 1368962.605061, 219622.058907, null, null, null, null, null], "current_cpa": [null, null, null, null, null, 91264.17367073333, 219622.058907, null, null, null, null, null], "previous_spend": [null, null, null, null, null, null, null, null, null, null, null, null], "previous_cpa": [null, null, null, null, null, null, null, null, null, null, null, null]}};
 
         try {
             initDashboard(reportData);
@@ -880,7 +800,7 @@
             }
 
             initTrendChart('trendSelector', 'trendNote', 'unifiedTrendChart', 'new_bridal_fashion');
-            initTrendChart('cpaTrendSelector', 'cpaTrendNote', 'cpaTrendChart', 'bridal_cpa');
+            initTrendChart('cpaTrendSelector', 'cpaTrendNote', 'cpaTrendChart', 'ad_cpa');
 
             const ctxDay = document.getElementById('dayTypeShareChart').getContext('2d');
             new Chart(ctxDay, {

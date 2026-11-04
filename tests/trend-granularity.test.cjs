@@ -70,7 +70,7 @@ test('all-store daily counts equal the store totals, including missing periods',
 
 test('every report period has complete daily counts and weekly sums without boundary overlap', () => {
     const files=fs.readdirSync('.').filter(name=>name.endsWith('.html')&&name!=='index.html');
-    assert.equal(files.length,49);
+    assert.equal(files.length,54);
     for (const filename of files) {
         const html=fs.readFileSync(filename,'utf8');
         const r=JSON.parse(html.match(/const reportData\s*=\s*(\{.*?\});/s)[1]);

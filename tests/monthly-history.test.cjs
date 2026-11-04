@@ -28,7 +28,7 @@ test('all chart series use exactly twelve fiscal months and retain missing value
         if (d.daily_trend.month >= '2026-05') {
             for (const key of ['monthly_trend', 'new_monthly_trend']) {
                 for (const [name, values] of Object.entries(d[key])) {
-                    if (name.startsWith('current_')) assert.ok(values.slice(6).every(v => v === null), filename + ':' + name);
+                    if (name.startsWith('current_')) assert.ok(values.slice(7).every(v => v === null), filename + ':' + name);
                 }
             }
             assert.ok(d.sales_trend.sales.slice(5).every(v => v === null), filename + ': October sales are not acquired');

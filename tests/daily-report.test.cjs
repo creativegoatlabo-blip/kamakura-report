@@ -7,7 +7,7 @@ test('daily acquisition reports reconcile across days, courses, stores and month
   assert.equal(all.daily.length,days);assert.equal(all.summary.bridal,bridal);assert.equal(all.summary.active_total,total);assert.equal(Math.round(all.spend),spend);assert.equal(all.cpa,all.spend/bridal);
   for(const d of docs)for(const row of d.daily){assert.equal(row.active_total,row.bridal+row.fashion+row.tour+row.other);assert.equal(row.received_total,row.active_total+row.canceled);assert.equal(row.active_total,Object.values(row.courses).reduce((a,b)=>a+b,0));assert.equal(row.cpa,row.spend!==null&&row.bridal?row.spend/row.bridal:null)}
   for(let i=0;i<days;i++)for(const k of ['bridal','fashion','tour','other','active_total','canceled'])assert.equal(all.daily[i][k],docs.slice(1).reduce((a,d)=>a+d.daily[i][k],0));
-  if(month==='10'){const m=read('all_course_report.html');assert.equal(m.new_monthly_trend.current_bridal[5],bridal);assert.equal(m.new_monthly_trend.current_reservations[5],total);assert.equal(m.cost_roas.ad_spend,spend)}
+  if(month==='10'){const m=read('all_course_report_2026_10.html');assert.equal(m.new_monthly_trend.current_bridal[5],bridal);assert.equal(m.new_monthly_trend.current_reservations[5],total);assert.equal(m.cost_roas.ad_spend,spend)}
   for(const stem of stems){const p=`daily/2026_${month}/${stem}.html`,html=fs.readFileSync(p,'utf8');for(const [,href] of html.matchAll(/href="([^"]+)"/g))assert.ok(fs.existsSync(path.resolve(path.dirname(p),href)),href);assert.doesNotMatch(html,/mailto:|予約番号|お名前|ふりがな|\/Users\//)}
  }
 });
