@@ -236,6 +236,22 @@
             </div>
         </div>
 
+<!-- web-orders:start -->
+<section id="webOrdersSection" class="glass-card p-6 mb-8" aria-labelledby="webOrdersHeading">
+  <h2 id="webOrdersHeading" class="text-xl font-bold text-gray-800 mb-3">WEBオーダーの成果</h2>
+  <p class="text-sm text-gray-600 mb-4">8月1〜31日受付分 ／ 管理画面確認：2026-11-05。本店のWEBオーダー専用管理一覧を集計しています。</p>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4"><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-600">有効受付（製作中・納品済み）</p><p class="text-2xl font-bold text-gray-800 mt-2">1件</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-600">見積中</p><p class="text-2xl font-bold text-gray-800 mt-2">0件</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-600">キャンセル</p><p class="text-2xl font-bold text-gray-800 mt-2">0件</p></div><div class="rounded-lg bg-gray-50 p-4"><p class="text-xs text-gray-600">WEBオーダー売上</p><p class="text-2xl font-bold text-gray-800 mt-2">未取得</p></div></div>
+  <p class="text-sm text-gray-600 mb-4">有効受付の現在の状態：製作中 0件・納品済み 1件。テスト登録 0件を除外。</p>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div><h3 class="font-bold text-gray-800 mb-2">種類別の有効受付（8月）</h3><table class="web-orders-table"><thead><tr><th scope="col">種類</th><th scope="col">件数</th></tr></thead><tbody><tr><th scope="row">結婚指輪</th><td>0件</td></tr><tr><th scope="row">婚約指輪</th><td>0件</td></tr><tr><th scope="row">アニバーサリー</th><td>1件</td></tr><tr><th scope="row">プロポーズ</th><td>0件</td></tr></tbody></table></div>
+    <div class="lg:col-span-2 min-w-0"><h3 class="font-bold text-gray-800 mb-2">月別推移（受付日基準）</h3><div class="overflow-x-auto"><table class="web-orders-table whitespace-nowrap"><thead><tr><th scope="col">受付月</th><th scope="col">有効受付</th><th scope="col">通常WEB</th><th scope="col">プロポーズ</th><th scope="col">見積中</th><th scope="col">取消</th></tr></thead><tbody><tr><th scope="row">2026/05</th><td>3</td><td>1</td><td>2</td><td>0</td><td>0</td></tr><tr><th scope="row">2026/06</th><td>4</td><td>4</td><td>0</td><td>0</td><td>1</td></tr><tr><th scope="row">2026/07</th><td>4</td><td>1</td><td>3</td><td>0</td><td>0</td></tr><tr class="web-orders-current"><th scope="row">2026/08</th><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></div>
+  </div>
+  <p class="text-xs text-gray-600 mt-4">有効受付は「製作中＋納品済み」。見積中・キャンセル・テスト登録を含みません。通常WEBは結婚指輪・婚約指輪・アニバーサリーの合計です。「別途見積」欄の印は見積中の件数とは別です。1登録を1件として数え、指輪本数・人数には換算していません。</p>
+  <p class="text-xs text-gray-600 mt-2">納品済みはこの受付月の注文の現在の状態であり、当月に納品した件数ではありません。月途中の数値は翌日以降を含まず、前年値は未取得です。売上・見積依頼からの成約率は未取得。店舗予約の合計・ブライダルCPAには加算していません。</p>
+</section>
+<style>.web-orders-table{width:100%;font-size:14px;border-collapse:collapse}.web-orders-table th,.web-orders-table td{padding:10px 8px;border-bottom:1px solid #e5e7eb;text-align:right}.web-orders-table th:first-child{text-align:left}.web-orders-table thead{background:#f9fafb}.web-orders-table tbody th{font-weight:400}.web-orders-current{background:#eef2ff}</style>
+<script type="application/json" id="webOrdersData">{"month": "2026-08", "through": "2026-08-31", "observed_on": "2026-11-05", "total": 1, "confirmed": 1, "by_type": {"結婚指輪": 0, "婚約指輪": 0, "アニバーサリー": 1, "プロポーズ": 0}, "statuses": {"見積中": 0, "製作中": 0, "納品済み": 1, "キャンセル": 0}, "excluded_tests": 0, "sales_jpy": null}</script>
+<!-- web-orders:end -->
         <!-- Cost & ROAS KPI Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="costRoasSection" style="display: none;">
             <div class="glass-card p-6 border-t-4 border-amber-400">

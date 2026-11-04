@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-11-05",
+  "source": "鎌倉本店管理画面 > WEBオーダー専用一覧",
+  "basis": "受付日。ステータスは確認日時点。氏名にテスト・てすと・testを含む登録は除外。",
+  "coverage": "一覧先頭から2026年4月以前の境界までを確認。11月は既存レポートと同じ11月3日まで。",
+  "cross_check": "2026年5〜8月の通常WEB・プロポーズ合計は既存KPI表のwebオーダー・web：DPと一致。",
+  "months": {
+    "2026-05": {"through": "2026-05-31", "excluded_tests": 1, "counts": [
+      {"type": "結婚指輪", "status": "納品済み", "count": 1},
+      {"type": "プロポーズ", "status": "製作中", "count": 1},
+      {"type": "プロポーズ", "status": "納品済み", "count": 1}
+    ]},
+    "2026-06": {"through": "2026-06-30", "excluded_tests": 0, "counts": [
+      {"type": "結婚指輪", "status": "納品済み", "count": 4},
+      {"type": "結婚指輪", "status": "キャンセル", "count": 1}
+    ]},
+    "2026-07": {"through": "2026-07-31", "excluded_tests": 3, "counts": [
+      {"type": "アニバーサリー", "status": "納品済み", "count": 1},
+      {"type": "プロポーズ", "status": "納品済み", "count": 3}
+    ]},
+    "2026-08": {"through": "2026-08-31", "excluded_tests": 0, "counts": [
+      {"type": "アニバーサリー", "status": "納品済み", "count": 1}
+    ]},
+    "2026-09": {"through": "2026-09-30", "excluded_tests": 0, "counts": [
+      {"type": "アニバーサリー", "status": "製作中", "count": 2},
+      {"type": "アニバーサリー", "status": "納品済み", "count": 1},
+      {"type": "アニバーサリー", "status": "キャンセル", "count": 1}
+    ]},
+    "2026-10": {"through": "2026-10-31", "excluded_tests": 0, "counts": [
+      {"type": "アニバーサリー", "status": "製作中", "count": 1},
+      {"type": "婚約指輪", "status": "製作中", "count": 1},
+      {"type": "プロポーズ", "status": "納品済み", "count": 2}
+    ]},
+    "2026-11": {"through": "2026-11-03", "excluded_tests": 0, "counts": []}
+  }
+}
