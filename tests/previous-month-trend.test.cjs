@@ -5,15 +5,15 @@ const sum=a=>a.reduce((s,x)=>s+(x??0),0);
 test('daily comparison changes actual values as well as labels',()=>{
  const d=read('10');const yoy=buildIntervalConfig(d,'daily','new_reservations','yoy');const mom=buildIntervalConfig(d,'daily','new_reservations','mom');
  assert.deepEqual(mom.data.datasets[0].data,yoy.data.datasets[0].data);
- assert.deepEqual(mom.data.datasets[1].data,read('09').current_new_reservations.slice(0,26));
+ assert.deepEqual(mom.data.datasets[1].data,[...read('09').current_new_reservations,null]);
  assert.notDeepEqual(mom.data.datasets[1].data,yoy.data.datasets[1].data);
  assert.match(mom.data.datasets[1].label,/前月/);assert.match(yoy.data.datasets[1].label,/前年/);
 });
-test('weekly partial period compares matching days of previous month',()=>{
+test('weekly full-month period clips the shorter previous month',()=>{
  const d=read('10');const c=buildIntervalConfig(d,'weekly','new_reservations','mom');
- assert.equal(c.data.datasets[1].data[4],read('09').current_new_reservations[25]);
- assert.equal(sum(c.data.datasets[1].data),sum(read('09').current_new_reservations.slice(0,26)));
- assert.match(c.options.plugins.tooltip.callbacks.afterTitle([{dataIndex:4}]),/2026-09-26〜2026-09-26/);
+ assert.equal(c.data.datasets[1].data[4],sum(read('09').current_new_reservations.slice(25)));
+ assert.equal(sum(c.data.datasets[1].data),sum([...read('09').current_new_reservations,null]));
+ assert.match(c.options.plugins.tooltip.callbacks.afterTitle([{dataIndex:4}]),/2026-09-26〜2026-09-30/);
 });
 test('shorter months stay null and January correctly crosses years',()=>{
  const march=read('03');assert.equal(march.previous_month,'2026-02');

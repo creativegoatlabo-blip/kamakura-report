@@ -12,26 +12,26 @@ test('weekly boundaries are Monday-Sunday, clipped to the report month', () => {
     assert.deepEqual(buckets(feb, 'weekly').map(g => [g[0]+1,g.at(-1)+1]), [[1,4],[5,11],[12,18],[19,25],[26,29]]);
 });
 
-test('accepted bookings exclude unobserved days and compare identical partial-week dates', () => {
+test('accepted bookings cover the closed month and compare identical week dates', () => {
     const d = data.daily_trend;
     const cfg = buildIntervalConfig(d,'weekly','new_reservations');
     assert.equal(cfg.data.labels.length,5);
-    assert.match(cfg.data.labels[4], /途中/);
-    assert.equal(cfg.data.datasets[0].data[4],d.current_new_reservations[25]);
-    assert.equal(cfg.data.datasets[1].data[4],d.previous_new_reservations[25]);
-    assert.equal(sum(cfg.data.datasets[0].data),338);
-    assert.equal(buildIntervalConfig(d,'daily','new_reservations').data.labels.length,26);
-    assert.ok(d.current_new_reservations.slice(26).every(v => v === null));
+    assert.equal(cfg.data.labels[4], '10/26〜10/31');
+    assert.equal(cfg.data.datasets[0].data[4],sum(d.current_new_reservations.slice(25)));
+    assert.equal(cfg.data.datasets[1].data[4],sum(d.previous_new_reservations.slice(25)));
+    assert.equal(sum(cfg.data.datasets[0].data),394);
+    assert.equal(buildIntervalConfig(d,'daily','new_reservations').data.labels.length,31);
+    assert.ok(d.current_new_reservations.every(v => Number.isInteger(v)));
 });
 
 test('booked-date metrics include the entire month and retain their cancellation definitions', () => {
     const d = data.daily_trend;
     assert.equal(buildIntervalConfig(d,'daily','reservations').data.labels.length,31);
     const weekly = buildIntervalConfig(d,'weekly','reservations');
-    assert.equal(sum(weekly.data.datasets[0].data),413);
+    assert.equal(sum(weekly.data.datasets[0].data),422);
     const split = buildIntervalConfig(d,'weekly','bridal_fashion');
-    assert.equal(sum(split.data.datasets[0].data),144);
-    assert.equal(sum(split.data.datasets[2].data),142);
+    assert.equal(sum(split.data.datasets[0].data),145);
+    assert.equal(sum(split.data.datasets[2].data),140);
 });
 
 test('daily and weekly totals reconcile to the existing October monthly counts for all stores', () => {
