@@ -31,7 +31,9 @@ test('all chart series use exactly twelve fiscal months and retain missing value
                     if (name.startsWith('current_')) assert.ok(values.slice(7).every(v => v === null), filename + ':' + name);
                 }
             }
-            assert.ok(d.sales_trend.sales.slice(5).every(v => v === null), filename + ': October sales are not acquired');
+            const acquired = filename.startsWith('kamakura_') ? 27063362 : filename.startsWith('yokohama_') ? 7249990 : filename.startsWith('kuramae_') ? 7459396 : filename.startsWith('all_') ? 45602288 : 3829540;
+            assert.equal(d.sales_trend.sales[5], acquired, filename + ': October verified ledger coverage');
+            assert.ok(d.sales_trend.sales.slice(6).every(v => v === null), filename + ': future sales remain unavailable');
         }
     }
 });

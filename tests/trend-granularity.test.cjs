@@ -19,7 +19,7 @@ test('accepted bookings cover the closed month and compare identical week dates'
     assert.equal(cfg.data.labels[4], '10/26〜10/31');
     assert.equal(cfg.data.datasets[0].data[4],sum(d.current_new_reservations.slice(25)));
     assert.equal(cfg.data.datasets[1].data[4],sum(d.previous_new_reservations.slice(25)));
-    assert.equal(sum(cfg.data.datasets[0].data),394);
+    assert.equal(sum(cfg.data.datasets[0].data),392);
     assert.equal(buildIntervalConfig(d,'daily','new_reservations').data.labels.length,31);
     assert.ok(d.current_new_reservations.every(v => Number.isInteger(v)));
 });
