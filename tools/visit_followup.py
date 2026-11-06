@@ -262,7 +262,7 @@ def render_followup(result, store='全店'):
             v=row[f'days_{days}'];label={'no_cohort':'対象なし','tracking':'追跡中・暫定','complete':'追跡完了・確定'}[v['status']]
             quality=v.get('quality')
             if quality=='unverified':label=('追跡中・暫定／' if v['pending'] else '')+'取消時点未確認'
-            elif quality=='reference':label=label.replace('確定','参考値')+'（取消は確認時点）'
+            elif quality=='reference':label={'complete':'追跡完了・参考値','tracking':'追跡中・暫定（参考）','no_cohort':'対象なし'}[v['status']]
             uncertain=set(v.get('uncertain_fields',['rate','converted','eligible','pending'] if quality=='unverified' else []))
             rate='—' if v['rate'] is None or 'rate' in uncertain else f'{v["rate"]:.1f}%'
             num='—' if 'converted' in uncertain else str(v['converted'])

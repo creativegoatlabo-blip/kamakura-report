@@ -13,7 +13,7 @@ test('published follow-up denominators, rates, maturity and store totals agree',
  }
  const {data,html}=read('all_course_report');const october=data.months.find(x=>x.month==='2026-10');assert.deepEqual(october.days_30,{eligible:9,converted:3,pending:44,rate:33.3,status:'tracking'});
  assert.match(html,/3 \/ 9組/);assert.match(html,/44組/);
- const archive=read('all_course_report','10');assert.match(archive.html,/取消時点未確認/);assert.equal(archive.data.months.at(-1).days_30.eligible,0);assert.ok(!archive.data.months.some(x=>x.month==='2026-11'));
+ const archive=read('all_course_report','10');assert.match(archive.html,/現在の取消状態による参考値/);assert.equal(archive.data.months.at(-1).days_30.eligible,0);assert.ok(!archive.data.months.some(x=>x.month==='2026-11'));
 });
 test('latest and November archive follow-up sections match and historical WEB orders remain intact',()=>{
  for(const stem of stems){const latest=fs.readFileSync(stem+'.html','utf8'),archive=fs.readFileSync(stem+'_2026_11.html','utf8');assert.equal(latest.match(/<!-- visit-followup:start -->.*?<!-- visit-followup:end -->/s)[0],archive.match(/<!-- visit-followup:start -->.*?<!-- visit-followup:end -->/s)[0]);}
