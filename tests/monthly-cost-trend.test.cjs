@@ -15,9 +15,10 @@ test('every report offers monthly cost in both selectors with a twelve-month ser
 test('October uses the latest snapshot, September uses the approved published value, and forecast months are not zero',()=>{
  const t=read('all_course_report').monthly_cost_trend;
  assert.equal(t.current_cost[5],7606041);
+ assert.equal(t.current_cost[6],1877309);assert.equal(t.current_meta[6].provisional,true);assert.equal(t.current_meta[6].through,'2026-11-05');
  assert.equal(t.current_cost[4],6271551);
  assert.equal(t.current_meta[4].adopted_from_published_report,true);
- assert.ok(t.current_cost.slice(6).every(v=>v===null));
+ assert.ok(t.current_cost.slice(7).every(v=>v===null));
  assert.equal(t.current_meta[5].through,'2026-10-31');
  assert.equal(t.current_meta[5].provisional,true);
  const config=buildCostConfig(t);

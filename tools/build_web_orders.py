@@ -31,6 +31,7 @@ def render(source, month):
     s = summarize(current)
     y, m = map(int, month.split('-'))
     through = current['through']
+    observed_on = current.get('observed_on', source['observed_on'])
     partial = int(through[-2:]) != calendar.monthrange(y, m)[1]
     period = f'{m}月1〜{int(through[-2:])}日受付分' + ('（月途中）' if partial else '')
     cards = [('有効受付（製作中・納品済み）', f'{s["confirmed"]}件'),
@@ -47,11 +48,11 @@ def render(source, month):
         values = [v['confirmed'], v['confirmed'] - v['by_type']['プロポーズ'], v['by_type']['プロポーズ'], v['statuses']['見積中'], v['statuses']['キャンセル']]
         selected = ' class="web-orders-current"' if key == month else ''
         monthly_rows.append(f'<tr{selected}><th scope="row">{label}</th>' + ''.join(f'<td>{n}</td>' for n in values) + '</tr>')
-    payload = {'month': month, 'through': through, 'observed_on': source['observed_on'], **s, 'sales_jpy': None}
+    payload = {'month': month, 'through': through, 'observed_on': observed_on, **s, 'sales_jpy': None}
     return f'''{START}
 <section id="webOrdersSection" class="glass-card p-6 mb-8" aria-labelledby="webOrdersHeading">
   <h2 id="webOrdersHeading" class="text-xl font-bold text-gray-800 mb-3">WEBオーダーの成果</h2>
-  <p class="text-sm text-gray-600 mb-4">{period} ／ 管理画面確認：{source['observed_on']}。本店のWEBオーダー専用管理一覧を集計しています。</p>
+  <p class="text-sm text-gray-600 mb-4">{period} ／ 管理画面確認：{observed_on}。本店のWEBオーダー専用管理一覧を集計しています。</p>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">{card_html}</div>
   <p class="text-sm text-gray-600 mb-4">有効受付の現在の状態：製作中 {s['statuses']['製作中']}件・納品済み {s['statuses']['納品済み']}件。テスト登録 {s['excluded_tests']}件を除外。</p>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">

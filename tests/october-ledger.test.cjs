@@ -44,7 +44,7 @@ test('Repaired Osaka ledger completes the all-store aggregation', () => {
     assert.equal(d.sales_trend.sales[5],d.ledger_sales.total_sales);
     const latest=JSON.parse(fs.readFileSync(stem+'.html','utf8').match(/const reportData\s*=\s*(\{.*?\});/s)[1]);
     assert.equal(latest.sales_trend.sales[5],d.ledger_sales.total_sales);
-    assert.ok(!d.meta.data_quality_note.includes('未確定'));
+    assert.ok(!/売上[^。]*未確定|大阪[^。]*売上[^。]*未確定/.test(d.meta.data_quality_note));
     assert.ok(!fs.readFileSync(stem+'_2026_10.html','utf8').includes('大阪の年間合計!C11が#REF!'));
   }
 });
