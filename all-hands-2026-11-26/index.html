@@ -130,13 +130,14 @@
   .actions strong, .plans strong { font-size: 33px; font-weight: 700; }
   .actions time { color: var(--green); font-size: 24px; font-weight: 700; white-space: nowrap; }
   .actions p { color: var(--muted); margin-top: 5px; font-size: 23px; }
+  .actions li { padding-top: 16px; padding-bottom: 16px; }
   .plans li { grid-template-columns: 1fr; padding: 17px 0; border-color: #617e71; }
   .plans li:last-child { border-color: #617e71; }
 
   .withdraw-summary { font-size: 31px; font-weight: 700; }
   .withdraw-chart { display: grid; align-content: center; gap: 12px; }
   .withdraw-chart .demand-grid { padding-top: 6px; }
-  .withdraw-chart .demand-bar { height: calc(var(--receipts) * .90px); }
+  .withdraw-chart .demand-bar { height: calc(var(--receipts) * .77px); }
   .withdraw-differences { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: center; color: var(--green); font-size: 20px; font-weight: 700; }
   .withdraw-decision { align-self: end; padding-bottom: 30px; }
   .withdraw-decision strong { font-size: 29px; }
@@ -145,7 +146,7 @@
   .summer-chart figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
   .summer-chart .demand-grid, .summer-chart .withdraw-differences, .summer-events { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .summer-chart .demand-grid { padding-top: 32px; }
-  .summer-chart .demand-bar { height: calc(var(--receipts) * .52px); }
+  .summer-chart .demand-bar { height: calc(var(--receipts) * .44px); }
   .summer-chart .partial-month { border-left: 1px dashed var(--muted); }
   .summer-chart .withdraw-differences { font-size: 18px; }
   .summer-events { display: grid; gap: 14px; margin: 3px 0 0; padding: 0; list-style: none; }
@@ -169,7 +170,7 @@
   .period-comparison tbody td { font-size: 26px; font-weight: 600; }
   .period-comparison .booking-rate td { font-size: 37px; font-weight: 700; line-height: 1.2; }
   .period-comparison .booking-rate td:last-child { color: var(--green); }
-  .booking-rate td::after { content: ""; display: block; width: calc(var(--rate) * 40%); height: 7px; margin-top: 6px; background: var(--sage); }
+  .booking-rate td::after { content: ""; display: block; width: calc(var(--rate) * 33.333%); height: 7px; margin-top: 6px; background: var(--sage); }
   .booking-rate td:last-child::after { background: var(--green); }
   .simulator-decision { display: grid; gap: 5px; margin-top: 0; }
   .simulator-decision strong { font-size: 27px; }
@@ -177,6 +178,7 @@
 
   .surge-slide h2 { font-size: 48px; }
   .surge-spread { grid-template-columns: minmax(0, 1fr) 315px; }
+  .surge-spread .stat-pair { font-size: 54px; }
   .surge-topline { font-size: 40px; }
   .surge-topline span { font-size: 58px; }
   .web-compare { display: grid; grid-template-columns: 1fr 1fr; flex: 1; align-content: center; }
@@ -291,6 +293,7 @@
           <p class="date">2026年11月26日（木）　藤井</p>
           <template>
             <p>2月ごろから予約が少ないと感じて、各店で予約を増やすために工夫したり、私にいろいろ質問してくれたりしました。今日は、秋までこの状況が続いた背景と、予約を増やすためにいま何をしているか、これから何に取り組むかを共有します。</p>
+            <p>ここでいうブライダル予約には、制作5コースと結婚指輪・婚約指輪の見学を含めます。すぐに制作を決める方だけでなく、まず指輪を見て相談したい方にも工房に来ていただくことを大切にしています。</p>
           </template>
         </section>
 
@@ -298,7 +301,7 @@
           <h2 id="title-2">2月から予約が減り、11月も前年を下回った</h2>
           <div class="chart-reader" style="--chart-width: 1000px">
             <div class="chart-scroll"><div class="chart-wide">
-          <figure class="monthly-trends" aria-label="2026年1月から10月のブライダル制作予約数、Web予約率と主な施策">
+          <figure class="monthly-trends" aria-label="2026年1月から10月のブライダル予約数（制作＋見学）、Web予約率と主な施策">
             <canvas id="monthly-count-chart" class="line-chart" width="1128" height="149" role="img"></canvas>
             <canvas id="monthly-rate-chart" class="line-chart" width="1128" height="149" role="img"></canvas>
             <div class="month-track month-axis" aria-hidden="true">
@@ -319,15 +322,17 @@
             <div class="month-track">
               <span class="event-label">広告</span>
               <span class="month-event ad-event" style="--event-months: 8 / 10">7月　広告運用を刷新<br>7〜8月　広告費大幅減</span>
+              <span class="month-event ad-event" style="--event-months: 11">10月30日<br>見学LP公開</span>
             </div>
           </figure>
             </div></div>
           </div>
-          <p class="caption foot"><b>11月1〜23日の制作予約</b>　前年265件 → 今年130件。前年より135件（50.9%）減。</p>
+          <p class="caption foot"><b>11月1〜23日の受付</b>　前年299件 → 今年170件（制作130件・見学40件）。前年より43.1%減。</p>
           <template>
-            <p>上は全店で受け付けた制作予約の件数、下は国内で公式サイトに来た訪問のうち、その訪問中に制作を予約した割合です。予約は1月の364件から2月に257件へ減り、6月に一時持ち直したあと、10月1〜31日の受付は159件でした。Webの予約率は5月に0.30％まで下がり、7月は0.53％に上がりましたが、10月は0.29％でした。11月1〜23日に全店で受け付けた制作予約は、前年の同じ23日間の265件から130件に減りました。</p>
-            <p>2〜3月に大阪で割引キャンペーンを実施しました。価格まわりでは、2月にシミュレーターを入れ、3月に固定価格の告知を始め、5月に固定価格へ移行してシミュレーターを外しました。7月には、ペアリングの予約に偏っていた広告が、ブライダルの制作予約を取る方向に学習するよう運用を大きく変え、7〜8月は広告費を大きく絞りました。8〜9月は蔵前に予約が集まりましたが、全店ではキャンペーン中の9月にすでに減っていました。</p>
-            <p class="source">台帳は制作5コースの有効予約を受付月で集計。1〜9月は10月27日保存の台帳集計。10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の受付日基準（10月1〜31日、11月5日時点の取消を反映）。11月1〜23日は前年の受付日別集計と11月24日朝に集計した今年の有効予約を比較。前年は蔵前の開店前。Webは国内全流入、公式サイト本体から始まった訪問と、その訪問中に制作5コースを予約した訪問を11月24日にGA4で暦月ごとに再集計。施策の日付は実施時期を示す。</p>
+            <p>上のグラフは全店のブライダル予約です。1月の436件から2月に311件へ減り、6月に247件まで持ち直しましたが、10月末は208件でした。11月1〜23日も、前年299件（制作265件・見学34件）に対して今年170件（制作130件・見学40件）です。</p>
+            <p>台帳は受付日で数え、1件の有効な予約を1件とします。同じお二人が見学の後に別途制作を予約すれば、見学1件・制作1件です。Webのグラフは、日本国内で公式サイトを最初に開いた訪問のうち、その訪問中に制作または見学を予約した割合です。同じ訪問で両方を予約しても1回です。5月は0.34%、7月は0.61%、10月は0.36%でした。</p>
+            <p>2〜3月は大阪の割引キャンペーン、8〜9月は蔵前のキャンペーンがありました。2月にシミュレーターを導入し、3月の告知を経て5月に固定価格制へ移行した際に見積もりを撤去しました。7月はペアリングに偏っていた広告運用を見直し、7〜8月に広告費を縮めました。10月には見学を案内するページも公開しました。</p>
+            <p class="source">制作・見学を含む集計と条件。店舗は制作5コースと結婚指輪・婚約指輪の見学。取消・テスト・スタッフ予約等は除外。1〜9月は10月27日保存の4店舗台帳、10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の受付日別集計（11月5日時点）、11月1〜23日は同じ日付で2025年の台帳と2026年11月24日朝の台帳を比較。2025年11月は蔵前開店前。WebはGA4、11月25日集計、国内全流入・公式サイト本体に着地した暦月の訪問。</p>
           </template>
         </section>
 
@@ -335,33 +340,35 @@
           <h2 id="title-3">予約を増やすために、いま進めていること</h2>
           <ul class="actions">
             <li><time datetime="2026-10-21">10月21日</time><div><strong>広告用の新ページ（新LP）の運用を開始</strong><p>手作り結婚指輪の特徴や制作の流れを紹介</p></div></li>
+            <li><time datetime="2026-10-30">10月30日</time><div><strong>見学を案内する広告ページを公開</strong><p>11月23日までに、このページから見学を予約した訪問が3回、制作が2回</p></div></li>
             <li><time datetime="2026-11-20">11月20日〜</time><div><strong>広告からの案内先を見直し</strong><p>結婚指輪コースへ直接案内する広告を試す</p></div></li>
             <li><time datetime="2026-11-21">11月21日</time><div><strong>価格シミュレーターを復帰</strong><p>結婚指輪・婚約指輪・3本制作・アニバーサリーの4コース</p></div></li>
           </ul>
           <template>
-            <p>10月21日に、手作り結婚指輪の特徴と制作の流れを紹介する新しいページを公開し、広告からの案内を始めました。11月には、結婚指輪コースへ直接案内する広告も試しています。コースに来たお客様がその場で予算を確かめられるよう、11月21日には4コースに価格シミュレーターを戻しました。</p>
-            <p class="source">公式サイトのGitで、10月21日の新LP（/lp01-a/）公開コミット 21e28db3 とマージ 935044cb を確認。広告の配信開始も10月21日。11月20日に検索広告でコース案内の試験を設定し、23日にSNS広告のコース案内版を公開。11月24日 予約進捗と復帰速報</p>
+            <p>10月21日に広告用の新ページを公開し、30日には「まず見学したい」というお客様向けに、通常版と大阪中崎町版の見学案内ページを公開しました。制作の前に相談したい方にも、工房を選んでいただく入口をつくるためです。</p>
+            <p>10月30日〜11月23日、見学案内ページを最初に開いた国内4,793訪問のうち、同じ訪問で見学予約が3回、制作予約が2回ありました。計5回はこの入口で確認できた予約です。ページの改修で何件増えたかは引き続き確かめます。</p>
+            <p>11月20日からは広告で結婚指輪コースに直接ご案内する試験も始めました。21日にはご予算をその場で確かめられるよう、4コースに見積もりを戻しました。</p>
+            <p class="source">公式サイトのGitで新LPの10月21日公開（21e28db3、マージ935044cb）と、見学案内2ページの10月30日の追加（8c757fe5）を確認。見学案内は /lp01-visit/ と /lp01-visit-a02/。国内全流入、GA4で両ページのいずれかに着地した訪問を直接集計。制作・見学を含む集計と条件。</p>
           </template>
         </section>
 
         <section class="slide" aria-labelledby="title-4" hidden>
           <h2 id="title-4">5月、価格シミュレーターを外した理由</h2>
-          <p class="withdraw-summary">2月から5月まで、制作予約は毎月前年を下回った</p>
+          <p class="withdraw-summary">2月から5月まで、見学を含めても予約は毎月前年を下回った</p>
           <div class="spread">
             <figure class="withdraw-chart">
-              <figcaption class="label">全店の予約台帳｜ブライダル制作予約（各月1〜18日受付・件）</figcaption>
+              <figcaption class="label">全店の予約台帳｜制作＋見学（各月1〜18日受付・件）</figcaption>
               <div class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></div>
               <div class="chart-reader" style="--chart-width: 600px">
                 <div class="chart-scroll"><div class="chart-wide">
-              <div class="demand-grid" role="img" aria-label="前年と今年の受付件数。2月は209件と192件、3月は182件と156件、4月は179件と131件、5月は179件と104件。">
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 209"><span class="numeric">209</span></div><div class="demand-bar current" style="--receipts: 192"><span class="numeric">192</span></div></div><span>2月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 182"><span class="numeric">182</span></div><div class="demand-bar current" style="--receipts: 156"><span class="numeric">156</span></div></div><span>3月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 179"><span class="numeric">179</span></div><div class="demand-bar current" style="--receipts: 131"><span class="numeric">131</span></div></div><span>4月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 179"><span class="numeric">179</span></div><div class="demand-bar current" style="--receipts: 104"><span class="numeric">104</span></div></div><span>5月</span></div>
+              <div class="demand-grid" role="img" aria-label="全店の予約台帳、制作と見学を合わせた有効予約。2025年と2026年の順に、2月は244件と226件、3月は226件と187件、4月は210件と158件、5月は212件と132件。">
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 244"><span class="numeric">244</span></div><div class="demand-bar current" style="--receipts: 226"><span class="numeric">226</span></div></div><span>2月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 226"><span class="numeric">226</span></div><div class="demand-bar current" style="--receipts: 187"><span class="numeric">187</span></div></div><span>3月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 210"><span class="numeric">210</span></div><div class="demand-bar current" style="--receipts: 158"><span class="numeric">158</span></div></div><span>4月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 212"><span class="numeric">212</span></div><div class="demand-bar current" style="--receipts: 132"><span class="numeric">132</span></div></div><span>5月</span></div>
               </div>
               <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
-                <span>17件（8.1%）減</span><span>26件（14.3%）減</span>
-                <span>48件（26.8%）減</span><span>75件（41.9%）減</span>
+                <span>18件（7.4%）減</span><span>39件（17.3%）減</span><span>52件（24.8%）減</span><span>80件（37.7%）減</span>
               </div>
                 </div></div>
               </div>
@@ -372,32 +379,32 @@
               <strong class="accent">5月20日に撤去</strong>
             </aside>
           </div>
-          <p class="caption foot">「結婚指輪 手作り」の国内検索回数は、2〜5月の合計で前年より<b>約26%減少</b>。<br>予約の減少率は2・3月がこの範囲内で、4月にわずかに上回り、5月には41.9%に達した。</p>
+          <p class="caption foot">「結婚指輪 手作り」の国内検索回数は、2〜5月の合計で前年より<b>約26%減少</b>。<br>予約の減少率は2〜4月が26%以内。5月には37.7%に達した。</p>
           <template>
-            <p>皆さんが店頭で感じていたように、2月から制作予約が前年に届かない状態が続きました。各月の18日までで見ると、2月は前年より17件少なく、5月は75件少なくなっていました。そこで、2月下旬に入れたシミュレーターを見直しました。</p>
-            <p>「私たちの予算でどんな指輪が作れるだろう」とお二人が考えたとき、手作りの面白さを知る前に、画面の金額だけで工房を候補から外してしまうかもしれない。そう考えて、5月20日にいったん外し、予約の動きを見ることにしました。2月前半にはすでに前年を下回っており、シミュレーターがどれだけ影響したかは、この比較だけでは分かりません。</p>
-            <p>春の予約の減少幅を、同じ時期の検索回数の減少幅と比べます。「結婚指輪 手作り」の国内検索は2〜5月合計で39,600回から29,400回へ、25.8%減りました。月別に見ると、4月の検索は33.3%減、5月は18.2%減です。4月の予約減は同じ月の検索の落ち込みより小さく、5月は検索の落ち込みを大きく上回りました。検索は月全体の推計、予約は各月1〜18日の受付です。検索需要が予約減のどれだけを説明するかは、この比較だけでは分かりません。</p>
-            <p class="source">出典　10月27日保存の予約台帳に基づく前年同期間の集計。全店・全経路のブライダル制作5コース。受付日基準で1予約を1件とし、キャンセル・テスト・スタッフ予約等を除外。両年とも春は蔵前の開店前。導入・撤去の経緯は11月24日 社長MTG資料。</p>
+            <p>制作予約が前年を下回り続けたことが、当時シミュレーターを見直したきっかけです。見学を含めても、各月1〜18日の受付は2月の前年244件から今年226件へ、5月の212件から132件へと差が広がりました。</p>
+            <p>「私たちの予算でどんな指輪が作れるだろう」と考えたお二人が、手作りの魅力を知る前に金額だけで工房を候補から外しているかもしれない。そう考えて5月20日にいったん外しました。2月前半には、導入前からすでに予約が前年を下回っていました。</p>
+            <p>「結婚指輪 手作り」の国内検索は2〜5月合計で39,600回から29,400回へ25.8%減りました。予約の減少率は2月7.4%、3月17.3%、4月24.8%、5月37.7%です。5月の検索回数だけを見ると18.2%減。検索は月全体の推計、予約は各月1〜18日受付で、需要減が予約減の何件分かまでは分かりません。</p>
+            <p class="source">制作・見学を含む集計と条件。両年の2〜5月は蔵前開店前。受付日の有効予約1件を1件とした全店・全経路の集計。施策の経緯と検索回数は11月24日 社長MTG資料。</p>
           </template>
         </section>
 
         <section class="slide summer-slide" aria-labelledby="title-5" hidden>
-          <h2 id="title-5">6〜11月も、制作予約は前年を下回った</h2>
+          <h2 id="title-5">6〜11月も、ブライダル予約は前年を下回った</h2>
           <figure class="withdraw-chart summer-chart">
-            <figcaption><span class="label">全店の予約台帳｜ブライダル制作予約（6〜10月は各月1日〜末日受付・件）</span><span class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></span></figcaption>
+            <figcaption><span class="label">全店の予約台帳｜制作＋見学（6〜10月は月末まで、11月は23日までの受付）</span><span class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></span></figcaption>
             <div class="chart-reader" style="--chart-width: 960px">
               <div class="chart-scroll"><div class="chart-wide">
-            <div class="demand-grid" role="img" aria-label="前年と今年のブライダル制作予約。6〜10月は月末まで。6月は334件と207件、7月は362件と195件、8月は378件と179件、9月は344件と163件、10月は354件と159件、11月1〜23日は265件と130件。">
-              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 334"><span class="numeric">334</span></div><div class="demand-bar current" style="--receipts: 207"><span class="numeric">207</span></div></div><span>6月</span></div>
-              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 362"><span class="numeric">362</span></div><div class="demand-bar current" style="--receipts: 195"><span class="numeric">195</span></div></div><span>7月</span></div>
-              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 378"><span class="numeric">378</span></div><div class="demand-bar current" style="--receipts: 179"><span class="numeric">179</span></div></div><span>8月</span></div>
-              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 344"><span class="numeric">344</span></div><div class="demand-bar current" style="--receipts: 163"><span class="numeric">163</span></div></div><span>9月</span></div>
-              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 354"><span class="numeric">354</span></div><div class="demand-bar current" style="--receipts: 159"><span class="numeric">159</span></div></div><span>10月</span></div>
-              <div class="demand-month partial-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 265"><span class="numeric">265</span></div><div class="demand-bar current" style="--receipts: 130"><span class="numeric">130</span></div></div><span>11月1〜23日</span></div>
-            </div>
-            <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
-              <span>127件（38.0%）減</span><span>167件（46.1%）減</span><span>199件（52.6%）減</span><span>181件（52.6%）減</span><span>195件（55.1%）減</span><span>135件（50.9%）減</span>
-            </div>
+            <div class="demand-grid" role="img" aria-label="全店の予約台帳、制作と見学を合わせた有効予約。2025年と2026年の順に、6月は388件と247件、7月は409件と240件、8月は440件と226件、9月は402件と224件、10月は400件と208件、11月1〜23日は299件と170件。">
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 388"><span class="numeric">388</span></div><div class="demand-bar current" style="--receipts: 247"><span class="numeric">247</span></div></div><span>6月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 409"><span class="numeric">409</span></div><div class="demand-bar current" style="--receipts: 240"><span class="numeric">240</span></div></div><span>7月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 440"><span class="numeric">440</span></div><div class="demand-bar current" style="--receipts: 226"><span class="numeric">226</span></div></div><span>8月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 402"><span class="numeric">402</span></div><div class="demand-bar current" style="--receipts: 224"><span class="numeric">224</span></div></div><span>9月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 400"><span class="numeric">400</span></div><div class="demand-bar current" style="--receipts: 208"><span class="numeric">208</span></div></div><span>10月</span></div>
+                <div class="demand-month partial-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 299"><span class="numeric">299</span></div><div class="demand-bar current" style="--receipts: 170"><span class="numeric">170</span></div></div><span>11月1〜23日</span></div>
+              </div>
+              <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
+                <span>141件（36.3%）減</span><span>169件（41.3%）減</span><span>214件（48.6%）減</span><span>178件（44.3%）減</span><span>192件（48.0%）減</span><span>129件（43.1%）減</span>
+              </div>
             <ul class="summer-events" aria-label="2026年の主な施策">
               <li class="month-event store-event" style="--event-months: 1" aria-label="6月、蔵前キャンペーンの告知開始">蔵前キャンペーン<br>告知開始</li>
               <li class="month-event store-event" style="--event-months: 3 / 5">8・9月<br>蔵前キャンペーン対象の制作月</li>
@@ -407,13 +414,13 @@
               </div></div>
             </div>
           </figure>
-          <p class="caption">6〜10月は各月末まで、11月は両年とも23日までに受け付けた制作予約。</p>
-          <p class="caption foot"><b>5月から6月のWeb予約</b>　前年秋に予約につながった55の検索語で、国内のGoogle広告から来た人を比較。<br>制作を予約した割合は1.07%から1.71%に上がり、予約した人は60人から45人に減りました。</p>
+          <p class="caption">見学予約は、10月が前年46件 → 今年49件、11月1〜23日が前年34件 → 今年40件。</p>
+          <p class="caption foot"><b>5月から6月のWeb予約</b>　前年秋に予約につながった55の検索語で、国内のGoogle広告から来た人を比較。<br>制作または見学を予約した割合は1.21%から2.16%に上がり、予約した人は68人から57人に減りました。</p>
           <template>
-            <p>6月から10月は、全店で月初から月末までに受け付けた制作予約です。10月は前年354件に対して今年159件で、195件（55.1%）減りました。11月1〜23日も、前年265件に対して今年130件でした。6月に蔵前のキャンペーンを告知し、3日に予約の受付を始めました。割引の対象は8月・9月に蔵前で制作するお客様です。キャンペーン中も、全店で見ると両月とも受付件数は前年の半分ほどでした。</p>
-            <p>5月にシミュレーターを外してよかったと6月に感じたのは、検索広告から来た人の予約率が上がったからです。ただ、5月の訪問者5,623人のうち予約したのは60人。6月は訪問者2,633人のうち45人でした。前年秋に公式トップページから制作予約につながった55の検索語で、今年の両月は最初に開いたページを問わず比較しています。訪問者数も蔵前の告知も変わっており、予約率の上昇だけでは撤去の効果は判断できません。</p>
-            <p>10月21日には新しい広告用ページの配信を始めました。シミュレーターを外したあとは、同じ検索語から結婚指輪コースに来て価格一覧を開いた割合が7.5%から29.2%に増えました。お二人が予算をその場で確かめられる方が安心して検討できると考え、11月21日にシミュレーターを戻しました。外す前と外したあとで予約率が動いた理由について、ほかにも考えたことがあります。</p>
-            <p class="source">台帳は全店・全経路のブライダル制作5コース。受付日基準でキャンセル・テスト・スタッフ予約等を除外。6〜10月の両年は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の「ブライダル vs ファッション 新規予約数」（受付日基準）。2026年10月は11月5日確認時の有効予約。11月1〜23日の前年は10月27日保存の台帳に基づく日別集計、今年は11月24日朝の4店舗台帳集計。Webの5月・6月は各月全体、日本国内のGoogle検索広告、結婚・婚約・3本制作を予約した人数。Web比較と見積もり復帰の根拠</p>
+            <p>全店の制作と見学を合わせると、6月から10月は月全体で前年を下回り、11月1〜23日も前年299件、今年170件でした。一方、見学に限ると、10月は46件から49件へ、11月1〜23日は34件から40件へ増えています。見学からご検討を始めるお客様との接点も追っていきます。</p>
+            <p>5月にシミュレーターを外したあと、6月にWebの予約率が上がりました。前年秋に制作予約につながった55の検索語にそろえると、制作または見学を予約した人は5月5,623人中68人、6月2,633人中57人でした。6月3日には蔵前のキャンペーン受付が始まっています。対象は8・9月に制作される方で、告知と訪問者数の変化も重なりました。</p>
+            <p>10月21日に新しい広告用ページ、30日には見学案内ページを公開しました。また、結婚指輪コースでは、同じ広告検索語から来て価格一覧を開いた訪問の割合が撤去前の7.5%から撤去後の29.2%に増えています。予算をその場で知りたいお客様にとっての見積もりの役割を見直しました。</p>
+            <p class="source">制作・見学を含む集計と条件。全店・全経路の制作5コース＋見学の有効予約。6〜10月は各月末、11月は各年23日までの受付。2026年10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>、同年11月は11月24日朝の台帳。Webの5・6月は国内Google検索広告の同じ55検索語、着地先を問わず、各月の訪問者と制作または見学を予約した人を重複を除いて集計。</p>
           </template>
         </section>
 
@@ -435,15 +442,16 @@
 
         <section class="slide simulator-yoy" aria-labelledby="title-7" hidden>
           <h2 id="title-7">11月、価格シミュレーターを戻した理由</h2>
-          <p class="label">「鎌倉彫金工房」の検索広告から、ブライダルのコースページを最初に開いた訪問（国内）</p>
+          <p class="label">「鎌倉彫金工房」の検索広告からコースページを最初に開いた国内の訪問。予約は制作＋見学。</p>
           <div class="period-comparison">
             <table>
               <caption>表示中<small>2/28〜5/18</small></caption>
               <thead><tr><td></td><th scope="col">2025年</th><th scope="col">2026年</th></tr></thead>
               <tbody>
                 <tr><th scope="row">訪問数</th><td>1,407回</td><td>533回</td></tr>
-                <tr><th scope="row">制作予約（Web）</th><td>25件</td><td>11件</td></tr>
-                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 1.78">1.78%</td><td style="--rate: 2.06">2.06%</td></tr>
+                <tr><th scope="row">Web予約件数</th><td>31件</td><td>12件</td></tr>
+                <tr><th scope="row">予約した訪問</th><td>30回</td><td>12回</td></tr>
+                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 2.13">2.13%</td><td style="--rate: 2.25">2.25%</td></tr>
               </tbody>
             </table>
             <table>
@@ -451,46 +459,48 @@
               <thead><tr><td></td><th scope="col">2025年</th><th scope="col">2026年</th></tr></thead>
               <tbody>
                 <tr><th scope="row">訪問数</th><td>572回</td><td>477回</td></tr>
-                <tr><th scope="row">制作予約（Web）</th><td>13件</td><td>7件</td></tr>
-                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 2.27">2.27%</td><td style="--rate: 1.47">1.47%</td></tr>
+                <tr><th scope="row">Web予約件数</th><td>15件</td><td>8件</td></tr>
+                <tr><th scope="row">予約した訪問</th><td>15回</td><td>8回</td></tr>
+                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 2.62">2.62%</td><td style="--rate: 1.68">1.68%</td></tr>
               </tbody>
             </table>
           </div>
           <div class="foot simulator-decision">
             <p><strong>表示中の予約率は前年を上回り、撤去後は下回りました。</strong></p>
             <p>予算の目安が分かれば、安心して指輪を選べるのでは。そう考え、11月21日に見積もりを戻しました。</p>
-            <p class="caption">9月は蔵前のキャンペーン期間。2026年9〜10月の予約は7件で、効果は検証中です。</p>
+            <p class="caption">予約率は「予約した訪問÷訪問数」。今年の9〜10月は8訪問で、効果は検証中です。</p>
           </div>
           <template>
-            <p>「私たちの予算でどんな指輪が作れるだろう」と思ってコースを開いた方にとって、見積もりはどんな意味があるでしょうか。工房名の検索広告から同じ4つのコースページのどれかに来た訪問に絞り、前年の同じ日付と比べました。</p>
-            <p>表示中は、訪問数が前年の1,407回から533回に減っても、予約率は1.78%から2.06%でした。撤去後の9〜10月は2.27%から1.47%に下がりました。広告の登録キーワードと対象のコースページを両年でそろえると、春と秋で前年比の動きが逆になっています。</p>
-            <p>別の集計でも、同じ広告検索語から結婚指輪コースに来て価格一覧を開いた訪問の割合は、撤去前の7.5%から撤去後の29.2%に増えました。予算をその場で確かめられる方が検討を続けやすいと考え、11月21日に4コースで見積もりを戻しました。今回の前年比較も、その判断を支える材料です。</p>
-            <p>この比較は復帰後の11月24日に集計しました。9月は蔵前キャンペーンの対象月で、今年の秋の予約も7件です。撤去の影響がどれだけだったかは引き続き検証します。</p>
-            <p class="source">出典　11月24日のGA4集計。日本国内のGoogle検索広告で、登録キーワードが「鎌倉彫金工房」の訪問（空白の表記違いを含む）。最初に開いたページは結婚指輪・婚約指輪・3本制作・アニバーサリー。制作予約は、その訪問中にWebで完了した4店舗のブライダル制作5コース（上記4種とダイヤモンドプロポーズ）の予約ID数。見学は集計対象外。予約率は制作予約した訪問数÷訪問数で、この4区分では制作予約した訪問数と予約ID数が一致。表示中・撤去後は2026年の状態を表し、春は導入・撤去の切替日を除いた。価格一覧の比較は11月24日 社長MTG資料。</p>
+            <p>「私たちの予算でどんな指輪が作れるだろう」と思ったとき、見積もりは検討を続ける助けになるでしょうか。広告に登録した工房名と、最初に開いた4コースの範囲をそろえて、制作または見学を予約した訪問の割合を前年と比べました。</p>
+            <p>表示中は前年1,407訪問中30回（2.13%）、今年533訪問中12回（2.25%）。撤去後の9〜10月は前年572訪問中15回（2.62%）、今年477訪問中8回（1.68%）です。2025年春のWeb予約は制作25件と見学6件の計31件ですが、1回の訪問で両方を予約した方がいて、予約した訪問は30回です。</p>
+            <p>別の集計では、同じ広告検索語から結婚指輪コースに来て価格一覧を開いた割合が撤去前の7.5%から撤去後の29.2%に増えました。予算の目安がその場で分かれば、安心して指輪を選べるのではと考え、11月21日に4コースで見積もりを戻しました。</p>
+            <p>11月25日に見学を含めて集計し直した前年比較も、この判断を支える材料です。9月は蔵前キャンペーンの対象月で、今年の秋の予約も8訪問です。見積もりが予約率にどれだけ影響したかは引き続き検証します。</p>
+            <p class="source">制作・見学を含む集計と条件。日本国内のGoogle検索広告・登録キーワード「鎌倉彫金工房」（空白の表記違いを含む）。最初のページは結婚指輪・婚約指輪・3本制作・アニバーサリー。Web予約件数は4店舗の制作5コース＋見学の予約完了件数。予約率の分子は両方を予約した訪問を1回とする。表示中・撤去後は2026年の状態、春は切替日を除く。価格一覧の比較は11月24日 社長MTG資料。</p>
           </template>
         </section>
 
         <section class="slide surge-slide" aria-labelledby="title-8" hidden>
-          <h2 id="title-8">復帰翌日からの2日で前月差＋14件</h2>
-          <p class="label">4店舗の予約台帳　ブライダル制作予約（受付日）</p>
+          <h2 id="title-8">復帰翌日からの2日で前月差＋17件</h2>
+          <p class="label">4店舗の予約台帳　ブライダル予約（制作＋見学・受付日）</p>
           <figure class="spread surge-spread">
             <div class="chart-reader" style="--chart-width: 640px">
               <div class="chart-scroll"><div class="chart-wide">
-            <canvas id="surge-chart" class="line-chart" width="775" height="348" role="img" aria-label="10月の同じ日までと比べた累計前月差。11月20日プラス10件、21日プラス10件、22日プラス18件、23日プラス24件。21日から23日は3連休で、21日にシミュレーターが復帰。"></canvas>
+            <canvas id="surge-chart" class="line-chart" width="775" height="348" role="img" aria-label="10月の同じ日までと比べた累計前月差。11月20日プラス11件、21日プラス8件、22日プラス20件、23日プラス25件。21日から23日は3連休で、21日にシミュレーターが復帰。"></canvas>
               </div></div>
             </div>
             <div class="stat-aside">
               <p class="label">各月1〜23日の受付</p>
-              <p class="numeric stat-pair">106<span class="shift">→</span><span class="accent">130</span><small class="unit">件</small></p>
-              <p class="caption">10月から11月に、計24件増</p>
-              <p class="numeric surge-topline accent"><span>58.3</span>%</p>
-              <p class="caption">24件の前月差のうち、22日と23日に生まれた割合</p>
+              <p class="numeric stat-pair">145<span class="shift">→</span><span class="accent">170</span><small class="unit">件</small></p>
+              <p class="caption">10月から11月に、計25件増</p>
+              <p class="numeric surge-topline accent"><span>68.0</span>%</p>
+              <p class="caption">25件の前月差のうち、22日と23日に生まれた割合</p>
             </div>
           </figure>
-          <p class="caption foot">11月21〜23日は3連休。連休後も予約の推移を確認します。</p>
+          <p class="caption foot">見学は10月39件 → 11月40件。11月21〜23日は3連休で、連休後も推移を確認します。</p>
           <template>
-            <p>11月1〜23日に4店舗で受け付けた制作予約は、10月の同じ日までより24件増えました。21日にシミュレーターを戻し、翌22日は前月より8件、23日は6件多く、2日で前月差が14件広がりました。両日は3連休中で、10月の同じ日は平日でした。連休後の動きを見ていきます。</p>
-            <p class="source">資料　11月24日 予約進捗と復帰速報。4店舗台帳の制作5コースの有効予約。見学は別集計。21日5→5件、22日3→11件、23日1→7件。</p>
+            <p>各月1〜23日に受け付けた制作と見学を足すと、10月は制作106件と見学39件で145件、11月は制作130件と見学40件で170件でした。前月より25件増えています。</p>
+            <p>11月21日の時点では、10月の同じ日までと比べて8件多い状態でした。22日の受付は10月4件・11月16件で差が12件広がり、23日は2件・7件でさらに5件広がりました。この2日で前月差の17件分、全体の68%です。11月の両日は3連休中、10月の同日は平日なので、連休後も確かめます。</p>
+            <p class="source">制作・見学を含む集計と条件。4店舗とも11月24日朝に保存した同じ版の予約台帳で、受付日の制作5コース＋見学の有効予約を集計。10月・11月とも1〜23日。21日単日の受付は10月9件、11月6件。</p>
           </template>
         </section>
 
@@ -509,12 +519,12 @@
               <p class="rate accent">1.16%</p>
             </div>
           </div>
-          <p class="caption">予約した訪問 ÷ 結婚指輪コースを最初に開いた訪問。制作予約まで進んだ訪問は前後ともに6回。</p>
+          <p class="caption">制作を予約した訪問は6回 → 6回、見学は0回 → 2回。復帰後の1回は両方を予約し、合計では1回に数えます。</p>
           <p class="caption foot">訪問が298回減ったうち、Google検索広告からの訪問が159回減、Facebook・Instagramなどの広告からが126回減。<br>予約数はまだ少なく、効果は引き続き検証中。次回評価の目安は12月1日。</p>
           <template>
-            <p>これは台帳の予約件数とは別に、国内のWebでコースを最初に開いた訪問のうち、同じ訪問で予約まで進んだ回数です。来る回数は減りましたが、制作か見学まで進んだ訪問は6回から7回になりました。制作の予約は前後とも6回です。まだ数件で割合が動くので、12月1日を目安に改めて確かめます。</p>
+            <p>これは台帳の予約件数とは別に、国内のWebでコースを最初に開いた訪問のうち、同じ訪問で予約まで進んだ回数です。来る回数は減りましたが、制作か見学まで進んだ訪問は6回から7回になりました。前週の見学は0回、復帰後の見学は2回。復帰後は1回の訪問で制作と見学を両方予約したため、制作6回と合わせて7回です。まだ数件で割合が動くので、12月1日を目安に改めて確かめます。</p>
             <p>901回と603回は、国内で結婚指輪コースを最初に開いた訪問数です。Google検索広告からは681回から522回に、Facebook・InstagramなどのMeta広告と判別できた訪問は129回から3回に減りました。合わせて285回で、減少全体298回の約96%です。Googleでは、11月18日に関東の「手作り結婚指輪」の広告を再停止しました。この広告グループ経由で結婚指輪コースを最初に開いた訪問は242回から5回に減っています。他のGoogle広告には増えたものもあり、Google検索広告全体の差は159回減です。同じ18日に関東で結婚指輪コースへ直接案内するMeta広告も停止し、新たなコース向け広告からの最初の訪問は23日深夜でした。Meta広告から4コース全体への訪問は392回から415回に増えています。</p>
-            <p class="source">資料　11月24日 予約進捗と復帰速報。国内GA4、結婚指輪コースから始まった訪問。Google広告グループ別の訪問は同じ2期間・同じ条件で11月24日に追加集計（関東ss10、03_手作り結婚指輪）。広告の停止・再開の記録。制作と見学の両方を予約した訪問は合計で1回。連休、広告の案内先と一部の価格表示の変更も重なっている。</p>
+            <p class="source">資料　11月24日集計の速報。国内GA4、結婚指輪コースから始まった訪問。Google広告グループ別の訪問は同じ2期間・同じ条件で11月24日に追加集計（関東ss10、03_手作り結婚指輪）。広告の停止・再開の記録。制作と見学の両方を予約した訪問は合計で1回。連休、広告の案内先と一部の価格表示の変更も重なっている。</p>
           </template>
         </section>
 
@@ -544,30 +554,22 @@
               <canvas id="path-pie-2026" width="520" height="273" role="img"></canvas>
             </figure>
           </div>
-          <div class="path-rates" aria-label="4つの着地先の2026年の制作予約率">
-            <p class="path-rates-title">2026年の制作予約率</p>
-            <span class="path-rate"><i class="swatch" style="background:#a9512e"></i>Aページ <b class="numeric">0.49%</b></span>
-            <span class="path-rate"><i class="swatch" style="background:#42685b"></i>Bページ <b class="numeric">1.11%</b></span>
-            <span class="path-rate"><i class="swatch" style="background:#465e80"></i>Cページ <b class="numeric">1.47%</b></span>
-            <span class="path-rate"><i class="swatch" style="background:#ba9246"></i>Dページ <b class="numeric">1.88%</b></span>
+          <div class="path-rates" aria-label="4つの着地先の2026年のWeb予約率（制作＋見学）">
+            <p class="path-rates-title">2026年の予約率<span style="display: inline-block">（制作＋見学）</span></p>
+            <span class="path-rate"><i class="swatch" style="background:#a9512e"></i>Aページ <b class="numeric">0.54%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#42685b"></i>Bページ <b class="numeric">1.21%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#465e80"></i>Cページ <b class="numeric">1.58%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#ba9246"></i>Dページ <b class="numeric">2.76%</b></span>
           </div>
           <div class="caption foot">
-            <p><b>案内先の配分の変化も、予約率が下がった一因。</b> 4種類を合わせた制作予約率は1.21%から0.70%へ。</p>
+            <p><b>案内先の配分の変化も、予約率が下がった一因。</b> 4種類を合わせた予約率は、前年の1.48%から今年の0.80%へ。</p>
             <p>各年2月24日〜4月30日。国内Google検索広告の同じ27登録キーワード、A〜Dの4種類の着地先を比較。</p>
           </div>
           <template>
-            <p>広告から来たとき、最初に開くページにはいくつか種類があります。この4つで見ると、Aページに来た割合は前年の44％から今年は73％になり、Cページは35％から7％に減りました。今年のAページはこの4つの中で予約する割合が最も低く、そこに案内が集中したことも、全体の割合を下げる方向に働きました。</p>
-            <p>ページごとの予約率にも変化があります。今年の各ページの予約率を固定した試算では、前年の配分なら全体で0.99％、今年の配分では0.70％です。前年の各ページの予約率を使った試算でも、配分による変化は小幅ながら同じ方向です。</p>
-            <table class="path-data">
-              <thead><tr><th scope="col">最初に開いたページ</th><th scope="col">2025年 制作／訪問</th><th scope="col">2026年 制作／訪問</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">A　公式トップ</th><td>77／7,271（1.06%）</td><td>91／18,617（0.49%）</td></tr>
-                <tr><th scope="row">B　旧LP</th><td>37／2,881（1.28%）</td><td>47／4,219（1.11%）</td></tr>
-                <tr><th scope="row">C　掲載4コース</th><td>61／5,752（1.06%）</td><td>26／1,767（1.47%）</td></tr>
-                <tr><th scope="row">D　予約フォーム</th><td>26／641（4.06%）</td><td>15／796（1.88%）</td></tr>
-              </tbody>
-            </table>
-            <p class="source">国内GA4。前年実績27登録キーワード、Google検索広告。Cは結婚指輪・婚約指輪・3本制作・アニバーサリー。分子は同じ訪問中に4店舗の制作5コースを予約した訪問数。円グラフはA〜Dの着地数合計を100%とした。配分の試算は算術比較で、同じ人を別のページに案内した場合の実測ではない。</p>
+            <p>この4種類の入口では、Aページに来た割合は前年の44%から今年は73%に、Cページは35%から7%に変わりました。制作と見学を合わせても、今年の予約率はAページが最も低く、Aに案内が集中したことが全体の予約率を下げる方向に働きました。</p>
+            <p>各ページの予約率を今年の値に固定し、案内先の配分だけを変えて計算すると、前年の配分なら1.11%、今年の配分では0.80%です。前年の各ページの予約率を使った場合も1.48%から1.45%と同じ方向でした。実際には、各ページで予約する割合自体も年によって変わります。</p>
+            <table class="path-data"><thead><tr><th scope="col">最初に開いたページ</th><th scope="col">2025年 予約した訪問／訪問数</th><th scope="col">2026年 予約した訪問／訪問数</th></tr></thead><tbody><tr><th scope="row">A　公式トップ</th><td>94／7,271（1.29%）</td><td>101／18,617（0.54%）</td></tr><tr><th scope="row">B　旧LP</th><td>47／2,881（1.63%）</td><td>51／4,219（1.21%）</td></tr><tr><th scope="row">C　掲載4コース</th><td>75／5,752（1.30%）</td><td>28／1,767（1.58%）</td></tr><tr><th scope="row">D　予約フォーム</th><td>29／641（4.52%）</td><td>22／796（2.76%）</td></tr></tbody></table>
+            <p class="source">制作・見学を含む集計と条件。国内GA4、両年2/24〜4/30、同じ27登録キーワードのGoogle検索広告。Cは結婚指輪・婚約指輪・3本制作・アニバーサリーの掲載4コース。予約率は同じ訪問で制作5コースまたは見学を予約した訪問数÷訪問数。円グラフは4入口の訪問数合計を100%とした。</p>
           </template>
         </section>
 
@@ -879,7 +881,7 @@
 
   function drawSurgeChart() {
     const context = chartContext('surge-chart');
-    const values = [10, 10, 18, 24];
+    const values = [11, 8, 20, 25];
     const x = index => 131 + index * 171;
     const y = value => 282 - value * 8.1;
     context.fillStyle = '#eee2c9';
@@ -899,32 +901,32 @@
   }
 
   const monthlyHistory = [
-    { receipts: 364, booked: 261, visits: 49724 },
-    { receipts: 257, booked: 171, visits: 34938 },
-    { receipts: 252, booked: 160, visits: 37776 },
-    { receipts: 211, booked: 123, visits: 36547 },
-    { receipts: 192, booked: 92, visits: 31059 },
-    { receipts: 207, booked: 83, visits: 19841 },
-    { receipts: 195, booked: 107, visits: 20345 },
-    { receipts: 179, booked: 92, visits: 20230 },
-    { receipts: 163, booked: 75, visits: 21609 },
-    { receipts: 159, booked: 86, visits: 29647 }
+    { receipts: 436, booked: 310, visits: 49724 },
+    { receipts: 311, booked: 204, visits: 34938 },
+    { receipts: 302, booked: 177, visits: 37776 },
+    { receipts: 253, booked: 146, visits: 36547 },
+    { receipts: 238, booked: 107, visits: 31059 },
+    { receipts: 247, booked: 90, visits: 19841 },
+    { receipts: 240, booked: 124, visits: 20345 },
+    { receipts: 226, booked: 112, visits: 20230 },
+    { receipts: 224, booked: 95, visits: 21609 },
+    { receipts: 208, booked: 108, visits: 29647 }
   ];
   drawMonthlySeries('monthly-count-chart', {
-    title: 'ブライダル制作予約数（全店の予約台帳・各月1日〜末日受付）',
+    title: 'ブライダル予約数（制作＋見学・全店の予約台帳・受付月）',
     values: monthlyHistory.map(month => month.receipts),
-    ticks: [0, 100, 200, 300, 400],
-    maximum: 400,
+    ticks: [0, 100, 200, 300, 400, 500],
+    maximum: 500,
     axisLabel: value => value + '件',
     valueLabel: value => String(value),
     color: chartGreen
   });
   drawMonthlySeries('monthly-rate-chart', {
-    title: 'Webの制作予約率（国内公式サイト）',
-    detail: '公式サイトを訪れ、その訪問中に制作を予約した割合',
+    title: 'Webの予約率（制作＋見学・国内公式サイト）',
+    detail: '公式サイトを最初に開き、その訪問中に予約した割合',
     values: monthlyHistory.map(month => 100 * month.booked / month.visits),
-    ticks: [0, 0.2, 0.4, 0.6],
-    maximum: 0.6,
+    ticks: [0, 0.2, 0.4, 0.6, 0.8],
+    maximum: 0.8,
     axisLabel: value => value.toFixed(1) + '%',
     valueLabel: value => value.toFixed(2) + '%',
     color: '#805737'
