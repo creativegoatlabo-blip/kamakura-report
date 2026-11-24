@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鎌倉彫金工房 全体MTG｜ブライダル予約の状況と対策</title>
+<style>
+  :root {
+    --paper: #f7f4ec;
+    --ink: #192923;
+    --muted: #4d6057;
+    --rule: #d7d8ca;
+    --green: #236251;
+    --sage: #a8b6a8;
+    --dark: #152f27;
+    --light: #f7f4ec;
+    --soft: #c7d9cc;
+    --serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+    --sans: "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans CJK JP", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: #222824; color: var(--ink); font-family: var(--sans); }
+  .viewer { display: grid; grid-template-rows: minmax(0, 1fr) 54px; height: 100dvh; }
+  .stage { display: grid; place-items: center; overflow: hidden; min-width: 0; }
+  .frame { position: relative; width: 1280px; height: 720px; }
+  .slides { position: absolute; width: 1280px; height: 720px; transform-origin: top left; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    padding: 53px 76px 43px;
+    background: var(--paper);
+    text-wrap: pretty;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  .slide[hidden], .notes[hidden] { display: none; }
+  .slide.dark { background: var(--dark); color: var(--light); }
+  h1, h2, p, figure, ul, dl, dd, blockquote { margin: 0; }
+  h1, h2 { font-family: var(--serif); font-weight: 700; letter-spacing: -.035em; line-height: 1.27; }
+  h1 { font-size: 80px; }
+  h2 { font-size: 49px; }
+  .label, .caption { color: var(--muted); }
+  .label { font-size: 22px; font-weight: 600; }
+  .caption { font-size: 19px; line-height: 1.5; }
+  .dark .label, .dark .caption { color: var(--soft); }
+  .foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .numeric { font-family: var(--sans); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.055em; line-height: 1.05; white-space: nowrap; }
+  .unit { margin-left: .21em; font-size: .43em; letter-spacing: 0; }
+  .accent { color: var(--green); }
+  .dark .accent { color: #bedcc3; }
+  .spread { display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: center; gap: 38px; }
+  .stat-aside { align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 14px; border-left: 1px solid var(--rule); padding-left: 29px; }
+  .stat-aside .numeric { font-size: 70px; }
+  .stat-aside .stat-pair { font-size: 62px; }
+  .shift { padding: 0 .18em; font-size: .55em; font-weight: 400; color: var(--muted); }
+  .cover { justify-content: space-between; padding: 70px 84px 64px; }
+  .cover .label { font-size: 24px; }
+  .cover h1 { line-height: 1.4; }
+  .cover .date { width: 100%; border-top: 1px solid #6e887c; padding-top: 24px; font-size: 23px; color: var(--soft); }
+
+  .legend { display: flex; align-items: center; gap: 23px; font-size: 19px; color: var(--muted); }
+  .legend span { display: inline-flex; gap: 9px; align-items: center; }
+  .swatch { display: inline-block; width: 19px; height: 13px; border-radius: 2px; background: var(--sage); }
+  .swatch.current { background: var(--green); }
+  .monthly-slide { padding-top: 38px; padding-bottom: 32px; gap: 12px; }
+  .monthly-slide .foot { padding-top: 10px; }
+  .monthly-slide .foot b { color: var(--ink); }
+  .monthly-trends { display: grid; gap: 5px; }
+  .month-track { display: grid; grid-template-columns: 96px repeat(10, minmax(0, 1fr)) 16px; align-items: stretch; }
+  .month-axis { text-align: center; font-size: 18px; font-weight: 700; color: var(--muted); }
+  .month-axis span:first-child { grid-column: 2; }
+  .event-label { grid-column: 1; align-self: center; font-size: 16px; font-weight: 700; color: var(--muted); }
+  .month-event {
+    grid-column: var(--event-months);
+    display: block;
+    align-content: center;
+    margin: 0 2px;
+    padding: 4px 2px;
+    border-top: 2px solid var(--event-ink);
+    background: var(--event-background);
+    color: var(--event-ink);
+    font-size: 16px;
+    line-height: 1.23;
+    font-weight: 600;
+    text-align: center;
+  }
+  .store-event { --event-ink: #235446; --event-background: #e4eee4; }
+  .price-event { --event-ink: #6b482d; --event-background: #f2e8d7; font-size: 15px; }
+  .simulator-label { font-size: 13.5px; letter-spacing: -.04em; white-space: nowrap; }
+  .ad-event { --event-ink: #394d65; --event-background: #e5eaf0; }
+
+  .overview { display: grid; grid-template-columns: repeat(3, 1fr); align-content: center; flex: 1; }
+  .overview > div { border-top: 2px solid var(--green); padding: 27px 23px 30px 0; }
+  .overview > div + div { border-left: 1px solid var(--rule); padding-left: 25px; }
+  .overview dt { font-size: 33px; font-weight: 700; letter-spacing: -.035em; margin-bottom: 14px; }
+  .overview dd { font-size: 23px; color: var(--muted); }
+
+  .path-mix-slide { gap: 14px; padding-top: 43px; padding-bottom: 33px; }
+  .path-pies { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; margin-top: 3px; }
+  .path-pies figure + figure { border-left: 1px solid var(--rule); }
+  .path-pies figcaption { text-align: center; font-size: 26px; font-weight: 700; }
+  .path-pies canvas { display: block; width: 100%; height: auto; }
+  .path-rates { display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 13px 0; border-top: 1px solid var(--rule); }
+  .path-rates-title { font-size: 20px; font-weight: 700; }
+  .path-rate { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; font-size: 20px; }
+  .path-rate .numeric { font-size: 28px; }
+  .path-rate:first-of-type .numeric { color: #9a4926; }
+  .path-mix-slide .foot { padding-top: 10px; }
+  .path-mix-slide .foot b { color: var(--ink); }
+  .notes .path-data { margin: 11px 0; width: 100%; border-collapse: collapse; font-size: 13px; }
+  .notes .path-data th, .notes .path-data td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--rule); }
+
+  .line-chart { display: block; width: 100%; height: auto; }
+  .demand-grid { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding-top: 34px; }
+  .demand-grid::after { content: ""; position: absolute; bottom: 33px; left: 0; right: 0; border-top: 1px solid #abb5a9; }
+  .demand-month { display: grid; grid-template-rows: 205px 30px; gap: 4px; text-align: center; }
+  .demand-bars { display: flex; align-items: end; justify-content: center; gap: 13px; }
+  .demand-bar { position: relative; width: 53px; height: var(--height); background: var(--sage); border-radius: 3px 3px 0 0; }
+  .demand-bar.current { background: var(--green); }
+  .demand-bar .numeric { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); font-size: 23px; }
+  .demand-month > span { font-size: 19px; font-weight: 600; }
+
+  .actions, .plans { display: grid; margin: auto 0; list-style: none; padding: 0; }
+  .actions li, .plans li { display: grid; grid-template-columns: 142px 1fr; align-items: baseline; gap: 26px; padding: 25px 0; border-top: 1px solid var(--rule); }
+  .actions li:last-child, .plans li:last-child { border-bottom: 1px solid var(--rule); }
+  .actions strong, .plans strong { font-size: 33px; font-weight: 700; }
+  .actions time { color: var(--green); font-size: 24px; font-weight: 700; white-space: nowrap; }
+  .actions p { color: var(--muted); margin-top: 5px; font-size: 23px; }
+  .plans li { grid-template-columns: 1fr; padding: 17px 0; border-color: #617e71; }
+  .plans li:last-child { border-color: #617e71; }
+
+  .withdraw-summary { font-size: 31px; font-weight: 700; }
+  .withdraw-chart { display: grid; align-content: center; gap: 12px; }
+  .withdraw-chart .demand-grid { padding-top: 6px; }
+  .withdraw-chart .demand-bar { height: calc(var(--receipts) * .90px); }
+  .withdraw-differences { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: center; color: var(--green); font-size: 20px; font-weight: 700; }
+  .withdraw-decision { align-self: end; padding-bottom: 30px; }
+  .withdraw-decision strong { font-size: 29px; }
+  .summer-slide { padding-top: 42px; padding-bottom: 34px; gap: 18px; }
+  .summer-chart { gap: 10px; }
+  .summer-chart figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+  .summer-chart .demand-grid, .summer-chart .withdraw-differences, .summer-events { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .summer-chart .demand-grid { padding-top: 32px; }
+  .summer-chart .demand-bar { height: calc(var(--receipts) * .52px); }
+  .summer-chart .partial-month { border-left: 1px dashed var(--muted); }
+  .summer-chart .withdraw-differences { font-size: 18px; }
+  .summer-events { display: grid; gap: 14px; margin: 3px 0 0; padding: 0; list-style: none; }
+  .summer-events .month-event { margin: 0; padding: 8px 2px; font-size: 17px; line-height: 1.35; }
+  .summer-slide .foot b { color: var(--ink); }
+
+  .hypotheses { display: grid; align-content: center; flex: 1; }
+  .hypotheses > div { display: grid; grid-template-columns: 260px 1fr; align-items: baseline; gap: 30px; padding: 22px 0; border-top: 1px solid var(--rule); }
+  .hypotheses dt { color: var(--green); font-size: 23px; font-weight: 700; }
+  .hypotheses dd { font-size: 28px; line-height: 1.45; }
+
+  .surge-slide h2 { font-size: 48px; }
+  .surge-spread { grid-template-columns: minmax(0, 1fr) 315px; }
+  .surge-topline { font-size: 40px; }
+  .surge-topline span { font-size: 58px; }
+  .web-compare { display: grid; grid-template-columns: 1fr 1fr; flex: 1; align-content: center; }
+  .web-compare > div { padding: 0 33px 0 0; }
+  .web-compare > div + div { border-left: 1px solid var(--rule); padding: 0 0 0 47px; }
+  .web-compare .numeric { margin: 16px 0 6px; font-size: 103px; }
+  .web-compare .denominator { font-size: .53em; color: var(--muted); letter-spacing: -.03em; }
+  .web-compare .rate { font-size: 29px; font-weight: 700; }
+
+  .controls { display: flex; align-items: center; justify-content: center; gap: 9px; color: #f1f3ee; padding: 0 8px; }
+  .controls button {
+    appearance: none; border: 1px solid #66746b; background: transparent; color: inherit;
+    border-radius: 5px; min-height: 34px; padding: 0 11px; cursor: pointer; font: 14px var(--sans);
+  }
+  .controls button:focus-visible, .notes button:focus-visible { outline: 2px solid #edbc73; outline-offset: 2px; }
+  .controls button:hover, .controls button[aria-expanded="true"] { background: #3c4b41; }
+  .controls button:disabled { opacity: .42; cursor: default; }
+  .counter { min-width: 63px; text-align: center; font-variant-numeric: tabular-nums; font-size: 14px; }
+  .notes {
+    z-index: 2; position: fixed; right: 15px; bottom: 56px; width: min(570px, calc(100vw - 30px));
+    max-height: calc(100dvh - 76px); overflow: auto; padding: 21px 24px; background: var(--paper);
+    border: 1px solid #aab3a6; border-radius: 5px; box-shadow: 0 10px 30px #0004; font-size: 16px; line-height: 1.7;
+  }
+  .notes header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .notes button { background: transparent; border: 1px solid #b3b8a9; border-radius: 4px; padding: 4px 9px; color: var(--ink); cursor: pointer; font: inherit; }
+  .notes p + p { margin-top: 10px; }
+  .notes .source { font-size: 13px; color: var(--muted); }
+  .notes .source a { color: inherit; text-underline-offset: .2em; }
+  .slide template { display: none; }
+  .chart-reader, .chart-scroll, .chart-wide { display: contents; }
+  @media screen and (max-width: 760px) and (orientation: portrait) {
+    .viewer { height: 100vh; height: 100dvh; grid-template-rows: minmax(0, 1fr) auto; }
+    .stage { display: block; overflow-y: auto; background: var(--paper); }
+    .frame, .slides { position: static; width: 100% !important; height: 100% !important; transform: none !important; }
+    .slide { position: relative; inset: auto; min-height: 100%; gap: 19px; padding: 26px 19px 30px; font-size: 17px; line-height: 1.55; }
+    .slide > *, .spread > *, .withdraw-chart > * { min-width: 0; }
+    .slide h2 { font-size: clamp(27px, 6.8vw, 40px); line-height: 1.32; }
+    .label, .legend { font-size: 16px; }
+    .caption { font-size: 15px; }
+    .foot { margin-top: auto; }
+    .cover h1 { font-size: clamp(25px, 7.45vw, 52px); }
+    .cover .label, .cover .date { font-size: 18px; }
+    .spread, .overview, .path-pies, .web-compare { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .stat-aside, .overview > div + div, .path-pies figure + figure, .web-compare > div + div {
+      border-left: 0; border-top: 1px solid var(--rule); padding: 14px 0 0;
+    }
+    .stat-aside { gap: 7px; }
+    .stat-aside .numeric { font-size: 48px; }
+    .stat-aside .stat-pair { font-size: clamp(38px, 12vw, 58px); }
+    .withdraw-decision { border-top: 1px solid var(--rule); }
+    .withdraw-summary, .overview dt, .withdraw-decision strong { font-size: 22px; }
+    .withdraw-chart, .summer-chart { gap: 10px; }
+    .summer-chart figcaption { display: grid; gap: 8px; }
+    .chart-reader { display: block; min-width: 0; max-width: 100%; }
+    .chart-reader::before { display: block; content: "グラフは左右にスクロールできます"; margin: 0 0 8px; color: var(--muted); font-size: 13px; }
+    .chart-scroll { display: block; overflow-x: auto; overscroll-behavior-x: contain; }
+    .chart-wide { display: grid; width: max(100%, var(--chart-width)); gap: 8px; }
+    .monthly-trends { gap: 5px; }
+    .path-pies { gap: 10px; }
+    .path-pies figcaption { font-size: 20px; }
+    .path-rates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .path-rates-title { grid-column: 1 / -1; font-size: 17px; }
+    .path-rate { font-size: 15px; gap: 5px; }
+    .path-rate .numeric { font-size: 20px; }
+    .overview { align-content: start; }
+    .overview > div { padding: 15px 0 0; }
+    .overview dt { margin-bottom: 5px; }
+    .overview dd, .actions p { font-size: 17px; }
+    .overview br, .hypotheses br { display: none; }
+    .hypotheses, .actions, .plans { align-content: start; margin: 0; }
+    .hypotheses > div, .actions li, .plans li { grid-template-columns: minmax(0, 1fr); gap: 5px; padding: 16px 0; }
+    .actions time, .hypotheses dt { font-size: 16px; }
+    .actions strong, .plans strong, .hypotheses dd { font-size: 21px; }
+    .actions p { margin: 4px 0 0; }
+    .web-compare { flex: 0; }
+    .web-compare > div { padding: 0; }
+    .web-compare .numeric { font-size: 64px; margin: 8px 0 4px; }
+    .web-compare .rate { font-size: 21px; }
+    .controls { min-height: 54px; padding: 4px 4px max(4px, env(safe-area-inset-bottom)); gap: 5px; }
+    .controls button { min-height: 44px; padding: 0 8px; }
+    .counter { min-width: 44px; }
+    .notes { bottom: calc(56px + env(safe-area-inset-bottom)); padding: 16px; }
+  }
+
+  @media print {
+    @page { size: 1280px 720px; margin: 0; }
+    html, body, .viewer, .stage, .frame, .slides { display: block; width: auto !important; height: auto !important; overflow: visible; position: static; transform: none !important; }
+    body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .controls, .notes { display: none !important; }
+    .slide, .slide[hidden] { display: flex; position: relative; width: 1280px; height: 720px; break-after: page; }
+    .slide:last-child { break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<main class="viewer" aria-label="鎌倉彫金工房 全体ミーティング発表資料">
+  <div class="stage" id="stage">
+    <div class="frame" id="frame">
+      <div class="slides" id="slides">
+        <section class="slide dark cover" aria-labelledby="title-1">
+          <p class="label">鎌倉彫金工房　全体ミーティング</p>
+          <h1 id="title-1">ブライダル予約が減った<br>背景と、いまの対策</h1>
+          <p class="date">2026年11月26日（木）　藤井</p>
+          <template>
+            <p>2月ごろから予約が少ないと感じて、各店で予約を増やすために工夫したり、私にいろいろ質問してくれたりしました。今日は、秋までこの状況が続いた背景と、予約を増やすためにいま何をしているか、これから何に取り組むかを共有します。</p>
+          </template>
+        </section>
+
+        <section class="slide monthly-slide" aria-labelledby="title-2" hidden>
+          <h2 id="title-2">2月から予約が減り、11月も前年を下回った</h2>
+          <div class="chart-reader" style="--chart-width: 1000px">
+            <div class="chart-scroll"><div class="chart-wide">
+          <figure class="monthly-trends" aria-label="2026年1月から10月のブライダル制作予約数、Web予約率と主な施策">
+            <canvas id="monthly-count-chart" class="line-chart" width="1128" height="149" role="img"></canvas>
+            <canvas id="monthly-rate-chart" class="line-chart" width="1128" height="149" role="img"></canvas>
+            <div class="month-track month-axis" aria-hidden="true">
+              <span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span>
+              <span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span>
+            </div>
+            <div class="month-track">
+              <span class="event-label">店舗</span>
+              <span class="month-event store-event" style="--event-months: 3 / 5" aria-label="2月から3月、大阪の割引キャンペーン">大阪の割引キャンペーン</span>
+              <span class="month-event store-event" style="--event-months: 9 / 11" aria-label="8月から9月、蔵前のキャンペーン">蔵前のキャンペーン</span>
+            </div>
+            <div class="month-track">
+              <span class="event-label">価格・見積</span>
+              <span class="month-event price-event" style="--event-months: 3" aria-label="2月、価格シミュレーター導入"><span class="simulator-label">シミュレーター</span><br>導入</span>
+              <span class="month-event price-event" style="--event-months: 4" aria-label="3月、固定価格の告知開始">固定価格<br>告知開始</span>
+              <span class="month-event price-event" style="--event-months: 6" aria-label="5月、固定価格制に移行、価格シミュレーター削除">固定価格制へ<br><span class="simulator-label">シミュレーター</span><br>削除</span>
+            </div>
+            <div class="month-track">
+              <span class="event-label">広告</span>
+              <span class="month-event ad-event" style="--event-months: 8 / 10">7月　広告運用を刷新<br>7〜8月　広告費大幅減</span>
+            </div>
+          </figure>
+            </div></div>
+          </div>
+          <p class="caption foot"><b>11月1〜23日の制作予約</b>　前年265件 → 今年130件。前年より135件（50.9%）減。</p>
+          <template>
+            <p>上は全店で受け付けた制作予約の件数、下は国内で公式サイトに来た訪問のうち、その訪問中に制作を予約した割合です。予約は1月の364件から2月に257件へ減り、6月に一時持ち直したあと、10月1〜31日の受付は159件でした。Webの予約率は5月に0.30％まで下がり、7月は0.53％に上がりましたが、10月は0.29％でした。11月1〜23日に全店で受け付けた制作予約は、前年の同じ23日間の265件から130件に減りました。</p>
+            <p>2〜3月に大阪で割引キャンペーンを実施しました。価格まわりでは、2月にシミュレーターを入れ、3月に固定価格の告知を始め、5月に固定価格へ移行してシミュレーターを外しました。7月には、ペアリングの予約に偏っていた広告が、ブライダルの制作予約を取る方向に学習するよう運用を大きく変え、7〜8月は広告費を大きく絞りました。8〜9月は蔵前に予約が集まりましたが、全店ではキャンペーン中の9月にすでに減っていました。</p>
+            <p class="source">台帳は制作5コースの有効予約を受付月で集計。1〜9月は10月27日保存の台帳集計。10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の受付日基準（10月1〜31日、11月5日時点の取消を反映）。11月1〜23日は前年の受付日別集計と11月24日朝に集計した今年の有効予約を比較。前年は蔵前の開店前。Webは国内全流入、公式サイト本体から始まった訪問と、その訪問中に制作5コースを予約した訪問を11月24日にGA4で暦月ごとに再集計。施策の日付は実施時期を示す。</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-3" hidden>
+          <h2 id="title-3">予約を増やすために、いま進めていること</h2>
+          <ul class="actions">
+            <li><time datetime="2026-10-21">10月21日</time><div><strong>広告用の新ページ（新LP）の運用を開始</strong><p>手作り結婚指輪の特徴や制作の流れを紹介</p></div></li>
+            <li><time datetime="2026-11-20">11月20日〜</time><div><strong>広告からの案内先を見直し</strong><p>結婚指輪コースへ直接案内する広告を試す</p></div></li>
+            <li><time datetime="2026-11-21">11月21日</time><div><strong>価格シミュレーターを復帰</strong><p>結婚指輪・婚約指輪・3本制作・アニバーサリーの4コース</p></div></li>
+          </ul>
+          <template>
+            <p>10月21日に、手作り結婚指輪の特徴と制作の流れを紹介する新しいページを公開し、広告からの案内を始めました。11月には、結婚指輪コースへ直接案内する広告も試しています。コースに来たお客様がその場で予算を確かめられるよう、11月21日には4コースに価格シミュレーターを戻しました。</p>
+            <p class="source">公式サイトのGitで、10月21日の新LP（/lp01-a/）公開コミット 21e28db3 とマージ 935044cb を確認。広告の配信開始も10月21日。11月20日に検索広告でコース案内の試験を設定し、23日にSNS広告のコース案内版を公開。11月24日 予約進捗と復帰速報</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-4" hidden>
+          <h2 id="title-4">5月、価格シミュレーターを外した理由</h2>
+          <p class="withdraw-summary">2月から5月まで、制作予約は毎月前年を下回った</p>
+          <div class="spread">
+            <figure class="withdraw-chart">
+              <figcaption class="label">全店の予約台帳｜ブライダル制作予約（各月1〜18日受付・件）</figcaption>
+              <div class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></div>
+              <div class="chart-reader" style="--chart-width: 600px">
+                <div class="chart-scroll"><div class="chart-wide">
+              <div class="demand-grid" role="img" aria-label="前年と今年の受付件数。2月は209件と192件、3月は182件と156件、4月は179件と131件、5月は179件と104件。">
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 209"><span class="numeric">209</span></div><div class="demand-bar current" style="--receipts: 192"><span class="numeric">192</span></div></div><span>2月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 182"><span class="numeric">182</span></div><div class="demand-bar current" style="--receipts: 156"><span class="numeric">156</span></div></div><span>3月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 179"><span class="numeric">179</span></div><div class="demand-bar current" style="--receipts: 131"><span class="numeric">131</span></div></div><span>4月</span></div>
+                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 179"><span class="numeric">179</span></div><div class="demand-bar current" style="--receipts: 104"><span class="numeric">104</span></div></div><span>5月</span></div>
+              </div>
+              <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
+                <span>17件（8.1%）減</span><span>26件（14.3%）減</span>
+                <span>48件（26.8%）減</span><span>75件（41.9%）減</span>
+              </div>
+                </div></div>
+              </div>
+            </figure>
+            <aside class="stat-aside withdraw-decision">
+              <p class="label">当時の見立て</p>
+              <p>手作りの魅力が伝わる前に、金額を見て候補から外すお客様がいるのでは。</p>
+              <strong class="accent">5月20日に撤去</strong>
+            </aside>
+          </div>
+          <p class="caption foot">「結婚指輪 手作り」の国内検索回数は、2〜5月の合計で前年より<b>約26%減少</b>。<br>予約の減少率は2・3月がこの範囲内で、4月にわずかに上回り、5月には41.9%に達した。</p>
+          <template>
+            <p>皆さんが店頭で感じていたように、2月から制作予約が前年に届かない状態が続きました。各月の18日までで見ると、2月は前年より17件少なく、5月は75件少なくなっていました。そこで、2月下旬に入れたシミュレーターを見直しました。</p>
+            <p>「私たちの予算でどんな指輪が作れるだろう」とお二人が考えたとき、手作りの面白さを知る前に、画面の金額だけで工房を候補から外してしまうかもしれない。そう考えて、5月20日にいったん外し、予約の動きを見ることにしました。2月前半にはすでに前年を下回っており、シミュレーターがどれだけ影響したかは、この比較だけでは分かりません。</p>
+            <p>春の予約の減少幅を、同じ時期の検索回数の減少幅と比べます。「結婚指輪 手作り」の国内検索は2〜5月合計で39,600回から29,400回へ、25.8%減りました。月別に見ると、4月の検索は33.3%減、5月は18.2%減です。4月の予約減は同じ月の検索の落ち込みより小さく、5月は検索の落ち込みを大きく上回りました。検索は月全体の推計、予約は各月1〜18日の受付です。検索需要が予約減のどれだけを説明するかは、この比較だけでは分かりません。</p>
+            <p class="source">出典　10月27日保存の予約台帳に基づく前年同期間の集計。全店・全経路のブライダル制作5コース。受付日基準で1予約を1件とし、キャンセル・テスト・スタッフ予約等を除外。両年とも春は蔵前の開店前。導入・撤去の経緯は11月24日 社長MTG資料。</p>
+          </template>
+        </section>
+
+        <section class="slide summer-slide" aria-labelledby="title-5" hidden>
+          <h2 id="title-5">6〜11月も、制作予約は前年を下回った</h2>
+          <figure class="withdraw-chart summer-chart">
+            <figcaption><span class="label">全店の予約台帳｜ブライダル制作予約（6〜10月は各月1日〜末日受付・件）</span><span class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></span></figcaption>
+            <div class="chart-reader" style="--chart-width: 960px">
+              <div class="chart-scroll"><div class="chart-wide">
+            <div class="demand-grid" role="img" aria-label="前年と今年のブライダル制作予約。6〜10月は月末まで。6月は334件と207件、7月は362件と195件、8月は378件と179件、9月は344件と163件、10月は354件と159件、11月1〜23日は265件と130件。">
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 334"><span class="numeric">334</span></div><div class="demand-bar current" style="--receipts: 207"><span class="numeric">207</span></div></div><span>6月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 362"><span class="numeric">362</span></div><div class="demand-bar current" style="--receipts: 195"><span class="numeric">195</span></div></div><span>7月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 378"><span class="numeric">378</span></div><div class="demand-bar current" style="--receipts: 179"><span class="numeric">179</span></div></div><span>8月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 344"><span class="numeric">344</span></div><div class="demand-bar current" style="--receipts: 163"><span class="numeric">163</span></div></div><span>9月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 354"><span class="numeric">354</span></div><div class="demand-bar current" style="--receipts: 159"><span class="numeric">159</span></div></div><span>10月</span></div>
+              <div class="demand-month partial-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 265"><span class="numeric">265</span></div><div class="demand-bar current" style="--receipts: 130"><span class="numeric">130</span></div></div><span>11月1〜23日</span></div>
+            </div>
+            <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
+              <span>127件（38.0%）減</span><span>167件（46.1%）減</span><span>199件（52.6%）減</span><span>181件（52.6%）減</span><span>195件（55.1%）減</span><span>135件（50.9%）減</span>
+            </div>
+            <ul class="summer-events" aria-label="2026年の主な施策">
+              <li class="month-event store-event" style="--event-months: 1" aria-label="6月、蔵前キャンペーンの告知開始">蔵前キャンペーン<br>告知開始</li>
+              <li class="month-event store-event" style="--event-months: 3 / 5">8・9月<br>蔵前キャンペーン対象の制作月</li>
+              <li class="month-event ad-event" style="--event-months: 5"><time datetime="2026-10-21">10月21日</time><br>新LPの広告配信開始</li>
+              <li class="month-event price-event" style="--event-months: 6"><time datetime="2026-11-21">11月21日</time><br>価格シミュレーター復帰</li>
+            </ul>
+              </div></div>
+            </div>
+          </figure>
+          <p class="caption">6〜10月は各月末まで、11月は両年とも23日までに受け付けた制作予約。</p>
+          <p class="caption foot"><b>5月から6月のWeb予約</b>　前年秋に予約につながった55の検索語で、国内のGoogle広告から来た人を比較。<br>制作を予約した割合は1.07%から1.71%に上がり、予約した人は60人から45人に減りました。</p>
+          <template>
+            <p>6月から10月は、全店で月初から月末までに受け付けた制作予約です。10月は前年354件に対して今年159件で、195件（55.1%）減りました。11月1〜23日も、前年265件に対して今年130件でした。6月に蔵前のキャンペーンを告知し、3日に予約の受付を始めました。割引の対象は8月・9月に蔵前で制作するお客様です。キャンペーン中も、全店で見ると両月とも受付件数は前年の半分ほどでした。</p>
+            <p>5月にシミュレーターを外してよかったと6月に感じたのは、検索広告から来た人の予約率が上がったからです。ただ、5月の訪問者5,623人のうち予約したのは60人。6月は訪問者2,633人のうち45人でした。前年秋に公式トップページから制作予約につながった55の検索語で、今年の両月は最初に開いたページを問わず比較しています。訪問者数も蔵前の告知も変わっており、予約率の上昇だけでは撤去の効果は判断できません。</p>
+            <p>10月21日には新しい広告用ページの配信を始めました。シミュレーターを外したあとは、同じ検索語から結婚指輪コースに来て価格一覧を開いた割合が7.5%から29.2%に増えました。お二人が予算をその場で確かめられる方が安心して検討できると考え、11月21日にシミュレーターを戻しました。外す前と外したあとで予約率が動いた理由について、ほかにも考えたことがあります。</p>
+            <p class="source">台帳は全店・全経路のブライダル制作5コース。受付日基準でキャンセル・テスト・スタッフ予約等を除外。6〜10月の両年は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の「ブライダル vs ファッション 新規予約数」（受付日基準）。2026年10月は11月5日確認時の有効予約。11月1〜23日の前年は10月27日保存の台帳に基づく日別集計、今年は11月24日朝の4店舗台帳集計。Webの5月・6月は各月全体、日本国内のGoogle検索広告、結婚・婚約・3本制作を予約した人数。Web比較と見積もり復帰の根拠</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-6" hidden>
+          <h2 id="title-6">考えた仮説</h2>
+          <dl class="hypotheses">
+            <div><dt>6月の予約率</dt><dd>蔵前キャンペーンの告知・受付開始が、<br>6月の予約率を押し上げたのでは？</dd></div>
+            <div><dt>訪問の内訳</dt><dd>予約率の高い経路から来る人の割合が減り、<br>予約率の低い経路から来る人の割合が増えたのでは？</dd></div>
+            <div><dt>予約率が下がった範囲</dt><dd>検索した言葉と、最初に開いたページをそろえると、<br>予約率が下がったのは一部の組み合わせだけでは？</dd></div>
+          </dl>
+          <p class="caption foot">「結婚指輪 手作り」は春に国内の検索回数が前年より減り、検索結果での工房の掲載順位も下がりました。</p>
+          <template>
+            <p>5月にシミュレーターを外したあと、6月に検索広告からの予約率が上がりました。同じ時期に蔵前のキャンペーン受付が始まっています。キャンペーンを見て予約するつもりで来た方が増えた可能性も考えました。</p>
+            <p>ページの内容が同じでも、どこから来る方が多いかで全体の予約率は変わります。「結婚指輪 手作り」の検索回数と工房の掲載順位はどちらも前年を下回りました。その変化によって、予約につながりやすい訪問の割合まで減ったかは、別に確かめる必要があります。</p>
+            <p>もう一つは、予約率の低下がどこに集中したかです。同じ検索語で同じページに来た訪問を前年と比べ、予約に進んだ割合が下がった組み合わせと、横ばいだった組み合わせを確かめます。</p>
+            <p class="source">6月3日の蔵前キャンペーン受付開始、国内検索広告の5〜6月の予約率、2〜5月の推計検索回数と公式サイトの掲載順位は11月24日 社長MTG資料。</p>
+          </template>
+        </section>
+
+        <section class="slide surge-slide" aria-labelledby="title-7" hidden>
+          <h2 id="title-7">復帰翌日からの2日で前月差＋14件</h2>
+          <p class="label">4店舗の予約台帳　ブライダル制作予約（受付日）</p>
+          <figure class="spread surge-spread">
+            <div class="chart-reader" style="--chart-width: 640px">
+              <div class="chart-scroll"><div class="chart-wide">
+            <canvas id="surge-chart" class="line-chart" width="775" height="348" role="img" aria-label="10月の同じ日までと比べた累計前月差。11月20日プラス10件、21日プラス10件、22日プラス18件、23日プラス24件。21日から23日は3連休で、21日にシミュレーターが復帰。"></canvas>
+              </div></div>
+            </div>
+            <div class="stat-aside">
+              <p class="label">各月1〜23日の受付</p>
+              <p class="numeric stat-pair">106<span class="shift">→</span><span class="accent">130</span><small class="unit">件</small></p>
+              <p class="caption">10月から11月に、計24件増</p>
+              <p class="numeric surge-topline accent"><span>58.3</span>%</p>
+              <p class="caption">24件の前月差のうち、22日と23日に生まれた割合</p>
+            </div>
+          </figure>
+          <p class="caption foot">11月21〜23日は3連休。連休後も予約の推移を確認します。</p>
+          <template>
+            <p>11月1〜23日に4店舗で受け付けた制作予約は、10月の同じ日までより24件増えました。21日にシミュレーターを戻し、翌22日は前月より8件、23日は6件多く、2日で前月差が14件広がりました。両日は3連休中で、10月の同じ日は平日でした。連休後の動きを見ていきます。</p>
+            <p class="source">資料　11月24日 予約進捗と復帰速報。4店舗台帳の制作5コースの有効予約。見学は別集計。21日5→5件、22日3→11件、23日1→7件。</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-8" hidden>
+          <h2 id="title-8">前週の同曜日との比較</h2>
+          <p class="label">結婚指輪コースから制作または見学を予約したWeb訪問（国内）</p>
+          <div class="web-compare">
+            <div>
+              <p class="label">前週　11月15日（日）・16日（月）</p>
+              <p class="numeric">6<span class="denominator"> ／ 901回</span></p>
+              <p class="rate">0.67%</p>
+            </div>
+            <div>
+              <p class="label">復帰後　11月22日（日）・23日（月・祝）</p>
+              <p class="numeric accent">7<span class="denominator"> ／ 603回</span></p>
+              <p class="rate accent">1.16%</p>
+            </div>
+          </div>
+          <p class="caption">予約した訪問 ÷ 結婚指輪コースを最初に開いた訪問。制作予約まで進んだ訪問は前後ともに6回。</p>
+          <p class="caption foot">訪問が298回減ったうち、Google検索広告からの訪問が159回減、Facebook・Instagramなどの広告からが126回減。<br>予約数はまだ少なく、効果は引き続き検証中。次回評価の目安は12月1日。</p>
+          <template>
+            <p>これは台帳の予約件数とは別に、国内のWebでコースを最初に開いた訪問のうち、同じ訪問で予約まで進んだ回数です。来る回数は減りましたが、制作か見学まで進んだ訪問は6回から7回になりました。制作の予約は前後とも6回です。まだ数件で割合が動くので、12月1日を目安に改めて確かめます。</p>
+            <p>901回と603回は、国内で結婚指輪コースを最初に開いた訪問数です。Google検索広告からは681回から522回に、Facebook・InstagramなどのMeta広告と判別できた訪問は129回から3回に減りました。合わせて285回で、減少全体298回の約96%です。Googleでは、11月18日に関東の「手作り結婚指輪」の広告を再停止しました。この広告グループ経由で結婚指輪コースを最初に開いた訪問は242回から5回に減っています。他のGoogle広告には増えたものもあり、Google検索広告全体の差は159回減です。同じ18日に関東で結婚指輪コースへ直接案内するMeta広告も停止し、新たなコース向け広告からの最初の訪問は23日深夜でした。Meta広告から4コース全体への訪問は392回から415回に増えています。</p>
+            <p class="source">資料　11月24日 予約進捗と復帰速報。国内GA4、結婚指輪コースから始まった訪問。Google広告グループ別の訪問は同じ2期間・同じ条件で11月24日に追加集計（関東ss10、03_手作り結婚指輪）。広告の停止・再開の記録。制作と見学の両方を予約した訪問は合計で1回。連休、広告の案内先と一部の価格表示の変更も重なっている。</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-9" hidden>
+          <h2 id="title-9">予約減の背景にある3つの変化</h2>
+          <p class="label">2月から11月までを振り返って</p>
+          <dl class="overview">
+            <div><dt>広告の案内先</dt><dd>広告を押したあとに<br>開くページが変わった</dd></div>
+            <div><dt>検索順位</dt><dd>検索結果で工房を<br>見つけにくくなった</dd></div>
+            <div><dt>市場のニーズ</dt><dd>手作りの結婚指輪を<br>探す検索が減った時期がある</dd></div>
+          </dl>
+          <template>
+            <p>一年を振り返ると、主にこの3つの変化を見ています。工房を探すところから、工房を見つけ、サイトで作り方や予算を確かめるところまで、予約の手前で何が起きたかを順にお話しします。それぞれの影響の大きさは時期によって異なり、全店の予約減を何件ずつ説明するかは分かっていません。</p>
+          </template>
+        </section>
+
+        <section class="slide path-mix-slide" aria-labelledby="title-10" hidden>
+          <h2 id="title-10">予約率の低いAページへの案内が増えた</h2>
+          <p class="label">検索広告から来た訪問が、最初に開いたページの割合</p>
+          <div class="path-pies">
+            <figure>
+              <figcaption>2025年</figcaption>
+              <canvas id="path-pie-2025" width="520" height="273" role="img"></canvas>
+            </figure>
+            <figure>
+              <figcaption>2026年</figcaption>
+              <canvas id="path-pie-2026" width="520" height="273" role="img"></canvas>
+            </figure>
+          </div>
+          <div class="path-rates" aria-label="4つの着地先の2026年の制作予約率">
+            <p class="path-rates-title">2026年の制作予約率</p>
+            <span class="path-rate"><i class="swatch" style="background:#a9512e"></i>Aページ <b class="numeric">0.49%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#42685b"></i>Bページ <b class="numeric">1.11%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#465e80"></i>Cページ <b class="numeric">1.47%</b></span>
+            <span class="path-rate"><i class="swatch" style="background:#ba9246"></i>Dページ <b class="numeric">1.88%</b></span>
+          </div>
+          <div class="caption foot">
+            <p><b>案内先の配分の変化も、予約率が下がった一因。</b> 4種類を合わせた制作予約率は1.21%から0.70%へ。</p>
+            <p>各年2月24日〜4月30日。国内Google検索広告の同じ27登録キーワード、A〜Dの4種類の着地先を比較。</p>
+          </div>
+          <template>
+            <p>広告から来たとき、最初に開くページにはいくつか種類があります。この4つで見ると、Aページに来た割合は前年の44％から今年は73％になり、Cページは35％から7％に減りました。今年のAページはこの4つの中で予約する割合が最も低く、そこに案内が集中したことも、全体の割合を下げる方向に働きました。</p>
+            <p>ページごとの予約率にも変化があります。今年の各ページの予約率を固定した試算では、前年の配分なら全体で0.99％、今年の配分では0.70％です。前年の各ページの予約率を使った試算でも、配分による変化は小幅ながら同じ方向です。</p>
+            <table class="path-data">
+              <thead><tr><th scope="col">最初に開いたページ</th><th scope="col">2025年 制作／訪問</th><th scope="col">2026年 制作／訪問</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">A　公式トップ</th><td>77／7,271（1.06%）</td><td>91／18,617（0.49%）</td></tr>
+                <tr><th scope="row">B　旧LP</th><td>37／2,881（1.28%）</td><td>47／4,219（1.11%）</td></tr>
+                <tr><th scope="row">C　掲載4コース</th><td>61／5,752（1.06%）</td><td>26／1,767（1.47%）</td></tr>
+                <tr><th scope="row">D　予約フォーム</th><td>26／641（4.06%）</td><td>15／796（1.88%）</td></tr>
+              </tbody>
+            </table>
+            <p class="source">国内GA4。前年実績27登録キーワード、Google検索広告。Cは結婚指輪・婚約指輪・3本制作・アニバーサリー。分子は同じ訪問中に4店舗の制作5コースを予約した訪問数。円グラフはA〜Dの着地数合計を100%とした。配分の試算は算術比較で、同じ人を別のページに案内した場合の実測ではない。</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-11" hidden>
+          <h2 id="title-11">検索結果で、工房を見つけにくくなった</h2>
+          <p class="label">「結婚指輪 手作り」で検索したときの公式サイトの平均順位</p>
+          <figure class="spread">
+            <div class="chart-reader" style="--chart-width: 640px">
+              <div class="chart-scroll"><div class="chart-wide">
+            <canvas id="rank-chart" class="line-chart" width="790" height="348" role="img" aria-label="平均掲載順位は2025年7月の3.1位から低下し、導入前の2026年1月に9.0位、5月に10.5位。数字が小さいほど上位。"></canvas>
+              </div></div>
+            </div>
+            <div class="stat-aside">
+              <p class="label">2〜5月の平均順位</p>
+              <p class="numeric stat-pair">3.4<span class="shift">→</span><span class="accent">9.6</span><small class="unit">位</small></p>
+              <p class="caption">2025年から2026年</p>
+            </div>
+          </figure>
+          <p class="caption foot">夏も前年を下回り、7〜9月の国内平均は前年4.2位、今年11.5位。</p>
+          <template>
+            <p>上にあるほど検索結果の上位です。手作りの結婚指輪を探したとき、工房のサイトは前年の夏からだんだん下に出るようになっていました。今年の7〜9月も前年より下に出ており、お客様に見つけてもらう機会が減りました。</p>
+            <p class="source">資料　11月24日 社長MTG資料、10月23日の検索需要・検索順位の比較記録。グラフはGoogle Search Consoleの国指定なしの集計。夏の補足は国内で別集計。10月1〜17日の国内順位は同じ語で前年8.13位、今年6.22位に改善し、クリック数は前年を下回った。</p>
+          </template>
+        </section>
+
+        <section class="slide" aria-labelledby="title-12" hidden>
+          <h2 id="title-12">手作りの結婚指輪を探す検索が減った</h2>
+          <p class="label">「結婚指輪 手作り」の月別検索回数（国内推計）</p>
+          <div class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></div>
+          <figure class="spread">
+            <div class="chart-reader" style="--chart-width: 580px">
+              <div class="chart-scroll"><div class="chart-wide">
+            <div class="demand-grid" role="img" aria-label="前年から今年の推計検索回数。2月9,900回から6,600回、3月9,900回から8,100回、4月9,900回から6,600回、5月9,900回から8,100回。">
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--height: 192px"><span class="numeric">9,900</span></div><div class="demand-bar current" style="--height: 128px"><span class="numeric">6,600</span></div></div><span>2月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--height: 192px"><span class="numeric">9,900</span></div><div class="demand-bar current" style="--height: 157px"><span class="numeric">8,100</span></div></div><span>3月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--height: 192px"><span class="numeric">9,900</span></div><div class="demand-bar current" style="--height: 128px"><span class="numeric">6,600</span></div></div><span>4月</span></div>
+              <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--height: 192px"><span class="numeric">9,900</span></div><div class="demand-bar current" style="--height: 157px"><span class="numeric">8,100</span></div></div><span>5月</span></div>
+            </div>
+              </div></div>
+            </div>
+            <div class="stat-aside">
+              <p class="label">2〜5月の合計</p>
+              <p class="numeric accent"><small class="unit" style="margin-left: 0">約</small>26<small class="unit">%減</small></p>
+              <p class="caption">39,600回から29,400回</p>
+            </div>
+          </figure>
+          <p class="caption foot">9月と10月前半にも、同じ言葉への国内の検索関心は前年を下回りました。</p>
+          <template>
+            <p>工房が検索結果のどこに出るかとは別に、手作りの結婚指輪を探す回数も、春は前年より減っていました。秋にも前年を下回る時期があり、検索から工房を知ってもらう機会が少なくなったと見ています。</p>
+            <p class="source">資料　11月24日 社長MTG資料のGoogleキーワードプランナー国内推計、10月23日のGoogleトレンド国内比較。後者は相対的な検索関心で、同じ語の9月は前年同月比17.1%減、10月1〜17日は16.2%減。全国の成約数や市場規模の変化はこの指標からは分からない。</p>
+          </template>
+        </section>
+
+        <section class="slide dark" aria-labelledby="title-13" hidden>
+          <h2 id="title-13">これから進める4つの取り組み</h2>
+          <ul class="plans">
+            <li><strong>広告を押したあとに開くページの種類を増やす</strong></li>
+            <li><strong>検索順位を上げるための施策を行う</strong></li>
+            <li><strong>期間限定のキャンペーンやタイアップを行う</strong></li>
+            <li><strong>新商品・新サービスを展開する</strong></li>
+          </ul>
+          <template>
+            <p>広告からお客様を案内するページの選択肢を増やし、検索でも工房を見つけやすくします。期間限定のキャンペーンやタイアップ、新商品や新サービスにも取り組み、工房を知って選んでいただくきっかけを増やします。各店で予約の状況を見ながら工夫し、質問や気づきを伝えてくれて、ありがとうございます。</p>
+          </template>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <nav class="controls" aria-label="発表資料の操作">
+    <button type="button" id="prev" aria-label="前のページ">← 前</button>
+    <span class="counter" id="counter" aria-live="polite"></span>
+    <button type="button" id="next" aria-label="次のページ">次 →</button>
+    <button type="button" id="notes-toggle" aria-controls="notes" aria-expanded="false" title="N キーでも開閉">話すメモ</button>
+    <button type="button" id="fullscreen" title="F キーでも切り替え">全画面</button>
+  </nav>
+  <aside class="notes" id="notes" aria-labelledby="notes-title" hidden>
+    <header><strong id="notes-title">藤井さんの話すメモ</strong><button type="button" id="notes-close">閉じる</button></header>
+    <div id="notes-content"></div>
+  </aside>
+</main>
+
+<script>
+  const stage = document.getElementById('stage');
+  const frame = document.getElementById('frame');
+  const slideStrip = document.getElementById('slides');
+  const slides = [...slideStrip.querySelectorAll('.slide')];
+  const previous = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  const notes = document.getElementById('notes');
+  const notesToggle = document.getElementById('notes-toggle');
+  const notesContent = document.getElementById('notes-content');
+  const fullscreen = document.getElementById('fullscreen');
+  let current = 0;
+
+  function fitSlides() {
+    const scale = Math.min(stage.clientWidth / 1280, stage.clientHeight / 720);
+    frame.style.width = 1280 * scale + 'px';
+    frame.style.height = 720 * scale + 'px';
+    slideStrip.style.transform = 'scale(' + scale + ')';
+  }
+
+  function indexFromHash() {
+    const match = location.hash.match(/^#slide-([0-9]+)$/);
+    return match ? Number(match[1]) - 1 : 0;
+  }
+
+  function showSlide(index) {
+    current = Math.min(Math.max(index, 0), slides.length - 1);
+    slides.forEach((slide, position) => { slide.hidden = position !== current; });
+    previous.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    notesContent.replaceChildren(slides[current].querySelector('template').content.cloneNode(true));
+    notes.scrollTop = 0;
+    stage.scrollTop = 0;
+    const hash = '#slide-' + (current + 1);
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  }
+
+  function openNotes(open) {
+    notes.hidden = !open;
+    notesToggle.setAttribute('aria-expanded', String(open));
+  }
+
+  async function toggleFullscreen() {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen();
+    } catch (error) {
+      fullscreen.title = 'ブラウザの全画面表示を使用してください';
+    }
+  }
+
+  previous.addEventListener('click', () => showSlide(current - 1));
+  next.addEventListener('click', () => showSlide(current + 1));
+  notesToggle.addEventListener('click', () => openNotes(notes.hidden));
+  document.getElementById('notes-close').addEventListener('click', () => {
+    openNotes(false);
+    notesToggle.focus();
+  });
+  fullscreen.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', () => {
+    fullscreen.textContent = document.fullscreenElement ? '全画面を終了' : '全画面';
+  });
+  if (!document.fullscreenEnabled) fullscreen.hidden = true;
+  window.addEventListener('hashchange', () => showSlide(indexFromHash()));
+  document.addEventListener('keydown', event => {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
+    if (event.key === 'Escape' && !notes.hidden) openNotes(false);
+    else if (event.key.toLowerCase() === 'n') openNotes(notes.hidden);
+    else if (event.key.toLowerCase() === 'f') toggleFullscreen();
+    else {
+      if (event.key === ' ' && event.target.closest('a, button')) return;
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) showSlide(current + 1);
+      else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) showSlide(current - 1);
+      else if (event.key === 'Home') showSlide(0);
+      else if (event.key === 'End') showSlide(slides.length - 1);
+      else return;
+    }
+    event.preventDefault();
+  });
+
+  new ResizeObserver(fitSlides).observe(stage);
+  fitSlides();
+  showSlide(indexFromHash());
+
+  const chartFont = '"Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif';
+  const chartInk = '#192923';
+  const chartMuted = '#4d6057';
+  const chartGreen = '#236251';
+
+  function chartContext(id) {
+    const canvas = document.getElementById(id);
+    const width = canvas.width;
+    const height = canvas.height;
+    canvas.width = width * 2;
+    canvas.height = height * 2;
+    canvas.style.aspectRatio = width + ' / ' + height;
+    const context = canvas.getContext('2d');
+    context.scale(2, 2);
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    return context;
+  }
+
+  function plotText(context, label, x, y, { size = 18, color = chartMuted, align = 'center', weight = 500 } = {}) {
+    context.font = weight + ' ' + size + 'px ' + chartFont;
+    context.textAlign = align;
+    context.textBaseline = 'middle';
+    context.fillStyle = color;
+    context.fillText(label, x, y);
+  }
+
+  function line(context, startX, startY, endX, endY, color, width = 1) {
+    context.beginPath();
+    context.moveTo(startX, startY);
+    context.lineTo(endX, endY);
+    context.strokeStyle = color;
+    context.lineWidth = width;
+    context.stroke();
+  }
+
+  function plotSeries(context, points, marked = [], color = chartGreen) {
+    context.beginPath();
+    context.moveTo(points[0][0], points[0][1]);
+    points.slice(1).forEach(([x, y]) => context.lineTo(x, y));
+    context.strokeStyle = color;
+    context.lineWidth = 4;
+    context.stroke();
+    points.forEach(([x, y], index) => {
+      context.beginPath();
+      context.arc(x, y, marked.includes(index) ? 7 : 4.5, 0, 2 * Math.PI);
+      context.fillStyle = color;
+      context.fill();
+    });
+  }
+
+  function drawPathPie(id, year, visits) {
+    const canvas = document.getElementById(id);
+    const context = chartContext(id);
+    const labels = ['A', 'B', 'C', 'D'];
+    const colors = ['#a9512e', '#42685b', '#465e80', '#ba9246'];
+    const total = visits.reduce((sum, count) => sum + count, 0);
+    const centerX = 260;
+    const centerY = 137;
+    const radius = 120;
+    let angle = -Math.PI / 2;
+
+    const slices = visits.map((count, index) => {
+      const start = angle;
+      angle += 2 * Math.PI * count / total;
+      return { start, end: angle, middle: (start + angle) / 2, share: count / total, label: labels[index], color: colors[index] };
+    });
+    slices.forEach(({ start, end, color }) => {
+      context.beginPath();
+      context.moveTo(centerX, centerY);
+      context.arc(centerX, centerY, radius, start, end);
+      context.closePath();
+      context.fillStyle = color;
+      context.fill();
+      context.strokeStyle = '#f7f4ec';
+      context.lineWidth = 2;
+      context.stroke();
+    });
+    slices.forEach(({ middle, share, label, color }) => {
+      const percent = Math.round(share * 100) + '%';
+      const x = distance => centerX + distance * Math.cos(middle);
+      const y = distance => centerY + distance * Math.sin(middle);
+      if (label === 'A') {
+        plotText(context, 'Aページ', x(58), y(58) - 17, { size: 23, color: '#fff', weight: 700 });
+        plotText(context, percent, x(58), y(58) + 16, { size: 35, color: '#fff', weight: 700 });
+      } else if (share < 0.1) {
+        const labelY = label === 'D' ? 15 : 49;
+        line(context, x(radius), y(radius), 159, labelY, color, 1.5);
+        line(context, 159, labelY, 141, labelY, color, 1.5);
+        plotText(context, label, x(105), y(105), { size: 15, color: label === 'D' ? chartInk : '#fff', weight: 700 });
+        plotText(context, label + ' ' + percent, 132, labelY, { size: 20, color: chartInk, weight: 700, align: 'right' });
+      } else {
+        plotText(context, label + ' ' + percent, x(78), y(78), { size: 19, color: '#fff', weight: 700 });
+      }
+    });
+    canvas.setAttribute('aria-label', year + '年の着地割合。' + slices.map(({ share, label }) => label + 'ページ ' + Math.round(share * 100) + '%').join('、'));
+  }
+
+  function drawMonthlySeries(id, { title, detail, values, ticks, maximum, axisLabel, valueLabel, color }) {
+    const canvas = document.getElementById(id);
+    const context = chartContext(id);
+    const left = 96;
+    const right = 1112;
+    const monthWidth = (right - left) / values.length;
+    const x = index => left + monthWidth * (index + 0.5);
+    const y = value => 139 - value * 88 / maximum;
+
+    plotText(context, title, 0, 15, { align: 'left', size: 21, weight: 700, color: chartInk });
+    if (detail) plotText(context, detail, right, 15, { align: 'right', size: 17 });
+    values.forEach((value, index) => line(context, x(index), 41, x(index), 139, '#e1e3d7'));
+    ticks.forEach(tick => {
+      line(context, left, y(tick), right, y(tick), '#cbd2c5');
+      plotText(context, axisLabel(tick), left - 13, y(tick), { align: 'right', size: 15 });
+    });
+    plotSeries(context, values.map((value, index) => [x(index), y(value)]), [], color);
+    values.forEach((value, index) => {
+      plotText(context, valueLabel(value), x(index), y(value) - 18, { size: 20, weight: 700, color });
+    });
+    canvas.setAttribute('aria-label', title + '。' + values.map((value, index) => (index + 1) + '月 ' + valueLabel(value)).join('、'));
+  }
+
+  function drawRankChart() {
+    const context = chartContext('rank-chart');
+    const ranks = [3.1, 4.4, 4.9, 6.7, 7.9, 8.8, 9.0, 9.7, 8.9, 9.1, 10.5];
+    const months = ['7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月', '4月', '5月'];
+    const x = index => 99 + index * 64;
+    const y = rank => 38 + (rank - 1) * 22.6;
+    [1, 3, 5, 7, 9, 11].forEach(rank => {
+      line(context, 65, y(rank), 759, y(rank), '#d7d8ca');
+      plotText(context, rank + '位', 50, y(rank), { align: 'right' });
+    });
+    line(context, 451, 20, 451, 288, '#b7c2b4');
+    plotSeries(context, ranks.map((rank, index) => [x(index), y(rank)]), [0, 6, 10]);
+    months.forEach((month, index) => plotText(context, month, x(index), 291));
+    plotText(context, '2025年', 257, 321, { weight: 700 });
+    plotText(context, '2026年', 611, 321, { weight: 700 });
+    plotText(context, '3.1位', x(0) + 17, y(ranks[0]) - 22, { size: 23, color: chartGreen, weight: 700 });
+    plotText(context, '導入前 9.0位', x(6), y(ranks[6]) - 30, { size: 23, color: chartGreen, weight: 700 });
+    plotText(context, '10.5位', x(10) - 14, y(ranks[10]) - 28, { size: 23, color: chartGreen, weight: 700 });
+  }
+
+  function drawSurgeChart() {
+    const context = chartContext('surge-chart');
+    const values = [10, 10, 18, 24];
+    const x = index => 131 + index * 171;
+    const y = value => 282 - value * 8.1;
+    context.fillStyle = '#eee2c9';
+    context.fillRect(220, 40, 510, 242);
+    plotText(context, '10月の同じ日までと比べた累計差', 76, 17, { align: 'left', size: 20, weight: 700 });
+    plotText(context, '11月の3連休', 237, 55, { align: 'left', size: 18, color: '#704e2e' });
+    [0, 10, 20, 30].forEach(value => {
+      line(context, 76, y(value), 730, y(value), '#cacdbd');
+      plotText(context, (value === 0 ? '' : '+') + value + '件', 64, y(value), { align: 'right', size: 16 });
+    });
+    plotSeries(context, values.map((value, index) => [x(index), y(value)]), [1, 2, 3]);
+    values.forEach((value, index) => {
+      plotText(context, '+' + value, x(index), y(value) - 24, { size: 30, weight: 700, color: chartInk });
+      plotText(context, '11月' + (20 + index) + '日', x(index), 304, { size: 19, weight: 600 });
+    });
+    plotText(context, 'シミュレーター復帰', x(1), 332, { size: 17, weight: 700, color: chartGreen });
+  }
+
+  const monthlyHistory = [
+    { receipts: 364, booked: 261, visits: 49724 },
+    { receipts: 257, booked: 171, visits: 34938 },
+    { receipts: 252, booked: 160, visits: 37776 },
+    { receipts: 211, booked: 123, visits: 36547 },
+    { receipts: 192, booked: 92, visits: 31059 },
+    { receipts: 207, booked: 83, visits: 19841 },
+    { receipts: 195, booked: 107, visits: 20345 },
+    { receipts: 179, booked: 92, visits: 20230 },
+    { receipts: 163, booked: 75, visits: 21609 },
+    { receipts: 159, booked: 86, visits: 29647 }
+  ];
+  drawMonthlySeries('monthly-count-chart', {
+    title: 'ブライダル制作予約数（全店の予約台帳・各月1日〜末日受付）',
+    values: monthlyHistory.map(month => month.receipts),
+    ticks: [0, 100, 200, 300, 400],
+    maximum: 400,
+    axisLabel: value => value + '件',
+    valueLabel: value => String(value),
+    color: chartGreen
+  });
+  drawMonthlySeries('monthly-rate-chart', {
+    title: 'Webの制作予約率（国内公式サイト）',
+    detail: '公式サイトを訪れ、その訪問中に制作を予約した割合',
+    values: monthlyHistory.map(month => 100 * month.booked / month.visits),
+    ticks: [0, 0.2, 0.4, 0.6],
+    maximum: 0.6,
+    axisLabel: value => value.toFixed(1) + '%',
+    valueLabel: value => value.toFixed(2) + '%',
+    color: '#805737'
+  });
+  drawPathPie('path-pie-2025', 2025, [7271, 2881, 5752, 641]);
+  drawPathPie('path-pie-2026', 2026, [18617, 4219, 1767, 796]);
+  drawRankChart();
+  drawSurgeChart();
+</script>
+</body>
+</html>
