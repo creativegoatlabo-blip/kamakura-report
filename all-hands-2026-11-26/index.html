@@ -157,6 +157,24 @@
   .hypotheses dt { color: var(--green); font-size: 23px; font-weight: 700; }
   .hypotheses dd { font-size: 28px; line-height: 1.45; }
 
+  .simulator-yoy { gap: 15px; }
+  .period-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; margin: auto 0; }
+  .period-comparison table { width: 100%; table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .period-comparison caption { padding-bottom: 9px; border-bottom: 2px solid var(--green); text-align: left; font-size: 30px; font-weight: 700; }
+  .period-comparison caption small { margin-left: .7em; color: var(--muted); font-size: .68em; white-space: nowrap; }
+  .period-comparison th, .period-comparison td { padding: 8px 8px 8px 0; text-align: left; }
+  .period-comparison thead td { width: 38%; }
+  .period-comparison thead th, .period-comparison tbody th { color: var(--muted); font-size: 20px; font-weight: 600; }
+  .period-comparison tbody tr { border-top: 1px solid var(--rule); }
+  .period-comparison tbody td { font-size: 26px; font-weight: 600; }
+  .period-comparison .booking-rate td { font-size: 37px; font-weight: 700; line-height: 1.2; }
+  .period-comparison .booking-rate td:last-child { color: var(--green); }
+  .booking-rate td::after { content: ""; display: block; width: calc(var(--rate) * 40%); height: 7px; margin-top: 6px; background: var(--sage); }
+  .booking-rate td:last-child::after { background: var(--green); }
+  .simulator-decision { display: grid; gap: 5px; margin-top: 0; }
+  .simulator-decision strong { font-size: 27px; }
+  .simulator-decision .caption { margin-top: 4px; }
+
   .surge-slide h2 { font-size: 48px; }
   .surge-spread { grid-template-columns: minmax(0, 1fr) 315px; }
   .surge-topline { font-size: 40px; }
@@ -233,6 +251,15 @@
     .actions time, .hypotheses dt { font-size: 16px; }
     .actions strong, .plans strong, .hypotheses dd { font-size: 21px; }
     .actions p { margin: 4px 0 0; }
+    .simulator-yoy { gap: 12px; }
+    .period-comparison { grid-template-columns: minmax(0, 1fr); gap: 16px; margin: 0; }
+    .period-comparison caption { padding-bottom: 4px; font-size: 22px; }
+    .period-comparison th, .period-comparison td { padding: 4px 5px 4px 0; }
+    .period-comparison thead th, .period-comparison tbody th { font-size: 15px; }
+    .period-comparison tbody td { font-size: 19px; }
+    .period-comparison .booking-rate td { font-size: clamp(20px, 6.2vw, 25px); }
+    .booking-rate td::after { height: 5px; margin-top: 3px; }
+    .simulator-decision strong { font-size: 20px; }
     .web-compare { flex: 0; }
     .web-compare > div { padding: 0; }
     .web-compare .numeric { font-size: 64px; margin: 8px 0 4px; }
@@ -406,8 +433,45 @@
           </template>
         </section>
 
-        <section class="slide surge-slide" aria-labelledby="title-7" hidden>
-          <h2 id="title-7">復帰翌日からの2日で前月差＋14件</h2>
+        <section class="slide simulator-yoy" aria-labelledby="title-7" hidden>
+          <h2 id="title-7">11月、価格シミュレーターを戻した理由</h2>
+          <p class="label">「鎌倉彫金工房」の検索広告から、ブライダルのコースページを最初に開いた訪問（国内）</p>
+          <div class="period-comparison">
+            <table>
+              <caption>表示中<small>2/28〜5/18</small></caption>
+              <thead><tr><td></td><th scope="col">2025年</th><th scope="col">2026年</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">訪問数</th><td>1,407回</td><td>533回</td></tr>
+                <tr><th scope="row">制作予約（Web）</th><td>25件</td><td>11件</td></tr>
+                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 1.78">1.78%</td><td style="--rate: 2.06">2.06%</td></tr>
+              </tbody>
+            </table>
+            <table>
+              <caption>撤去後<small>9/1〜10/31</small></caption>
+              <thead><tr><td></td><th scope="col">2025年</th><th scope="col">2026年</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">訪問数</th><td>572回</td><td>477回</td></tr>
+                <tr><th scope="row">制作予約（Web）</th><td>13件</td><td>7件</td></tr>
+                <tr class="booking-rate"><th scope="row">予約率</th><td style="--rate: 2.27">2.27%</td><td style="--rate: 1.47">1.47%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="foot simulator-decision">
+            <p><strong>表示中の予約率は前年を上回り、撤去後は下回りました。</strong></p>
+            <p>予算の目安が分かれば、安心して指輪を選べるのでは。そう考え、11月21日に見積もりを戻しました。</p>
+            <p class="caption">9月は蔵前のキャンペーン期間。2026年9〜10月の予約は7件で、効果は検証中です。</p>
+          </div>
+          <template>
+            <p>「私たちの予算でどんな指輪が作れるだろう」と思ってコースを開いた方にとって、見積もりはどんな意味があるでしょうか。工房名の検索広告から同じ4つのコースページのどれかに来た訪問に絞り、前年の同じ日付と比べました。</p>
+            <p>表示中は、訪問数が前年の1,407回から533回に減っても、予約率は1.78%から2.06%でした。撤去後の9〜10月は2.27%から1.47%に下がりました。広告の登録キーワードと対象のコースページを両年でそろえると、春と秋で前年比の動きが逆になっています。</p>
+            <p>別の集計でも、同じ広告検索語から結婚指輪コースに来て価格一覧を開いた訪問の割合は、撤去前の7.5%から撤去後の29.2%に増えました。予算をその場で確かめられる方が検討を続けやすいと考え、11月21日に4コースで見積もりを戻しました。今回の前年比較も、その判断を支える材料です。</p>
+            <p>この比較は復帰後の11月24日に集計しました。9月は蔵前キャンペーンの対象月で、今年の秋の予約も7件です。撤去の影響がどれだけだったかは引き続き検証します。</p>
+            <p class="source">出典　11月24日のGA4集計。日本国内のGoogle検索広告で、登録キーワードが「鎌倉彫金工房」の訪問（空白の表記違いを含む）。最初に開いたページは結婚指輪・婚約指輪・3本制作・アニバーサリー。制作予約は、その訪問中にWebで完了した4店舗のブライダル制作5コース（上記4種とダイヤモンドプロポーズ）の予約ID数。見学は集計対象外。予約率は制作予約した訪問数÷訪問数で、この4区分では制作予約した訪問数と予約ID数が一致。表示中・撤去後は2026年の状態を表し、春は導入・撤去の切替日を除いた。価格一覧の比較は11月24日 社長MTG資料。</p>
+          </template>
+        </section>
+
+        <section class="slide surge-slide" aria-labelledby="title-8" hidden>
+          <h2 id="title-8">復帰翌日からの2日で前月差＋14件</h2>
           <p class="label">4店舗の予約台帳　ブライダル制作予約（受付日）</p>
           <figure class="spread surge-spread">
             <div class="chart-reader" style="--chart-width: 640px">
@@ -430,8 +494,8 @@
           </template>
         </section>
 
-        <section class="slide" aria-labelledby="title-8" hidden>
-          <h2 id="title-8">前週の同曜日との比較</h2>
+        <section class="slide" aria-labelledby="title-9" hidden>
+          <h2 id="title-9">前週の同曜日との比較</h2>
           <p class="label">結婚指輪コースから制作または見学を予約したWeb訪問（国内）</p>
           <div class="web-compare">
             <div>
@@ -454,8 +518,8 @@
           </template>
         </section>
 
-        <section class="slide" aria-labelledby="title-9" hidden>
-          <h2 id="title-9">予約減の背景にある3つの変化</h2>
+        <section class="slide" aria-labelledby="title-10" hidden>
+          <h2 id="title-10">予約減の背景にある3つの変化</h2>
           <p class="label">2月から11月までを振り返って</p>
           <dl class="overview">
             <div><dt>広告の案内先</dt><dd>広告を押したあとに<br>開くページが変わった</dd></div>
@@ -467,8 +531,8 @@
           </template>
         </section>
 
-        <section class="slide path-mix-slide" aria-labelledby="title-10" hidden>
-          <h2 id="title-10">予約率の低いAページへの案内が増えた</h2>
+        <section class="slide path-mix-slide" aria-labelledby="title-11" hidden>
+          <h2 id="title-11">予約率の低いAページへの案内が増えた</h2>
           <p class="label">検索広告から来た訪問が、最初に開いたページの割合</p>
           <div class="path-pies">
             <figure>
@@ -507,8 +571,8 @@
           </template>
         </section>
 
-        <section class="slide" aria-labelledby="title-11" hidden>
-          <h2 id="title-11">検索結果で、工房を見つけにくくなった</h2>
+        <section class="slide" aria-labelledby="title-12" hidden>
+          <h2 id="title-12">検索結果で、工房を見つけにくくなった</h2>
           <p class="label">「結婚指輪 手作り」で検索したときの公式サイトの平均順位</p>
           <figure class="spread">
             <div class="chart-reader" style="--chart-width: 640px">
@@ -529,8 +593,8 @@
           </template>
         </section>
 
-        <section class="slide" aria-labelledby="title-12" hidden>
-          <h2 id="title-12">手作りの結婚指輪を探す検索が減った</h2>
+        <section class="slide" aria-labelledby="title-13" hidden>
+          <h2 id="title-13">手作りの結婚指輪を探す検索が減った</h2>
           <p class="label">「結婚指輪 手作り」の月別検索回数（国内推計）</p>
           <div class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></div>
           <figure class="spread">
@@ -557,8 +621,8 @@
           </template>
         </section>
 
-        <section class="slide dark" aria-labelledby="title-13" hidden>
-          <h2 id="title-13">これから進める4つの取り組み</h2>
+        <section class="slide dark" aria-labelledby="title-14" hidden>
+          <h2 id="title-14">これから進める4つの取り組み</h2>
           <ul class="plans">
             <li><strong>広告を押したあとに開くページの種類を増やす</strong></li>
             <li><strong>検索順位を上げるための施策を行う</strong></li>
