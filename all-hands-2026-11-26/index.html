@@ -193,11 +193,15 @@
   .simulator-decision strong { font-size: 27px; }
   .simulator-decision .caption { margin-top: 4px; }
 
-  .surge-slide h2 { font-size: 48px; }
-  .surge-spread { grid-template-columns: minmax(0, 1fr) 315px; }
-  .surge-spread .stat-pair { font-size: 54px; }
-  .surge-topline { font-size: 40px; }
-  .surge-topline span { font-size: 58px; }
+  .booking-trends-slide { padding: 36px 72px 26px; gap: 10px; }
+  .booking-trends-slide h2 { font-size: 43px; }
+  .booking-trends-slide h2 span { display: inline-block; }
+  .booking-trends-slide figure + figure { border-top: 1px solid var(--rule); padding-top: 10px; }
+  .booking-trend-caption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 3px 26px; font-size: 23px; }
+  .booking-periods { color: var(--green); font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .booking-trends-slide .foot { font-size: 18px; padding-top: 8px; }
+  .booking-trend-details { overflow-x: auto; }
+  .booking-trend-details table { white-space: nowrap; }
   .web-compare { display: grid; grid-template-columns: 1fr 1fr; flex: 1; align-content: center; }
   .web-compare > div { padding: 0 33px 0 0; }
   .web-compare > div + div { border-left: 1px solid var(--rule); padding: 0 0 0 47px; }
@@ -282,6 +286,10 @@
     .period-comparison .booking-rate td { font-size: clamp(20px, 6.2vw, 25px); }
     .booking-rate td::after { height: 5px; margin-top: 3px; }
     .simulator-decision strong { font-size: 20px; }
+    .booking-trends-slide { padding: 22px 16px; gap: 13px; }
+    .booking-trend-caption { display: grid; gap: 3px; font-size: 17px; }
+    .booking-periods { font-size: 15px; }
+    .booking-trends-slide .foot { font-size: 14px; }
     .web-compare { flex: 0; }
     .web-compare > div { padding: 0; }
     .web-compare .numeric { font-size: 64px; margin: 8px 0 4px; }
@@ -517,24 +525,41 @@
           </template>
         </section>
 
-        <section class="slide surge-slide" aria-labelledby="title-8" hidden>
-          <h2 id="title-8">復帰翌日からの2日で前月差＋17件</h2>
-          <p class="label">4店舗の予約台帳　ブライダル予約（制作＋見学・受付日）</p>
-          <figure class="spread surge-spread">
-            <canvas id="surge-chart" class="line-chart" width="775" height="348" role="img" aria-label="11月の各日までの累計受付件数から、10月の同じ日までの件数を引いた差。18日 ＋15件、19日 ＋10件、20日 ＋11件、21日 ＋8件、22日 ＋20件、23日 ＋25件。21日に価格シミュレーターが復帰。21〜23日は3連休。"></canvas>
-            <div class="stat-aside">
-              <p class="label">各月1〜23日の受付</p>
-              <p class="numeric stat-pair">145<span class="shift">→</span><span class="accent">170</span><small class="unit">件</small></p>
-              <p class="caption">10月から11月に、計25件増</p>
-              <p class="numeric surge-topline accent"><span>68.0</span>%</p>
-              <p class="caption">25件の前月差のうち、22日と23日に生まれた割合</p>
-            </div>
+        <section class="slide booking-trends-slide" aria-labelledby="title-8" hidden>
+          <h2 id="title-8">復帰日から5日間で、<span>制作・見学予約は46件</span></h2>
+          <figure>
+            <figcaption class="booking-trend-caption"><strong>4店舗の予約台帳　11月16日からの累計</strong>
+              <span class="booking-periods">16〜20日の受付 28件　21〜25日の受付 46件</span></figcaption>
+            <canvas id="cumulative-booking-chart" class="line-chart" width="1128" height="203" role="img" aria-label="受付日別の制作・見学の累計。16日5件、17日13件、18日15件、19日20件、20日28件、21日34件、22日50件、23日57件、24日65件、25日74件。21日に価格シミュレーターが復帰。"></canvas>
           </figure>
-          <p class="caption foot">見学は10月39件 → 11月40件。11月21〜23日は3連休で、連休後も推移を確認します。</p>
+          <figure>
+            <figcaption class="booking-trend-caption"><strong>Google広告から訪れて予約した割合</strong>
+              <span class="booking-periods">16〜20日 0.62%　21〜25日 1.25%</span></figcaption>
+            <canvas id="google-booking-rate-chart" class="line-chart" width="1128" height="203" role="img" aria-label="国内でGoogle広告から訪れ、同じ訪問で制作または見学を予約した割合。16日0.21%、17日0.68%、18日0.25%、19日0.59%、20日1.77%、21日1.25%、22日1.58%、23日0.88%、24日1.58%、25日0.82%。25日は21時台までの速報。"></canvas>
+          </figure>
+          <p class="caption foot">11月21日にシミュレーターが復帰。色を付けた21〜23日は3連休。<br>Webの25日分（白丸）は21時台までの速報です。</p>
           <template>
-            <p>各月1〜23日に受け付けた制作と見学を足すと、10月は制作106件と見学39件で145件、11月は制作130件と見学40件で170件でした。前月より25件増えています。</p>
-            <p>各月1日からその日までの受付を比べると、11月は復帰前の18日が10月より15件多く、19日は10件、20日は11件多い状態でした。復帰当日の21日には差が8件に縮まりました。22日の受付は10月4件・11月16件で差が12件広がり、23日は2件・7件でさらに5件広がりました。この2日で前月差の17件分、全体の68%です。11月の両日は3連休中、10月の同日は平日なので、連休後も確かめます。</p>
-            <p class="source">制作・見学を含む集計と条件。4店舗とも11月24日朝に保存した同じ版の予約台帳で、受付日の制作5コース＋見学の有効予約を集計。10月・11月とも1〜23日。21日単日の受付は10月9件、11月6件。</p>
+            <p>11月16日からその日までに4店舗で受け付けた、制作と見学の有効予約を積み上げました。復帰前の5日間は制作21件・見学7件で28件、復帰日からの5日間は制作35件・見学11件で46件です。10日間で計74件でした。</p>
+            <p>25日の受付は制作7件・見学2件の9件です。鎌倉本店が制作2件、横浜元町が制作2件、東京蔵前が制作3件・見学2件、大阪中崎町が0件でした。</p>
+            <p>下のグラフは、日本国内のGoogle広告からの訪問のうち、同じ訪問中に制作または見学を予約した割合です。すべての着地先を含み、同じ訪問で両方を予約した場合は1回と数えました。復帰前は1,937訪問のうち12回、復帰日からは1,834訪問のうち23回です。5日間の割合は期間全体の訪問数を使って計算しています。</p>
+            <div class="booking-trend-details"><table class="receipt-table">
+              <caption>11月16〜25日の日別内訳</caption>
+              <thead><tr><th scope="col">受付日</th><th scope="col">制作</th><th scope="col">見学</th><th scope="col">当日計</th><th scope="col">累計</th><th scope="col">広告訪問</th><th scope="col">うち予約</th><th scope="col">予約率</th></tr></thead>
+              <tbody>
+                  <tr><th scope="row"><time datetime="2026-11-16">11/16</time></th><td>4</td><td>1</td><td>5</td><td>5</td><td>482</td><td>1</td><td>0.21%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-17">11/17</time></th><td>4</td><td>4</td><td>8</td><td>13</td><td>441</td><td>3</td><td>0.68%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-18">11/18</time></th><td>1</td><td>1</td><td>2</td><td>15</td><td>396</td><td>1</td><td>0.25%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-19">11/19</time></th><td>5</td><td>0</td><td>5</td><td>20</td><td>338</td><td>2</td><td>0.59%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-20">11/20</time></th><td>7</td><td>1</td><td>8</td><td>28</td><td>282</td><td>5</td><td>1.77%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-21">11/21</time></th><td>5</td><td>1</td><td>6</td><td>34</td><td>320</td><td>4</td><td>1.25%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-22">11/22</time></th><td>11</td><td>5</td><td>16</td><td>50</td><td>442</td><td>7</td><td>1.58%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-23">11/23</time></th><td>7</td><td>0</td><td>7</td><td>57</td><td>454</td><td>4</td><td>0.88%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-24">11/24</time></th><td>5</td><td>3</td><td>8</td><td>65</td><td>380</td><td>6</td><td>1.58%</td></tr>
+                  <tr><th scope="row"><time datetime="2026-11-25">11/25</time></th><td>7</td><td>2</td><td>9</td><td>74</td><td>245</td><td>2</td><td>0.82%</td></tr>
+              </tbody>
+            </table></div>
+            <p>21〜23日の3連休と広告配信の変更も重なっています。シミュレーターの効果は12月1日を目安に改めて確かめます。</p>
+            <p class="source">出典は4店舗の予約管理システムの受付一覧とGoogleアナリティクス（GA4）です。予約台帳は11月26日午前2時ごろ（日本時間）に確認。制作5コースと結婚指輪・婚約指輪の見学を受付日で集計し、取消・テスト・スタッフ予約等を除外しました。Webは日本国内のGoogle広告経由の訪問を11月26日1時52分に取得。25日の反映は21時台までです。</p>
           </template>
         </section>
 
@@ -989,48 +1014,76 @@
   }
 
   const compactCharts = window.matchMedia('screen and (max-width: 760px) and (orientation: portrait)');
-  function drawSurgeChart() {
-    const canvas = document.getElementById('surge-chart');
-    const compact = compactCharts.matches;
-    const width = compact ? 364 : 775;
-    const height = compact ? 239 : 348;
-    canvas.width = width;
-    canvas.height = height;
-    const context = chartContext('surge-chart');
-    const values = [15, 10, 11, 8, 20, 25];
-    const left = compact ? 40 : 77;
-    const right = width - (compact ? 4 : 15);
-    const step = (right - left) / values.length;
-    const x = index => left + (index + 0.5) * step;
-    const top = compact ? 53 : 62;
-    const bottom = compact ? 185 : 277;
-    const y = value => bottom - (bottom - top) * value / 30;
-    const holidayStart = (x(2) + x(3)) / 2;
-    const bandTop = compact ? 26 : 34;
+  const bookingTrendRows = document.querySelector('.booking-trends-slide template').content.querySelectorAll('tbody tr');
+  const bookingDays = Array.from(bookingTrendRows, row => {
+    const cells = row.cells;
+    return {
+      day: Number(row.querySelector('time').dateTime.slice(-2)),
+      cumulative: Number(cells[4].textContent),
+      adRate: 100 * Number(cells[6].textContent) / Number(cells[5].textContent)
+    };
+  });
 
-    plotText(context, '各月1日からの累計差（11月 − 10月）', 1, compact ? 10 : 13,
-      { align: 'left', size: compact ? 16 : 21, weight: 700, color: chartInk });
-    context.fillStyle = '#eee2c9';
-    context.fillRect(holidayStart, bandTop, right - holidayStart, bottom - bandTop);
-    plotText(context, '11月の3連休', (holidayStart + right) / 2, bandTop + (compact ? 11 : 13),
-      { size: compact ? 14 : 18, weight: 600, color: '#704e2e' });
-    [0, 10, 20, 30].forEach(value => {
-      line(context, left, y(value), right, y(value), '#c6ccbf');
-      plotText(context, (value ? '+' : '') + value + '件', left - (compact ? 3 : 8), y(value),
-        { align: 'right', size: compact ? 12 : 16 });
-    });
-    plotSeries(context, values.map((value, index) => [x(index), y(value)]), [3]);
-    values.forEach((value, index) => {
-      plotText(context, '+' + value, x(index), y(value) - (compact ? 16 : 24),
-        { size: compact ? 20 : 29, weight: 700, color: chartInk });
-      plotText(context, (compact ? '' : '11月') + (18 + index) + '日', x(index), bottom + (compact ? 16 : 25),
-        { size: compact ? 15 : 19, weight: index === 3 ? 700 : 500 });
-    });
-    plotText(context, '見積もり復帰', x(3), height - (compact ? 12 : 16),
-      { size: compact ? 14 : 18, weight: 700, color: chartGreen });
+  function drawBookingTrends() {
+    const compact = compactCharts.matches;
+    const width = compact ? 360 : 1128;
+    const height = compact ? 174 : 203;
+    const left = compact ? 34 : 55;
+    const right = width - (compact ? 17 : 32);
+    const top = compact ? 23 : 27;
+    const bottom = height - (compact ? 27 : 31);
+    const firstX = left + (compact ? 13 : 18);
+    const step = (right - firstX) / (bookingDays.length - 1);
+    const x = i => firstX + i * step;
+    const holidayStart = x(bookingDays.findIndex(row => row.day === 21)) - step / 2;
+    const holidayEnd = x(bookingDays.findIndex(row => row.day === 23)) + step / 2;
+    const charts = [
+      { id: 'cumulative-booking-chart', field: 'cumulative', ticks: [0, 20, 40, 60, 80], unit: '件', decimals: 0, color: chartGreen },
+      { id: 'google-booking-rate-chart', field: 'adRate', ticks: [0, 0.5, 1, 1.5, 2], unit: '%', decimals: 2, color: '#8b4b30' }
+    ];
+
+    for (const chart of charts) {
+      const canvas = document.getElementById(chart.id);
+      canvas.width = width;
+      canvas.height = height;
+      const context = chartContext(chart.id);
+      const maximum = chart.ticks[chart.ticks.length - 1];
+      const y = value => bottom - value / maximum * (bottom - top);
+      context.fillStyle = '#efe5d0';
+      context.fillRect(holidayStart, top - 14, holidayEnd - holidayStart, bottom - top + 14);
+      context.setLineDash([4, 4]);
+      line(context, holidayStart, top - 14, holidayStart, bottom, '#967b52');
+      context.setLineDash([]);
+      for (const tick of chart.ticks) {
+        line(context, left, y(tick), right, y(tick), '#cbd2c6');
+        plotText(context, tick + chart.unit, left - (compact ? 4 : 9), y(tick),
+          { size: compact ? 12 : 16, align: 'right' });
+      }
+      const points = bookingDays.map((row, i) => [x(i), y(row[chart.field])]);
+      plotSeries(context, points, [], chart.color);
+      if (chart.field === 'adRate') {
+        const [lastX, lastY] = points[points.length - 1];
+        context.beginPath();
+        context.arc(lastX, lastY, 4.5, 0, 2 * Math.PI);
+        context.fillStyle = '#f7f4ec';
+        context.fill();
+        context.strokeStyle = chart.color;
+        context.lineWidth = 2;
+        context.stroke();
+      }
+      bookingDays.forEach((row, i) => {
+        const [px, py] = points[i];
+        const below = chart.field === 'adRate' && i > 0 && row.adRate < bookingDays[i - 1].adRate;
+        const labelY = below ? py + (compact ? 13 : 15) : py - (compact ? 14 : 16);
+        plotText(context, row[chart.field].toFixed(chart.decimals), px, labelY,
+          { size: compact ? 14 : 20, weight: 700, color: chart.color });
+        plotText(context, row.day + '日', px, bottom + (compact ? 15 : 17),
+          { size: compact ? 12 : 16, weight: row.day === 21 ? 700 : 500 });
+      });
+    }
   }
   compactCharts.addEventListener('change', drawRankChart);
-  compactCharts.addEventListener('change', drawSurgeChart);
+  compactCharts.addEventListener('change', drawBookingTrends);
 
   const receiptRows = document.querySelector('.monthly-slide template').content.querySelectorAll('.receipt-table tbody tr');
   const monthlyReceipts = Array.from(receiptRows, row => {
@@ -1169,7 +1222,7 @@
   drawPathPie('path-pie-2025', 2025, [7271, 2881, 5752, 641]);
   drawPathPie('path-pie-2026', 2026, [18617, 4219, 1767, 796]);
   drawRankChart();
-  drawSurgeChart();
+  drawBookingTrends();
 </script>
 </body>
 </html>
