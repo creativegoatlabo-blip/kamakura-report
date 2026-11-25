@@ -142,10 +142,12 @@
   .plans li { grid-template-columns: 1fr; padding: 17px 0; border-color: #617e71; }
   .plans li:last-child { border-color: #617e71; }
 
+  .spring-slide .spread { margin-block: auto; }
+  .spring-slide .withdraw-differences { font-size: clamp(16px, 1.7vw, 18px); white-space: nowrap; }
   .withdraw-summary { font-size: 31px; font-weight: 700; }
   .withdraw-chart { display: grid; align-content: center; gap: 12px; }
   .withdraw-chart .demand-grid { padding-top: 6px; }
-  .withdraw-chart .demand-bar { height: calc(var(--receipts) * .77px); }
+  .withdraw-chart .demand-bar { height: calc(var(--receipts) * .44px); }
   .withdraw-differences { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: center; color: var(--green); font-size: 20px; font-weight: 700; }
   .withdraw-decision { align-self: end; padding-bottom: 30px; }
   .withdraw-decision strong { font-size: 29px; }
@@ -154,7 +156,6 @@
   .summer-chart figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
   .summer-chart .demand-grid, .summer-chart .withdraw-differences, .summer-events { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .summer-chart .demand-grid { padding-top: 32px; }
-  .summer-chart .demand-bar { height: calc(var(--receipts) * .44px); }
   .summer-chart .partial-month { border-left: 1px dashed var(--muted); }
   .summer-chart .withdraw-differences { font-size: 18px; }
   .summer-events { display: grid; gap: 14px; margin: 3px 0 0; padding: 0; list-style: none; }
@@ -385,24 +386,17 @@
           </template>
         </section>
 
-        <section class="slide" aria-labelledby="title-4" hidden>
+        <section class="slide spring-slide" aria-labelledby="title-4" hidden>
           <h2 id="title-4">5月、価格シミュレーターを外した理由</h2>
           <p class="withdraw-summary">2月から5月まで、見学を含めても予約は毎月前年を下回った</p>
           <div class="spread">
-            <figure class="withdraw-chart">
-              <figcaption class="label">全店の予約台帳｜制作＋見学（各月1〜18日受付・件）</figcaption>
+            <figure class="withdraw-chart" id="spring-receipts">
+              <figcaption class="label">全店の予約台帳｜制作＋見学（各月1日〜月末の受付・件）</figcaption>
               <div class="legend"><span><i class="swatch"></i>2025年</span><span><i class="swatch current"></i>2026年</span></div>
-              <div class="chart-reader" style="--chart-width: 600px">
+              <div class="chart-reader" style="--chart-width: 684px">
                 <div class="chart-scroll"><div class="chart-wide">
-              <div class="demand-grid" role="img" aria-label="全店の予約台帳、制作と見学を合わせた有効予約。2025年と2026年の順に、2月は244件と226件、3月は226件と187件、4月は210件と158件、5月は212件と132件。">
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 244"><span class="numeric">244</span></div><div class="demand-bar current" style="--receipts: 226"><span class="numeric">226</span></div></div><span>2月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 226"><span class="numeric">226</span></div><div class="demand-bar current" style="--receipts: 187"><span class="numeric">187</span></div></div><span>3月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 210"><span class="numeric">210</span></div><div class="demand-bar current" style="--receipts: 158"><span class="numeric">158</span></div></div><span>4月</span></div>
-                <div class="demand-month"><div class="demand-bars"><div class="demand-bar" style="--receipts: 212"><span class="numeric">212</span></div><div class="demand-bar current" style="--receipts: 132"><span class="numeric">132</span></div></div><span>5月</span></div>
-              </div>
-              <div class="withdraw-differences" aria-label="前年同期間からの減少件数と減少率">
-                <span>18件（7.4%）減</span><span>39件（17.3%）減</span><span>52件（24.8%）減</span><span>80件（37.7%）減</span>
-              </div>
+                  <div class="demand-grid" role="img"></div>
+                  <div class="withdraw-differences" aria-label="前年同月からの減少件数と減少率"></div>
                 </div></div>
               </div>
             </figure>
@@ -412,12 +406,10 @@
               <strong class="accent">5月20日に撤去</strong>
             </aside>
           </div>
-          <p class="caption foot">「結婚指輪 手作り」の国内検索回数は、2〜5月の合計で前年より<b>約26%減少</b>。<br>予約の減少率は2〜4月が26%以内。5月には37.7%に達した。</p>
           <template>
-            <p>制作予約が前年を下回り続けたことが、当時シミュレーターを見直したきっかけです。見学を含めても、各月1〜18日の受付は2月の前年244件から今年226件へ、5月の212件から132件へと差が広がりました。</p>
+            <p>制作予約が前年を下回り続けたことが、当時シミュレーターを見直したきっかけです。見学を合わせた月ごとの受付件数でも、2月から5月にかけて前年との差が広がりました。グラフの5月分には、20日の撤去後に受け付けた予約も含みます。</p>
             <p>「私たちの予算でどんな指輪が作れるだろう」と考えたお二人が、手作りの魅力を知る前に金額だけで工房を候補から外しているかもしれない。そう考えて5月20日にいったん外しました。2月前半には、導入前からすでに予約が前年を下回っていました。</p>
-            <p>「結婚指輪 手作り」の国内検索は2〜5月合計で39,600回から29,400回へ25.8%減りました。予約の減少率は2月7.4%、3月17.3%、4月24.8%、5月37.7%です。5月の検索回数だけを見ると18.2%減。検索は月全体の推計、予約は各月1〜18日受付で、需要減が予約減の何件分かまでは分かりません。</p>
-            <p class="source">制作・見学を含む集計と条件。両年の2〜5月は蔵前開店前。受付日の有効予約1件を1件とした全店・全経路の集計。施策の経緯と検索回数は11月24日 社長MTG資料。</p>
+            <p class="source">制作・見学を含む集計と条件。両年の2〜5月は蔵前開店前。受付日の有効予約1件を1件とした全店・全経路の集計。撤去の経緯は11月24日 社長MTG資料。</p>
           </template>
         </section>
 
@@ -936,6 +928,29 @@
   const receiptPercent = value => value.toFixed(1) + '%';
   const receiptDeclineLabel = m => m.decrease + '件（' + receiptPercent(m.decreaseRate) + '）減';
 
+  function drawSpringReceipts() {
+    const chart = document.getElementById('spring-receipts');
+    const grid = chart.querySelector('.demand-grid');
+    const differences = chart.querySelector('.withdraw-differences');
+    const description = [];
+    monthlyReceipts.slice(1, 5).forEach((month, index) => {
+      const label = (index + 2) + '月';
+      grid.insertAdjacentHTML('beforeend', `
+        <div class="demand-month">
+          <div class="demand-bars">
+            <div class="demand-bar" style="--receipts: ${month.previous}"><span class="numeric">${month.previous}</span></div>
+            <div class="demand-bar current" style="--receipts: ${month.current}"><span class="numeric">${month.current}</span></div>
+          </div>
+          <span>${label}</span>
+        </div>`);
+      const difference = document.createElement('span');
+      difference.textContent = receiptDeclineLabel(month);
+      differences.append(difference);
+      description.push(`${label}、前年${month.previous}件、今年${month.current}件、${difference.textContent}`);
+    });
+    grid.setAttribute('aria-label', description.join('。') + '。');
+  }
+
   function plotReceiptTrend(context, points, color) {
     // The final point covers November 1–23, after ten complete months.
     plotSeries(context, points.slice(0, -1), [], color);
@@ -1032,6 +1047,7 @@
     document.getElementById(id).setAttribute('aria-label', document.getElementById('monthly-yoy-chart').getAttribute('aria-label'));
   }
 
+  drawSpringReceipts();
   drawMonthlyReceipts('monthly-count-chart', false);
   drawMonthlyReceipts('monthly-yoy-chart', true);
   drawMobileReceiptComparison();
