@@ -56,6 +56,7 @@
   .stat-aside { align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 14px; border-left: 1px solid var(--rule); padding-left: 29px; }
   .stat-aside .numeric { font-size: 70px; }
   .stat-aside .stat-pair { font-size: 62px; }
+  .rank-slide .stat-pair { font-size: 52px; }
   .shift { padding: 0 .18em; font-size: .55em; font-weight: 400; color: var(--muted); }
   .cover { justify-content: space-between; padding: 70px 84px 64px; }
   .cover .label { font-size: 24px; }
@@ -607,20 +608,20 @@
         </section>
 
         <section class="slide rank-slide" aria-labelledby="title-12" hidden>
-          <h2 id="title-12">検索順位は夏に下がり、10月に持ち直した</h2>
-          <p class="label">「結婚指輪 手作り」で検索したときの公式サイトの平均順位（国指定なし）</p>
+          <h2 id="title-12">9月の検索順位は前年より下がった</h2>
+          <p class="label">「結婚指輪 手作り」での公式サイトの平均順位（2025年7月〜2026年9月・国指定なし）</p>
           <figure class="spread">
-            <canvas id="rank-chart" class="line-chart" width="790" height="348" role="img" aria-label="「結婚指輪 手作り」での公式サイトの月別平均掲載順位。上ほど上位。2025年7月3.1位、2025年8月4.4位、2025年9月4.9位、2025年10月6.7位、2025年11月7.9位、2025年12月8.8位、2026年1月9.0位、2026年2月9.7位、2026年3月8.9位、2026年4月9.1位、2026年5月10.5位、2026年6月11.5位、2026年7月11.2位、2026年8月11.8位、2026年9月11.4位、2026年10月5.8位。"></canvas>
+            <canvas id="rank-chart" class="line-chart" width="790" height="348" role="img" aria-label="「結婚指輪 手作り」での公式サイトの月別平均掲載順位。上ほど上位。2025年7月3.1位、2025年8月4.4位、2025年9月4.9位、2025年10月6.7位、2025年11月7.9位、2025年12月8.8位、2026年1月9.0位、2026年2月9.7位、2026年3月8.9位、2026年4月9.1位、2026年5月10.5位、2026年6月11.5位、2026年7月11.2位、2026年8月11.8位、2026年9月11.4位。"></canvas>
             <div class="stat-aside">
-              <p class="label">10月の平均順位</p>
-              <p class="numeric stat-pair">6.7<span class="shift">→</span><span class="accent">5.8</span><small class="unit">位</small></p>
-              <p class="caption">2025年10月 → 2026年10月</p>
+              <p class="label">9月の平均順位</p>
+              <p class="numeric stat-pair">4.9<span class="shift">→</span><span class="accent">11.4</span><small class="unit">位</small></p>
+              <p class="caption">2025年9月 → 2026年9月</p>
             </div>
           </figure>
-          <p class="caption foot">10月にこの言葉の検索結果から公式サイトが開かれた回数は、前年235回、今年82回でした。</p>
+          <p class="caption foot">9月にこの言葉の検索結果から公式サイトが開かれた回数は、前年301回、今年74回でした。</p>
           <template>
-            <p>折れ線は上にあるほど検索結果の上位です。工房の順位は前年の夏から下がり、シミュレーターを導入する前の今年1月には9.0位、8月には11.8位でした。10月は5.8位まで持ち直し、前年10月の6.7位も上回りました。</p>
-            <p>10月は前年より上位に表示されましたが、この検索結果から工房のサイトが開かれた回数は235回から82回に減りました。</p>
+            <p>折れ線は上にあるほど検索結果の上位です。工房の順位は前年の夏から下がり、シミュレーターを導入する前の今年1月には9.0位、8月には11.8位でした。9月は11.4位で、前年9月の4.9位を下回りました。</p>
+            <p>前年の9月には、この検索結果から工房のサイトが301回開かれていました。今年の9月は74回でした。</p>
             <table class="path-data"><caption>公式サイトの平均掲載順位（各月1日〜月末）</caption>
               <thead><tr><th scope="col">年月</th><th scope="col">平均順位（位）</th></tr></thead>
               <tbody>
@@ -639,10 +640,9 @@
                 <tr><th scope="row"><time datetime="2026-07">2026年7月</time></th><td>11.2</td></tr>
                 <tr><th scope="row"><time datetime="2026-08">2026年8月</time></th><td>11.8</td></tr>
                 <tr><th scope="row"><time datetime="2026-09">2026年9月</time></th><td>11.4</td></tr>
-                <tr><th scope="row"><time datetime="2026-10">2026年10月</time></th><td>5.8</td></tr>
               </tbody>
             </table>
-            <p class="source">Google Search Console、公式ドメイン全体のウェブ検索。「結婚指輪 手作り」と完全に一致する検索語、国・端末の指定なし。2025年7月は保存済みの同条件の月別値。2025年8月〜2026年10月は確定した日別の掲載順位を表示回数で重み付けし、各月の平均を小数第1位で表示。10月は両年とも1〜31日。2026年11月25日確認。</p>
+            <p class="source">Google Search Console、公式ドメイン全体のウェブ検索。「結婚指輪 手作り」と完全に一致する検索語、国・端末の指定なし。2025年7月は保存済みの同条件の月別値。2025年8月〜2026年9月は確定した日別の掲載順位を表示回数で重み付けし、各月の平均を小数第1位で表示。9月は両年とも1〜30日。2026年11月25日確認。</p>
           </template>
         </section>
 
