@@ -203,6 +203,7 @@
   .booking-trend-details { overflow-x: auto; }
   .booking-trend-details table { white-space: nowrap; }
   .web-compare { display: grid; grid-template-columns: 1fr 1fr; flex: 1; align-content: center; }
+  .web-compare .dates { display: inline-block; }
   .web-compare > div { padding: 0 33px 0 0; }
   .web-compare > div + div { border-left: 1px solid var(--rule); padding: 0 0 0 47px; }
   .web-compare .numeric { margin: 16px 0 6px; font-size: 103px; }
@@ -293,7 +294,7 @@
     .booking-trends-slide .foot { font-size: 14px; }
     .web-compare { flex: 0; }
     .web-compare > div { padding: 0; }
-    .web-compare .numeric { font-size: 64px; margin: 8px 0 4px; }
+    .web-compare .numeric { font-size: clamp(48px, 16vw, 64px); margin: 8px 0 4px; }
     .web-compare .rate { font-size: 21px; }
     .volume-chart { margin-block: 0; }
     .volume-chart .demand-grid { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-top: 0; }
@@ -560,25 +561,27 @@
 
         <section class="slide" aria-labelledby="title-9" hidden>
           <h2 id="title-9">前週の同曜日との比較</h2>
-          <p class="label">結婚指輪コースから制作または見学を予約したWeb訪問（国内）</p>
+          <p class="label">結婚指輪コースを最初に開いた国内のWeb訪問のうち、制作または見学を予約した割合</p>
           <div class="web-compare">
             <div>
-              <p class="label">前週　11月15日（日）・16日（月）</p>
-              <p class="numeric">6<span class="denominator"> ／ 901回</span></p>
-              <p class="rate">0.67%</p>
+              <p class="label">前週　<span class="dates">11月14日（土）〜18日（水）</span></p>
+              <p class="numeric">12<span class="unit">回</span><span class="denominator"> ／ 1,990回</span></p>
+              <p class="rate">予約率 0.60%</p>
             </div>
             <div>
-              <p class="label">復帰後　11月22日（日）・23日（月・祝）</p>
-              <p class="numeric accent">7<span class="denominator"> ／ 603回</span></p>
-              <p class="rate accent">1.16%</p>
+              <p class="label">復帰日から　<span class="dates">11月21日（土）〜25日（水）</span></p>
+              <p class="numeric accent">15<span class="unit">回</span><span class="denominator"> ／ 1,316回</span></p>
+              <p class="rate accent">予約率 1.14%</p>
             </div>
           </div>
-          <p class="caption">制作を予約した訪問は6回 → 6回、見学は0回 → 2回。復帰後の1回は両方を予約し、合計では1回に数えます。</p>
-          <p class="caption foot">訪問が298回減ったうち、Google検索広告からの訪問が159回減、Facebook・Instagramなどの広告からが126回減。<br>予約数はまだ少なく、効果は引き続き検証中。次回評価の目安は12月1日。</p>
+          <p class="caption">制作を予約した訪問は9回から12回、見学は3回から4回。復帰後に両方を予約した1回は、合計で1回と数えます。</p>
+          <p class="caption foot">訪問全体は674回減。Google検索広告からは430回、Facebook・Instagramなどの広告からは266回減りました。<br>21日は9時56分の公開前も含み、21〜23日は3連休でした。効果は12月1日を目安に再確認します。</p>
           <template>
-            <p>これは台帳の予約件数とは別に、国内のWebでコースを最初に開いた訪問のうち、同じ訪問で予約まで進んだ回数です。来る回数は減りましたが、制作か見学まで進んだ訪問は6回から7回になりました。前週の見学は0回、復帰後の見学は2回。復帰後は1回の訪問で制作と見学を両方予約したため、制作6回と合わせて7回です。まだ数件で割合が動くので、12月1日を目安に改めて確かめます。</p>
-            <p>901回と603回は、国内で結婚指輪コースを最初に開いた訪問数です。Google検索広告からは681回から522回に、Facebook・InstagramなどのMeta広告と判別できた訪問は129回から3回に減りました。合わせて285回で、減少全体298回の約96%です。Googleでは、11月18日に関東の「手作り結婚指輪」の広告を再停止しました。この広告グループ経由で結婚指輪コースを最初に開いた訪問は242回から5回に減っています。他のGoogle広告には増えたものもあり、Google検索広告全体の差は159回減です。同じ18日に関東で結婚指輪コースへ直接案内するMeta広告も停止し、新たなコース向け広告からの最初の訪問は23日深夜でした。Meta広告から4コース全体への訪問は392回から415回に増えています。</p>
-            <p class="source">資料　11月24日集計の速報。国内GA4、結婚指輪コースから始まった訪問。Google広告グループ別の訪問は同じ2期間・同じ条件で11月24日に追加集計（関東ss10、03_手作り結婚指輪）。広告の停止・再開の記録。制作と見学の両方を予約した訪問は合計で1回。連休、広告の案内先と一部の価格表示の変更も重なっている。</p>
+            <p>どちらも土曜から水曜までの5日間です。結婚指輪コースを最初に開いた訪問は1,990回から1,316回に減りましたが、同じ訪問で制作か見学を予約した回数は12回から15回に増えました。予約率は0.60%から1.14%で、0.54ポイントの上昇です。</p>
+            <p>前週は制作9回・見学3回で、合わせて12回でした。復帰日からの5日間は制作12回・見学4回です。このうち1回は同じ訪問で両方を予約したため、予約した訪問の合計は15回です。</p>
+            <p>Google検索広告から結婚指輪コースを開いた訪問は1,485回から1,055回に、Facebook・Instagramなどの広告からは316回から50回に減りました。そのほかの流入は差し引き22回増え、全体では674回の減少でした。</p>
+            <p>11月21日は午前9時56分の公開前も含めて1日分を数えました。21〜23日の3連休と広告配信の変更も重なり、予約した訪問の差は3回です。シミュレーターの効果は12月1日を目安に改めて確かめます。</p>
+            <p class="source">出典は11月26日7時56分（日本時間）のGoogleアナリティクスの集計です。日本国内の全流入を対象に、4店舗の制作5コースまたは結婚指輪・婚約指輪の見学を予約した訪問を、各5日間で集計しました。</p>
           </template>
         </section>
 
