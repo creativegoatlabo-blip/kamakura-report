@@ -70,16 +70,18 @@
   .monthly-slide .foot { padding-top: 10px; }
   .monthly-slide .foot b { color: var(--ink); }
   .monthly-trends { display: grid; gap: 5px; }
-  .mobile-monthly-web { display: none; }
+  .mobile-monthly-yoy { display: none; }
   .monthly-recap { display: flex; align-items: baseline; gap: 7px 15px; flex-wrap: wrap; font-size: 18px; }
-  .note-rates { width: 100%; margin: 14px 0; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
-  .note-rates caption { text-align: left; font-weight: 700; }
-  .note-rates th, .note-rates td { padding: 4px 2px; text-align: right; border-bottom: 1px solid var(--rule); }
-  .note-rates th:first-child { text-align: left; }
-  .note-rates small { display: block; font-size: 11px; font-weight: 400; white-space: nowrap; }
-  .month-track { display: grid; grid-template-columns: 96px repeat(10, minmax(0, 1fr)) 16px; align-items: stretch; }
+  .receipt-table { width: 100%; margin: 14px 0; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .receipt-table caption { text-align: left; font-weight: 700; }
+  .receipt-table th, .receipt-table td { padding: 4px 2px; text-align: right; border-bottom: 1px solid var(--rule); }
+  .receipt-table th:first-child { text-align: left; }
+  .receipt-table small { display: block; font-size: 11px; font-weight: 400; white-space: nowrap; }
+  .month-track { display: grid; grid-template-columns: 96px repeat(11, minmax(0, 1fr)) 16px; align-items: stretch; }
   .month-axis { text-align: center; font-size: 18px; font-weight: 700; color: var(--muted); }
   .month-axis span:first-child { grid-column: 2; }
+  .month-axis .partial { display: flex; align-items: baseline; justify-content: center; gap: 2px; background: #f0e8d8; white-space: nowrap; }
+  .month-axis .partial small { font-size: 12px; }
   .event-label { grid-column: 1; align-self: center; font-size: 16px; font-weight: 700; color: var(--muted); }
   .month-event {
     grid-column: var(--event-months);
@@ -97,7 +99,6 @@
   }
   .store-event { --event-ink: #235446; --event-background: #e4eee4; }
   .price-event { --event-ink: #6b482d; --event-background: #f2e8d7; font-size: 15px; }
-  .simulator-label { font-size: 13.5px; letter-spacing: -.04em; white-space: nowrap; }
   .ad-event { --event-ink: #394d65; --event-background: #e5eaf0; }
 
   .overview { display: grid; grid-template-columns: repeat(3, 1fr); align-content: center; flex: 1; }
@@ -244,8 +245,8 @@
     .chart-scroll { display: block; overflow-x: auto; overscroll-behavior-x: contain; }
     .chart-wide { display: grid; width: max(100%, var(--chart-width)); gap: 8px; }
     .monthly-trends { gap: 5px; }
-    .monthly-trends #monthly-rate-chart { display: none; }
-    .mobile-monthly-web { display: grid; gap: 5px; }
+    .monthly-trends #monthly-yoy-chart { display: none; }
+    .mobile-monthly-yoy { display: grid; gap: 5px; }
     .monthly-recap { display: grid; gap: 6px; }
     .path-pies { gap: 10px; }
     .path-pies figcaption { font-size: 20px; }
@@ -309,19 +310,19 @@
 
         <section class="slide monthly-slide" aria-labelledby="title-2" hidden>
           <h2 id="title-2">2月から予約が減り、11月も前年を下回った</h2>
-          <figure class="mobile-monthly-web">
-            <figcaption class="label">Web予約率（制作＋見学）</figcaption>
-            <canvas id="monthly-rate-mobile" class="line-chart" width="364" height="177" role="img"></canvas>
-            <p class="caption"><b>10月は前年0.54% → 今年0.32%。</b>0.22ポイント下がりました。国内の公式サイト・広告ページ・予約サイトへの訪問が対象です。</p>
+          <figure class="mobile-monthly-yoy">
+            <figcaption class="label">ブライダル予約数の前年比（制作＋見学）</figcaption>
+            <canvas id="monthly-yoy-mobile" class="line-chart" width="320" height="270" role="img"></canvas>
+            <p class="caption">前年と同じ件数なら100%。10月は前年400件に対して今年208件で、<b>前年の52.0%</b>でした。11月は両年とも1〜23日です。</p>
           </figure>
-          <div class="chart-reader" style="--chart-width: 1000px">
+          <div class="chart-reader" style="--chart-width: 1128px">
             <div class="chart-scroll"><div class="chart-wide">
-          <figure class="monthly-trends" aria-label="2026年1〜10月のブライダル予約受付数と主な施策、Web予約率の前年同月比較（2025年・2026年）">
+          <figure class="monthly-trends" aria-label="2026年1〜11月の制作・見学の予約受付件数、前年同期の件数に対する割合、各月の主な施策。1〜10月は各月末まで、11月は両年とも23日まで。">
             <canvas id="monthly-count-chart" class="line-chart" width="1128" height="149" role="img"></canvas>
-            <canvas id="monthly-rate-chart" class="line-chart" width="1128" height="175" role="img"></canvas>
+            <canvas id="monthly-yoy-chart" class="line-chart" width="1128" height="163" role="img"></canvas>
             <div class="month-track month-axis" aria-hidden="true">
               <span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span>
-              <span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span>
+              <span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span class="partial">11月<small>1〜23日</small></span>
             </div>
             <div class="month-track">
               <span class="event-label">店舗</span>
@@ -330,9 +331,10 @@
             </div>
             <div class="month-track">
               <span class="event-label">価格・見積</span>
-              <span class="month-event price-event" style="--event-months: 3" aria-label="2月、価格シミュレーター導入"><span class="simulator-label">シミュレーター</span><br>導入</span>
+              <span class="month-event price-event" style="--event-months: 3" aria-label="2月、価格シミュレーター導入">見積もり<br>導入</span>
               <span class="month-event price-event" style="--event-months: 4" aria-label="3月、固定価格の告知開始">固定価格<br>告知開始</span>
-              <span class="month-event price-event" style="--event-months: 6" aria-label="5月、固定価格制に移行、価格シミュレーター削除">固定価格制へ<br><span class="simulator-label">シミュレーター</span><br>削除</span>
+              <span class="month-event price-event" style="--event-months: 6" aria-label="5月、固定価格制に移行、価格シミュレーター削除">価格を固定<br>見積もり<br>撤去</span>
+              <span class="month-event price-event" style="--event-months: 12" aria-label="11月21日、価格シミュレーター復帰">11月21日<br>見積もり<br>復帰</span>
             </div>
             <div class="month-track">
               <span class="event-label">広告</span>
@@ -342,29 +344,28 @@
           </figure>
             </div></div>
           </div>
-          <p class="caption foot monthly-recap"><b>11月1〜23日（前年 → 今年）</b><span>台帳の受付　299件 → 170件（43.1%減）</span><span>Web予約率　0.68% → 0.29%（0.39ポイント低下）</span></p>
+          <p class="caption foot monthly-recap"><b>11月1〜23日の受付</b><span>前年299件 → 今年170件（制作130件・見学40件）</span><b>前年同期の56.9%</b></p>
           <template>
-            <p>上のグラフは全店のブライダル予約です。1月の436件から2月に311件へ減り、6月に247件まで持ち直しましたが、10月末は208件でした。11月1〜23日も、前年299件（制作265件・見学34件）に対して今年170件（制作130件・見学40件）です。</p>
-            <p>台帳は受付日で数え、1件の有効な予約を1件とします。同じお二人が見学の後に別途制作を予約すれば、見学1件・制作1件です。</p>
-            <p>Webのグラフは、国内から公式サイト・広告ページ・予約サイトを訪れ、その訪問中に制作か見学を予約した割合です。1〜10月の全月で前年を下回りました。前年との差が最も大きかった5月は0.78%から0.17%へ。10月も0.54%から0.32%に下がり、前年を0.22ポイント下回りました。同じ訪問で制作と見学を両方予約しても1回です。</p>
+            <p>全店の予約台帳で、制作と見学を受け付けた件数を数えました。今年は1月436件、2月311件、10月は208件でした。見学のあとに別途制作を予約した場合は、見学と制作をそれぞれ1件と数えます。</p>
+            <p>前年と同じ月の予約数を100%として比べると、2月は88.6%、5月は64.2%、8月は51.4%まで下がりました。10月は前年400件に対して今年208件。208を400で割ると、前年比は52.0%です。11月は前年も今年も1〜23日の受付で比べ、299件から170件で56.9%でした。</p>
             <p>2〜3月は大阪の割引キャンペーン、8〜9月は蔵前のキャンペーンがありました。2月にシミュレーターを導入し、3月の告知を経て5月に固定価格制へ移行した際に見積もりを撤去しました。7月はペアリングに偏っていた広告運用を見直し、7〜8月に広告費を縮めました。10月には見学を案内するページも公開しました。</p>
-            <table class="note-rates"><caption>Web予約率と、予約した訪問／対象の訪問（回）</caption>
-              <thead><tr><th scope="col">月</th><th scope="col">2025年</th><th scope="col">2026年</th><th scope="col">前年差<small>ポイント</small></th></tr></thead>
+            <table class="receipt-table"><caption>制作と見学の予約受付件数と前年比</caption>
+              <thead><tr><th scope="col">受付月</th><th scope="col">2025年（件）</th><th scope="col">2026年（件）</th><th scope="col">前年比</th></tr></thead>
               <tbody>
-                <tr><th scope="row">1月</th><td>0.83%<small>489／58,868</small></td><td>0.68%<small>432／63,619</small></td><td>−0.15</td></tr>
-                <tr><th scope="row">2月</th><td>0.60%<small>333／55,629</small></td><td>0.53%<small>292／54,848</small></td><td>−0.07</td></tr>
-                <tr><th scope="row">3月</th><td>0.73%<small>375／51,450</small></td><td>0.45%<small>265／59,025</small></td><td>−0.28</td></tr>
-                <tr><th scope="row">4月</th><td>0.91%<small>376／41,531</small></td><td>0.34%<small>238／70,719</small></td><td>−0.57</td></tr>
-                <tr><th scope="row">5月</th><td>0.78%<small>342／43,735</small></td><td>0.17%<small>218／125,111</small></td><td>−0.61</td></tr>
-                <tr><th scope="row">6月</th><td>0.71%<small>366／51,368</small></td><td>0.49%<small>257／52,590</small></td><td>−0.22</td></tr>
-                <tr><th scope="row">7月</th><td>0.74%<small>397／53,806</small></td><td>0.57%<small>239／41,761</small></td><td>−0.17</td></tr>
-                <tr><th scope="row">8月</th><td>0.72%<small>437／60,397</small></td><td>0.52%<small>252／48,903</small></td><td>−0.21</td></tr>
-                <tr><th scope="row">9月</th><td>0.58%<small>390／66,841</small></td><td>0.42%<small>201／47,445</small></td><td>−0.16</td></tr>
-                <tr><th scope="row">10月</th><td>0.54%<small>378／69,875</small></td><td>0.32%<small>196／61,047</small></td><td>−0.22</td></tr>
-                <tr><th scope="row">11月<small>1〜23日</small></th><td>0.68%<small>303／44,520</small></td><td>0.29%<small>155／53,077</small></td><td>−0.39</td></tr>
+                <tr><th scope="row">1月</th><td>498</td><td>436</td><td>87.6%</td></tr>
+                <tr><th scope="row">2月</th><td>351</td><td>311</td><td>88.6%</td></tr>
+                <tr><th scope="row">3月</th><td>369</td><td>302</td><td>81.8%</td></tr>
+                <tr><th scope="row">4月</th><td>383</td><td>253</td><td>66.1%</td></tr>
+                <tr><th scope="row">5月</th><td>371</td><td>238</td><td>64.2%</td></tr>
+                <tr><th scope="row">6月</th><td>388</td><td>247</td><td>63.7%</td></tr>
+                <tr><th scope="row">7月</th><td>409</td><td>240</td><td>58.7%</td></tr>
+                <tr><th scope="row">8月</th><td>440</td><td>226</td><td>51.4%</td></tr>
+                <tr><th scope="row">9月</th><td>402</td><td>224</td><td>55.7%</td></tr>
+                <tr><th scope="row">10月</th><td>400</td><td>208</td><td>52.0%</td></tr>
+                <tr><th scope="row">11月<small>1〜23日</small></th><td>299</td><td>170</td><td>56.9%</td></tr>
               </tbody>
             </table>
-            <p class="source">制作・見学を含む集計と条件。店舗は制作5コースと結婚指輪・婚約指輪の見学。取消・テスト・スタッフ予約等は除外。1〜9月は10月27日保存の4店舗台帳、10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の受付日別集計（11月5日時点）、11月1〜23日は同じ日付で2025年の台帳と2026年11月24日朝の台帳を比較。2025年11月は蔵前開店前。WebはGA4・国内全流入。公式サイト本体（wwwを含む）と、広告ページ・予約フォームがあるreserve・reserve02の各サイトを対象に、同じ条件で両年を集計。1〜10月は月末まで、11月は両年とも23日まで。公式サイト本体から訪問を始めたかどうかは、前年春などの詳細データが保持期間を過ぎているため、比較条件に含めていません。分母は対象サイトへの訪問、分子は制作または見学を予約した訪問。前年差は丸める前の割合から計算。</p>
+            <p class="source">制作・見学を含む集計と条件。制作5コースと結婚指輪・婚約指輪の見学の有効予約を、受付日で集計。取消・テスト・スタッフ予約等を除外。2025年の全期間と2026年1〜9月は、2026年10月27日保存の全店台帳、2026年10月は<a href="https://creativegoatlabo-blip.github.io/kamakura-report/all_course_report_2026_10.html">10月の全店月次レポート</a>の受付日別集計（11月5日時点）、2026年11月は11月24日朝保存の台帳を使用。1〜10月は両年とも月末まで、11月は両年とも1〜23日の受付。前年11月の比較期間は蔵前開店前。前年比は今年の件数÷前年同期間の件数×100。小数第1位まで表示。</p>
           </template>
         </section>
 
@@ -498,14 +499,13 @@
           </div>
           <div class="foot simulator-decision">
             <p><strong>表示中の予約率は前年を上回り、撤去後は下回りました。</strong></p>
-            <p>予算の目安が分かれば、安心して指輪を選べるのでは。そう考え、11月21日に見積もりを戻しました。</p>
             <p class="caption">予約率は「予約した訪問÷訪問数」。今年の9〜10月は8訪問で、効果は検証中です。</p>
           </div>
           <template>
             <p>「私たちの予算でどんな指輪が作れるだろう」と思ったとき、見積もりは検討を続ける助けになるでしょうか。広告に登録した工房名と、最初に開いた4コースの範囲をそろえて、制作または見学を予約した訪問の割合を前年と比べました。</p>
             <p>表示中は前年1,407訪問中30回（2.13%）、今年533訪問中12回（2.25%）。撤去後の9〜10月は前年572訪問中15回（2.62%）、今年477訪問中8回（1.68%）です。2025年春のWeb予約は制作25件と見学6件の計31件ですが、1回の訪問で両方を予約した方がいて、予約した訪問は30回です。</p>
-            <p>別の集計では、同じ広告検索語から結婚指輪コースに来て価格一覧を開いた割合が撤去前の7.5%から撤去後の29.2%に増えました。予算の目安がその場で分かれば、安心して指輪を選べるのではと考え、11月21日に4コースで見積もりを戻しました。</p>
-            <p>11月25日に見学を含めて集計し直した前年比較も、この判断を支える材料です。9月は蔵前キャンペーンの対象月で、今年の秋の予約も8訪問です。見積もりが予約率にどれだけ影響したかは引き続き検証します。</p>
+            <p>別の集計では、同じ広告検索語から結婚指輪コースに来て価格一覧を開いた割合が撤去前の7.5%から撤去後の29.2%に増えました。</p>
+            <p>この前年比較は11月25日に見学を含めて集計し直しました。9月は蔵前キャンペーンの対象月で、今年の秋の予約も8訪問です。見積もりが予約率にどれだけ影響したかは引き続き検証します。</p>
             <p class="source">制作・見学を含む集計と条件。日本国内のGoogle検索広告・登録キーワード「鎌倉彫金工房」（空白の表記違いを含む）。最初のページは結婚指輪・婚約指輪・3本制作・アニバーサリー。Web予約件数は4店舗の制作5コース＋見学の予約完了件数。予約率の分子は両方を予約した訪問を1回とする。表示中・撤去後は2026年の状態、春は切替日を除く。価格一覧の比較は11月24日 社長MTG資料。</p>
           </template>
         </section>
@@ -863,29 +863,6 @@
     canvas.setAttribute('aria-label', year + '年の着地割合。' + slices.map(({ share, label }) => label + 'ページ ' + Math.round(share * 100) + '%').join('、'));
   }
 
-  function drawMonthlySeries(id, { title, detail, values, ticks, maximum, axisLabel, valueLabel, color }) {
-    const canvas = document.getElementById(id);
-    const context = chartContext(id);
-    const left = 96;
-    const right = 1112;
-    const monthWidth = (right - left) / values.length;
-    const x = index => left + monthWidth * (index + 0.5);
-    const y = value => 139 - value * 88 / maximum;
-
-    plotText(context, title, 0, 15, { align: 'left', size: 21, weight: 700, color: chartInk });
-    if (detail) plotText(context, detail, right, 15, { align: 'right', size: 17 });
-    values.forEach((value, index) => line(context, x(index), 41, x(index), 139, '#e1e3d7'));
-    ticks.forEach(tick => {
-      line(context, left, y(tick), right, y(tick), '#cbd2c5');
-      plotText(context, axisLabel(tick), left - 13, y(tick), { align: 'right', size: 15 });
-    });
-    plotSeries(context, values.map((value, index) => [x(index), y(value)]), [], color);
-    values.forEach((value, index) => {
-      plotText(context, valueLabel(value), x(index), y(value) - 18, { size: 20, weight: 700, color });
-    });
-    canvas.setAttribute('aria-label', title + '。' + values.map((value, index) => (index + 1) + '月 ' + valueLabel(value)).join('、'));
-  }
-
   function drawRankChart() {
     const context = chartContext('rank-chart');
     const ranks = [3.1, 4.4, 4.9, 6.7, 7.9, 8.8, 9.0, 9.7, 8.9, 9.1, 10.5];
@@ -949,92 +926,102 @@
   }
   compactSurge.addEventListener('change', drawSurgeChart);
 
-  function drawMonthlyRateComparison(id, compact) {
-    const canvas = document.getElementById(id);
-    const context = chartContext(id);
-    const previous = monthlyHistory.map(m => 100 * m.booked2025 / m.visits2025);
-    const current = monthlyHistory.map(m => 100 * m.booked2026 / m.visits2026);
-    const priorColor = '#536879';
-    const currentColor = '#854e31';
-    const left = compact ? 32 : 96;
-    const right = compact ? 358 : 1112;
-    const top = compact ? 42 : 62;
-    const bottom = compact ? 146 : 157;
-    const x = index => left + (index + 0.5) * (right - left) / previous.length;
-    const y = rate => bottom - (bottom - top) * rate;
-    const percent = rate => rate.toFixed(2) + '%';
+  const receiptRows = document.querySelector('.monthly-slide template').content.querySelectorAll('.receipt-table tbody tr');
+  const monthlyReceipts = Array.from(receiptRows, row => {
+    const previous = Number(row.cells[1].textContent);
+    const current = Number(row.cells[2].textContent);
+    return { previous, current, yoy: 100 * current / previous };
+  });
+  const receiptYoyColor = '#805132';
+  const receiptPercent = value => value.toFixed(1) + '%';
 
-    if (!compact) {
-      plotText(context, 'Web予約率（制作＋見学）', 0, 13, { align: 'left', size: 21, weight: 700, color: chartInk });
-      plotText(context, '国内の公式サイト・広告ページ・予約サイトへの訪問が対象', 0, 37,
-        { align: 'left', size: 16 });
-      const octoberGap = (previous[9] - current[9]).toFixed(2);
-      plotText(context, '10月は前年より' + octoberGap + 'ポイント低下', right, 15,
-        { align: 'right', size: 19, weight: 700, color: currentColor });
-    }
-    const legendY = 14;
-    const legendX = compact ? 45 : 356;
-    function yearKey(start, label, color, dashed) {
-      context.setLineDash(dashed ? [7, 5] : []);
-      line(context, start, legendY, start + 30, legendY, color, 3);
-      context.setLineDash([]);
-      plotText(context, label, start + 38, legendY,
-        { align: 'left', size: compact ? 15 : 17, weight: 600, color });
-    }
-    yearKey(legendX, '2025年', priorColor, true);
-    yearKey(legendX + (compact ? 144 : 139), '2026年', currentColor, false);
-
-    if (!compact) previous.forEach((_, index) => line(context, x(index), top, x(index), bottom, '#e1e3d7'));
-    (compact ? [0, 0.5, 1] : [0, 0.25, 0.50, 0.75, 1]).forEach(tick => {
-      line(context, left, y(tick), right, y(tick), '#cbd2c5');
-      plotText(context, (compact ? tick.toFixed(1) : tick.toFixed(2)) + '%', left - (compact ? 3 : 10), y(tick),
-        { align: 'right', size: compact ? 12 : 15 });
-    });
-    context.setLineDash([8, 6]);
-    plotSeries(context, previous.map((v, i) => [x(i), y(v)]), [], priorColor);
-    context.setLineDash([]);
-    plotSeries(context, current.map((v, i) => [x(i), y(v)]), [], currentColor);
-    previous.forEach((v, i) => {
-      if (!compact || i === 9) {
-        const direction = v >= current[i] ? -1 : 1;
-        const labelX = compact ? right : x(i);
-        const style = { size: compact ? 14 : 17, weight: 700, align: compact ? 'right' : 'center' };
-        plotText(context, percent(v), labelX, y(v) + direction * 14, { ...style, color: priorColor });
-        plotText(context, percent(current[i]), labelX, y(current[i]) - direction * 15, { ...style, color: currentColor });
-      }
-      if (compact) plotText(context, (i + 1) + '月', x(i), 165, { size: 13 });
-    });
-    const months = previous.map((v, i) => {
-      const gap = current[i] - v;
-      return (i + 1) + '月、前年' + percent(v) + '、今年' + percent(current[i]) + '、前年差' +
-        (gap < 0 ? 'マイナス' : 'プラス') + Math.abs(gap).toFixed(2) + 'ポイント';
-    });
-    canvas.setAttribute('aria-label', '国内の公式サイト・広告ページ・予約サイトで制作または見学を予約した訪問の割合。' + months.join('。'));
+  function plotReceiptTrend(context, points, color) {
+    // The final point covers November 1–23, after ten complete months.
+    plotSeries(context, points.slice(0, -1), [], color);
+    const [x, y] = points[points.length - 1];
+    context.beginPath();
+    context.arc(x, y, 5, 0, 2 * Math.PI);
+    context.fillStyle = '#f7f4ec';
+    context.fill();
+    context.strokeStyle = color;
+    context.lineWidth = 3;
+    context.stroke();
   }
 
-  const monthlyHistory = [
-    { receipts: 436, booked2025: 489, visits2025: 58868, booked2026: 432, visits2026: 63619 },
-    { receipts: 311, booked2025: 333, visits2025: 55629, booked2026: 292, visits2026: 54848 },
-    { receipts: 302, booked2025: 375, visits2025: 51450, booked2026: 265, visits2026: 59025 },
-    { receipts: 253, booked2025: 376, visits2025: 41531, booked2026: 238, visits2026: 70719 },
-    { receipts: 238, booked2025: 342, visits2025: 43735, booked2026: 218, visits2026: 125111 },
-    { receipts: 247, booked2025: 366, visits2025: 51368, booked2026: 257, visits2026: 52590 },
-    { receipts: 240, booked2025: 397, visits2025: 53806, booked2026: 239, visits2026: 41761 },
-    { receipts: 226, booked2025: 437, visits2025: 60397, booked2026: 252, visits2026: 48903 },
-    { receipts: 224, booked2025: 390, visits2025: 66841, booked2026: 201, visits2026: 47445 },
-    { receipts: 208, booked2025: 378, visits2025: 69875, booked2026: 196, visits2026: 61047 }
-  ];
-  drawMonthlySeries('monthly-count-chart', {
-    title: 'ブライダル予約数（制作＋見学・全店の予約台帳・受付月）',
-    values: monthlyHistory.map(month => month.receipts),
-    ticks: [0, 100, 200, 300, 400, 500],
-    maximum: 500,
-    axisLabel: value => value + '件',
-    valueLabel: value => String(value),
-    color: chartGreen
-  });
-  drawMonthlyRateComparison('monthly-rate-chart', false);
-  drawMonthlyRateComparison('monthly-rate-mobile', true);
+  function drawMonthlyReceipts(id, comparison) {
+    const canvas = document.getElementById(id);
+    const bottom = canvas.height - 10;
+    const context = chartContext(id);
+    const left = 96;
+    const right = 1112;
+    const top = 47;
+    const step = (right - left) / monthlyReceipts.length;
+    const x = i => left + (i + 0.5) * step;
+    const ticks = comparison ? [0, 25, 50, 75, 100] : [0, 100, 200, 300, 400, 500];
+    const y = value => bottom - value / ticks[ticks.length - 1] * (bottom - top);
+    const color = comparison ? receiptYoyColor : chartGreen;
+    const values = monthlyReceipts.map(m => comparison ? m.yoy : m.current);
+    const points = values.map((v, i) => [x(i), y(v)]);
+    const title = comparison ? 'ブライダル予約数の前年比' : 'ブライダル予約の受付件数（制作＋見学・全店の予約台帳）';
+    const detail = comparison ? '前年の同じ期間を100%として比較' : '2026年　11月は1〜23日の受付';
+
+    plotText(context, title, 0, 15, { align: 'left', size: 21, weight: 700, color: chartInk });
+    plotText(context, detail, right, 15, { align: 'right', size: 17 });
+    context.fillStyle = '#f0e8d8';
+    context.fillRect(right - step, top - 7, step, bottom - top + 7);
+    points.forEach(([pointX]) => line(context, pointX, top, pointX, bottom, '#e1e3d7'));
+    ticks.forEach(tick => {
+      const baseline = comparison && tick === 100;
+      context.setLineDash(baseline ? [7, 5] : []);
+      line(context, left, y(tick), right, y(tick), baseline ? '#637268' : '#cbd2c5', baseline ? 1.8 : 1);
+      context.setLineDash([]);
+      plotText(context, tick + (comparison ? '%' : '件'), left - 10, y(tick),
+        { align: 'right', size: 15, weight: baseline ? 700 : 500 });
+    });
+    plotReceiptTrend(context, points, color);
+    values.forEach((v, i) => {
+      plotText(context, comparison ? receiptPercent(v) : String(v), x(i), y(v) + (comparison ? 17 : -16),
+        { size: 19, weight: 700, color });
+    });
+    const description = monthlyReceipts.map((m, i) => {
+      const month = (i + 1) + '月' + (i === monthlyReceipts.length - 1 ? '1〜23日' : '');
+      return month + (comparison ? '、前年' + m.previous + '件、今年' + m.current + '件、前年比' + receiptPercent(m.yoy) : ' ' + m.current + '件');
+    });
+    canvas.setAttribute('aria-label', (comparison ? '制作と見学の受付件数の前年比。前年同期間を100%。' : '2026年の制作と見学の受付件数。') + description.join('。'));
+  }
+
+  function drawMobileReceiptComparison() {
+    const id = 'monthly-yoy-mobile';
+    const context = chartContext(id);
+    const left = 48;
+    const right = 244;
+    const x = percent => left + percent / 100 * (right - left);
+    const y = index => 30 + index * 21;
+    const last = monthlyReceipts.length - 1;
+
+    context.fillStyle = '#f0e8d8';
+    context.fillRect(0, y(last) - 10, 320, 37);
+    plotText(context, '受付月', 1, 9, { align: 'left', size: 12, weight: 600 });
+    plotText(context, '前年比', 316, 9, { align: 'right', size: 12, weight: 600 });
+    monthlyReceipts.forEach((month, i) => {
+      line(context, left, y(i), right, y(i), '#e1e3d7');
+      plotText(context, (i + 1) + '月', left - 11, y(i), { align: 'right', size: 14, weight: 600 });
+      plotText(context, receiptPercent(month.yoy), 316, y(i), { align: 'right', size: 15, weight: 700, color: receiptYoyColor });
+    });
+    plotText(context, '1〜23日', left - 5, y(last) + 16, { align: 'right', size: 11 });
+    [0, 50, 100].forEach(tick => {
+      context.setLineDash(tick === 100 ? [5, 4] : []);
+      line(context, x(tick), y(0) - 6, x(tick), y(last) + 8, tick === 100 ? '#637268' : '#cbd2c5');
+      context.setLineDash([]);
+      plotText(context, tick + '%', x(tick), 9, { size: 12, weight: tick === 100 ? 700 : 500 });
+    });
+    plotReceiptTrend(context, monthlyReceipts.map((m, i) => [x(m.yoy), y(i)]), receiptYoyColor);
+    document.getElementById(id).setAttribute('aria-label', document.getElementById('monthly-yoy-chart').getAttribute('aria-label'));
+  }
+
+  drawMonthlyReceipts('monthly-count-chart', false);
+  drawMonthlyReceipts('monthly-yoy-chart', true);
+  drawMobileReceiptComparison();
   drawPathPie('path-pie-2025', 2025, [7271, 2881, 5752, 641]);
   drawPathPie('path-pie-2026', 2026, [18617, 4219, 1767, 796]);
   drawRankChart();
